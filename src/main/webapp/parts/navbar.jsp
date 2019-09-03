@@ -33,7 +33,7 @@
         <div class="navbar-text mr-3"> Guest</div>
 
         <div class="mr-3">
-            <form action="/" method="post">
+            <form action="${pageContext.request.contextPath}/conference/logout" method="post">
                 <button type="submit" class="btn btn-primary">Log out  <i class="fas fa-sign-out-alt"></i>
                 </button>
             </form>
