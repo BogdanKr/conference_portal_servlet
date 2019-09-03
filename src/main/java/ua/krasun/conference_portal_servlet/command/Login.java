@@ -10,9 +10,12 @@ public class Login implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         System.out.println(email + " " + password);
-        if (email == null || email.isEmpty() || password == null || password.isEmpty()) return "/login.jsp";
-        else {
-            User user ;
-            return "redirect:/welcome.jsp";}
+        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
+            if (email != null) request.setAttribute("error", true);
+            return "/login.jsp";
+        } else {
+            User user;
+            return "redirect:/welcome.jsp";
+        }
     }
 }
