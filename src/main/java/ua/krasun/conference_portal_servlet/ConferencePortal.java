@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class FirstServlet extends HttpServlet {
+public class ConferencePortal extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,9 +28,9 @@ public class FirstServlet extends HttpServlet {
         path = path.replaceAll(".*/app", "");
         response.getWriter().print("<br>");
 //        response.getWriter().print("replaceAll(\".*/app\", \"\") path: " + path);
-        response.sendRedirect("/welcome.jsp");
+//        response.sendRedirect("/welcome.jsp");
 
-//        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/welcome.jsp").forward(request, response);
     }
 }
 

@@ -38,9 +38,13 @@
     </div>
 </#macro>
 
+
+
 <#macro logout>
     <form action="/" method="post">
         <button type="submit" class="btn btn-primary">Log out  <i class="fas fa-sign-out-alt"></i>
         </button>
     </form>
 </#macro>
+
+<%@ page import="java.util.*, java.text.*" %>

@@ -1,13 +1,20 @@
-<%@ page import="java.util.*, java.text.*" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Index</title>
-</head>
-<body>
-<h2>Hello World! привіт!</h2>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="parts/head.jsp" %>
+
+
+
+<h5> Welcome Guest
+
+</h5>
+This is a conference portal
+Це портал конференцій!
 <br>
-<a href="${pageContext.request.contextPath}/app">Link to servlet</a>
-</body>
-</html>
+Login or Registration please
+<div class="mt-1">
+<a class="btn btn-primary" href="${pageContext.request.contextPath}/conference/login" role="button">Login</a>
+<br>
+<a class="btn btn-primary" href="${pageContext.request.contextPath}/conference/registration" role="button">Registration</a>
+</div>
+
+
+<%@ include file="parts/tail.jsp" %>

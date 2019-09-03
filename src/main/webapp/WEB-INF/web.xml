@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app  version="3.0">
-    <display-name>Archetype Created Web Application</display-name>
+    <display-name>Conference portal</display-name>
 
     <servlet>
-        <servlet-name>FirstServlet</servlet-name>
-        <servlet-class>ua.krasun.conference_portal_servlet.FirstServlet</servlet-class>
+        <servlet-name>ConferenceServlet</servlet-name>
+        <servlet-class>ua.krasun.conference_portal_servlet.ConferencePortal</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>FirstServlet</servlet-name>
-        <url-pattern>/app</url-pattern>
+        <servlet-name>ConferenceServlet</servlet-name>
+        <url-pattern>/conference/*</url-pattern>
     </servlet-mapping>
 
 <!--    <welcome-file-list>-->
