@@ -27,14 +27,12 @@ public class ConferencePortal extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("DoGet");
         processRequest(req, resp);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("DoPost");
         processRequest(req, resp);
 
     }

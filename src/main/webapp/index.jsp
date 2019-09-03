@@ -10,9 +10,9 @@ This is a conference portal
 <br>
 Login or Registration please
 <div class="mt-1">
-    <a class="btn btn-primary" href="${pageContext.request.contextPath}/login.jsp" role="button">Login</a>
+    <a class="btn btn-primary" href="${pageContext.request.contextPath}/conference/login" role="button">Login</a>
     <br>
-    <a class="btn btn-primary mt-1" href="${pageContext.request.contextPath}/registration.jsp" role="button">Registration</a>
+    <a class="btn btn-primary mt-1" href="${pageContext.request.contextPath}/conference/registration" role="button">Registration</a>
     <br>
     <a class="btn btn-primary mt-1" href="${pageContext.request.contextPath}/welcome.jsp" role="button">Welcome page</a>
 </div>
