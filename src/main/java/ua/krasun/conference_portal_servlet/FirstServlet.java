@@ -28,7 +28,7 @@ public class FirstServlet extends HttpServlet {
         path = path.replaceAll(".*/app", "");
         response.getWriter().print("<br>");
 //        response.getWriter().print("replaceAll(\".*/app\", \"\") path: " + path);
-        response.sendRedirect("https://google.com");
+        response.sendRedirect("/welcome.jsp");
 
 //        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
