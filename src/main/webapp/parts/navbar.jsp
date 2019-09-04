@@ -8,24 +8,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/"><i class="fas fa-home"></i> </a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/conference/"><i class="fas fa-home"></i> </a>
             </li>
             <li class="nav-item"><a class="nav-link"
-                                    href="/">All conferences </a>
+                                    href="${pageContext.request.contextPath}/conference/">All conferences </a>
             </li>
             <li class="nav-item"><a class="nav-link"
-                                    href="/">My registration </a>
+                                    href="${pageContext.request.contextPath}/">My registration </a>
             </li>
             <li class="nav-item"><a class="nav-link"
-                                    href="/">All presentation </a>
+                                    href="${pageContext.request.contextPath}/">All presentation </a>
             </li>
             <li class="nav-item"><a class="nav-link"
-                                    href="/">My presentation</a></li>
+                                    href="${pageContext.request.contextPath}/">My presentation</a></li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Edit</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/">Edit</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">User list </a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/">User list </a>
             </li>
 
         </ul>

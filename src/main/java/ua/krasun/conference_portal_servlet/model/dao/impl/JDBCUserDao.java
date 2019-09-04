@@ -1,6 +1,7 @@
 package ua.krasun.conference_portal_servlet.model.dao.impl;
 
 import ua.krasun.conference_portal_servlet.model.dao.UserDao;
+import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.*;
@@ -8,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JDBCUserDao implements UserDao {
-    private String queryAdd = "INSERT INTO user (email , password ) VALUES (? ,? )";
+    private String queryAdd = "INSERT INTO user (email , password , role) VALUES (? ,? ,?)";
     private String queryFindById = "SELECT * FROM user WHERE id = ?";
     private String queryFindAll = "SELECT * FROM user";
-    private String queryUpdateUser = "UPDATE user SET email = ? , password = ? WHERE id = ?";
+    private String queryUpdateUser = "UPDATE user SET email = ? , password = ?, role = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM user  WHERE id = ?";
     private Connection connection;
 
@@ -25,6 +26,7 @@ public class JDBCUserDao implements UserDao {
                 (queryAdd)) {
             ps.setString(1, entity.getEmail());
             ps.setString(2, entity.getPassword());
+            ps.setObject(3, entity.getRole());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Invalid input");
@@ -68,7 +70,8 @@ public class JDBCUserDao implements UserDao {
                 queryUpdateUser)){
             ps.setString(1 , entity.getEmail());
             ps.setString(2 ,entity.getPassword());
-            ps.setLong(3, entity.getId());
+            ps.setObject(3, entity.getRole());
+            ps.setLong(4, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -101,6 +104,7 @@ public class JDBCUserDao implements UserDao {
                 .id(rs.getLong("id"))
                 .email(rs.getString("email"))
                 .password(rs.getString("password"))
+                .role(Role.values()[rs.getInt("role")])
                 .build();
     }
 }

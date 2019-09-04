@@ -58,7 +58,7 @@ public class User {
         }
 
         public Builder password(String password) {
-            User.this.email = password;
+            User.this.password = password;
             return this;
         }
 
@@ -70,5 +70,15 @@ public class User {
         public User build() {
             return User.this;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
     }
 }
