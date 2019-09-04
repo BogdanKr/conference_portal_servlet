@@ -1,4 +1,4 @@
-package ua.krasun.conference_portal_servlet.entity;
+package ua.krasun.conference_portal_servlet.model.entity;
 
 public class User {
     private Long id;

@@ -16,10 +16,18 @@
 <!--    </welcome-file-list>-->
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>ua.krasun.conference_portal_servlet.filters.EncodingFilter</filter-class>
+        <filter-class>ua.krasun.conference_portal_servlet.controller.filters.EncodingFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ua.krasun.conference_portal_servlet.controller.filters.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
@@ -27,5 +35,10 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/WEB-INF/error.jsp</location>
     </error-page>
+
+    <listener>
+        <listener-class>ua.krasun.conference_portal_servlet.controller.listener.SessionListener</listener-class>
+    </listener>
+
 
 </web-app>

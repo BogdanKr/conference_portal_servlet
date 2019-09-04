@@ -1,4 +1,4 @@
-package ua.krasun.conference_portal_servlet.filters;
+package ua.krasun.conference_portal_servlet.controller.filters;
 
 import javax.servlet.*;
 import java.io.IOException;

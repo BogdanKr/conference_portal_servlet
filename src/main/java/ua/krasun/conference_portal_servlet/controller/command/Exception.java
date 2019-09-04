@@ -1,4 +1,4 @@
-package ua.krasun.conference_portal_servlet.command;
+package ua.krasun.conference_portal_servlet.controller.command;
 
 import javax.servlet.http.HttpServletRequest;
 
