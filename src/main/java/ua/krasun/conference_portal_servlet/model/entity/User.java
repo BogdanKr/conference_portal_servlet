@@ -47,6 +47,11 @@ public class User {
         private Builder() {
         }
 
+        public Builder id(Long id) {
+            User.this.id = id;
+            return this;
+        }
+
         public Builder email(String email) {
             User.this.email = email;
             return this;

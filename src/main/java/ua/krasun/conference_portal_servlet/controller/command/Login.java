@@ -29,7 +29,7 @@ public class Login implements Command {
                 return "/WEB-INF/user/userbasic.jsp";
             } else {
                 CommandUtility.setUserRole(request, Role.GUEST, email);
-                return "/welcome.jsp";
+                return "redirect:/welcome.jsp";
             }
         }
     }
