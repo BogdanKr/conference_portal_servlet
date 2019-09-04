@@ -27,7 +27,7 @@ public class JDBCUserDao implements UserDao {
             ps.setString(2, entity.getPassword());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Invalid input");
         }
     }
 

@@ -1,17 +1,23 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
 import ua.krasun.conference_portal_servlet.model.entity.Role;
+import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
 import static java.util.Objects.nonNull;
 
 public class Login implements Command {
+//    private UserService userService = new UserService();
+
     @Override
     public String execute(HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         System.out.println(email + " " + password);
+
+//        System.out.println(userService.findAllUsers());
+
         if (nonNull(request.getSession().getAttribute("userEmail"))) return "/welcome.jsp";
         if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             if (email != null) request.setAttribute("error", true);

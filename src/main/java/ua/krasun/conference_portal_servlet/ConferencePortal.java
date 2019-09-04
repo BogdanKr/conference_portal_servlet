@@ -1,6 +1,5 @@
 package ua.krasun.conference_portal_servlet;
 
-
 import ua.krasun.conference_portal_servlet.controller.command.Command;
 import ua.krasun.conference_portal_servlet.controller.command.Exception;
 import ua.krasun.conference_portal_servlet.controller.command.LogOut;
@@ -27,6 +26,7 @@ public class ConferencePortal extends HttpServlet {
         commands.put("registration", new Registration());
         commands.put("logout", new LogOut());
         commands.put("exception", new Exception());
+
     }
 
     @Override
@@ -43,6 +43,7 @@ public class ConferencePortal extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         System.out.println(request.getMethod());
         System.out.println(request.getRequestURI());
         String path = request.getRequestURI();

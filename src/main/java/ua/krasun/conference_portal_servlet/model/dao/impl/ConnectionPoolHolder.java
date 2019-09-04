@@ -10,8 +10,10 @@ public class ConnectionPoolHolder {
 
         if (dataSource == null){
             synchronized (ConnectionPoolHolder.class) {
+//                Class.forName("com.mysql.cj.jdbc.Driver");
                 if (dataSource == null) {
                     BasicDataSource ds = new BasicDataSource();
+                    ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
                     ds.setUrl("jdbc:mysql://localhost:3306/conference_servlet_db?useTimezone=true&serverTimezone=UTC");
                     ds.setUsername("root");
                     ds.setPassword("12345678");
