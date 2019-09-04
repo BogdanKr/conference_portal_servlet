@@ -30,11 +30,7 @@ public class Login implements Command {
             return "/login.jsp";
         } else {
             //todo: check login with DB
-//            String name = request.getParameter("name");
-//            String pass = request.getParameter("pass");
-//            if( name == null || name.equals("") || pass == null || pass.equals("")  ){
-//                return "/login.jsp";
-//            }
+
 //            Optional<Teacher> teacher = teacherService.login(name);
 //            if( teacher.isPresent() && teacher.get().getPassHash()
 //                    == pass.hashCode()){

@@ -30,25 +30,6 @@ public class SessionListener implements HttpSessionListener {
         System.out.println("listener works");
         System.out.println(loggedUsers);
 
-        Enumeration<Driver> drivers = DriverManager.getDrivers();
-        Driver d = null;
-        while(drivers.hasMoreElements()) {
-            try {
-                d = drivers.nextElement();
-                DriverManager.deregisterDriver(d);
-                System.out.println(String.format("Driver %s deregistered", d));
-            } catch (SQLException ex) {
-                System.out.println(String.format("Error deregistering driver %s", d));
-            }
-        }
-        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-        Thread[] threadArray = threadSet.toArray(new Thread[threadSet.size()]);
-        for(Thread t:threadArray) {
-            if(t.getName().contains("Abandoned connection cleanup thread")) {
-                synchronized(t) {
-                    t.stop(); //don't complain, it works
-                }
-            }
-        }
+
     }
 }

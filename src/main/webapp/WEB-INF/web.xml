@@ -30,6 +30,14 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>ua.krasun.conference_portal_servlet.controller.filters.AccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <error-page>
         <exception-type>java.lang.Exception</exception-type>

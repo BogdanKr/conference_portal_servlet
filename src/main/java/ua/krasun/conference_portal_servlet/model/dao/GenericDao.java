@@ -6,7 +6,7 @@ public interface GenericDao<T> extends AutoCloseable {
 
     void add(T entity);
 
-    T findById(int id);
+    T findByEmail(String email);
 
     List<T> findAll();
 

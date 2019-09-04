@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JDBCUserDao implements UserDao {
     private String queryAdd = "INSERT INTO user (email , password , role) VALUES (? ,? ,?)";
-    private String queryFindById = "SELECT * FROM user WHERE id = ?";
+    private String queryFindByEmail = "SELECT * FROM user WHERE email = ?";
     private String queryFindAll = "SELECT * FROM user";
     private String queryUpdateUser = "UPDATE user SET email = ? , password = ?, role = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM user  WHERE id = ?";
@@ -34,10 +34,10 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public User findById(int id) {
+    public User findByEmail(String email) {
         try (PreparedStatement ps = connection.prepareStatement
-                (queryFindById)) {
-            ps.setInt(1, id);
+                (queryFindByEmail)) {
+            ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return extractFromResultSet(rs);
