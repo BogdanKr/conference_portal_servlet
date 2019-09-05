@@ -26,7 +26,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/">Edit</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/">User list </a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/conference/admin/userlist">User list </a>
             </li>
 
         </ul>

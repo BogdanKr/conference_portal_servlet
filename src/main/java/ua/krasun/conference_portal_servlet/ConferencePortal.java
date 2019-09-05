@@ -26,6 +26,8 @@ public class ConferencePortal extends HttpServlet {
         commands.put("logout", new LogOut());
         commands.put("exception", new Exception());
         commands.put("admin", new AdminRole());
+        commands.put("user", new UserRole());
+        commands.put("admin/userlist", new UserList(userService));
 
     }
 
