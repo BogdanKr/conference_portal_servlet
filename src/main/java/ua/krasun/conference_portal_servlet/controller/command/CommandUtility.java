@@ -2,7 +2,6 @@ package ua.krasun.conference_portal_servlet.controller.command;
 
 import ua.krasun.conference_portal_servlet.model.entity.Role;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;

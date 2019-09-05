@@ -22,7 +22,7 @@ public class ConferencePortal extends HttpServlet {
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
         commands.put("login", new Login(userService));
-        commands.put("registration", new Registration());
+        commands.put("registration", new Registration(userService));
         commands.put("logout", new LogOut());
         commands.put("exception", new Exception());
         commands.put("admin", new AdminRole());

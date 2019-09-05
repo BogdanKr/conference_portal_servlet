@@ -25,7 +25,8 @@ public class Login implements Command {
     public String execute(HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        System.out.println(email + " " + password);
+        if (email == null) return "/login.jsp";
+        System.out.println("user enter email: "+ email + " " + password);
 
         System.out.println("entering DB : ");
         userService.findAllUsers().forEach(System.out::println);
@@ -34,7 +35,7 @@ public class Login implements Command {
         Optional<User> user = userService.findUser(email, password);
         if (!user.isPresent()) {
             logger.info("Invalid attempt of user email: '" + email + "'");
-            if (email != null) request.setAttribute("error", true);
+             request.setAttribute("error", true);
             return "/login.jsp";
         }
         if (CommandUtility.checkUserIsLogged(request, email)) {

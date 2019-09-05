@@ -25,6 +25,5 @@ public class SessionListener implements HttpSessionListener {
         System.out.println("listener works");
         System.out.println(loggedUsers);
 
-
     }
 }

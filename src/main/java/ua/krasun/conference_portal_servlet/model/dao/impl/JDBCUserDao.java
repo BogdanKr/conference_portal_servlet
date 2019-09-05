@@ -6,6 +6,7 @@ import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class JDBCUserDao implements UserDao {
@@ -26,7 +27,7 @@ public class JDBCUserDao implements UserDao {
                 (queryAdd)) {
             ps.setString(1, entity.getEmail());
             ps.setString(2, entity.getPassword());
-            ps.setObject(3, entity.getRole());
+            ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Invalid input");
@@ -51,10 +52,10 @@ public class JDBCUserDao implements UserDao {
     @Override
     public List<User> findAll() {
         List<User> resultList = new ArrayList<>();
-        try (Statement ps = connection.createStatement()){
+        try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
 
-            while ( rs.next() ){
+            while (rs.next()) {
                 User result = extractFromResultSet(rs);
                 resultList.add(result);
             }
@@ -67,9 +68,9 @@ public class JDBCUserDao implements UserDao {
     @Override
     public void update(User entity) {
         try (PreparedStatement ps = connection.prepareStatement(
-                queryUpdateUser)){
-            ps.setString(1 , entity.getEmail());
-            ps.setString(2 ,entity.getPassword());
+                queryUpdateUser)) {
+            ps.setString(1, entity.getEmail());
+            ps.setString(2, entity.getPassword());
             ps.setObject(3, entity.getRole());
             ps.setLong(4, entity.getId());
             ps.executeUpdate();
@@ -81,7 +82,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public void delete(int id) {
         try (PreparedStatement ps = connection.prepareStatement(
-                queryDeleteById)){
+                queryDeleteById)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
