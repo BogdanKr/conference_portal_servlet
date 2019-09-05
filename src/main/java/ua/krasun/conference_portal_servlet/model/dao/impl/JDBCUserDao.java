@@ -22,16 +22,16 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void add(User entity) {
-        try (PreparedStatement ps = connection.prepareStatement
-                (queryAdd)) {
+    public void add(User entity) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(queryAdd)) {
             ps.setString(1, entity.getEmail());
             ps.setString(2, entity.getPassword());
             ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
             ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException("Invalid input");
         }
+//        catch (SQLException e) {
+//            throw new RuntimeException("Invalid input");
+//        }
     }
 
     @Override

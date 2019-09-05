@@ -7,6 +7,7 @@ import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 public class Registration implements Command {
     private static final Logger logger = LogManager.getLogger(Login.class);
@@ -15,7 +16,6 @@ public class Registration implements Command {
     public Registration(UserService userService) {
         this.userService = userService;
     }
-
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -27,7 +27,12 @@ public class Registration implements Command {
                 .password(password)
                 .role(Role.USER)
                 .build();
-        userService.addUser(newUser);
+        try {
+            userService.addUser(newUser);
+            logger.info("User email " + email + " registrate successfully.");
+        } catch (SQLException e) {
+            request.setAttribute("error", true);
+        }
         return "/registration.jsp";
     }
 }

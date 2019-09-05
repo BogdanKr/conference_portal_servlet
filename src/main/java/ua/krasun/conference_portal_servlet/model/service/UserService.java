@@ -5,6 +5,7 @@ import ua.krasun.conference_portal_servlet.model.dao.DaoFactory;
 import ua.krasun.conference_portal_servlet.model.dao.UserDao;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class UserService {
         return userDao.findAll();
     }
 
-    public void addUser(User user){
+    public void addUser(User user) throws SQLException {
         userDao.add(user);
     }
 
