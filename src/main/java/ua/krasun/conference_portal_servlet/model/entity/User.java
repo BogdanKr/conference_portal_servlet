@@ -5,6 +5,15 @@ public class User {
     private String email;
     private String password;
     private Role role;
+    private boolean active;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public Long getId() {
         return id;
@@ -67,6 +76,10 @@ public class User {
             return this;
         }
 
+        public Builder active(boolean active) {
+            User.this.active = active;
+            return this;
+        }
         public User build() {
             return User.this;
         }
@@ -79,6 +92,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
+                ", active=" + active +
                 '}';
     }
 }

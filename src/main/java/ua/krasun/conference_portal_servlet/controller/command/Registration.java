@@ -2,8 +2,6 @@ package ua.krasun.conference_portal_servlet.controller.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.krasun.conference_portal_servlet.model.entity.Role;
-import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +20,8 @@ public class Registration implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (email == null) return "/registration.jsp";
-        User newUser = User.builder()
-                .email(email)
-                .password(password)
-                .role(Role.USER)
-                .build();
         try {
-            userService.addUser(newUser);
+            userService.addUser(email, password);
             logger.info("User email " + email + " registrate successfully.");
         } catch (SQLException e) {
             request.setAttribute("error", true);

@@ -3,6 +3,7 @@ package ua.krasun.conference_portal_servlet.model.service;
 
 import ua.krasun.conference_portal_servlet.model.dao.DaoFactory;
 import ua.krasun.conference_portal_servlet.model.dao.UserDao;
+import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.SQLException;
@@ -17,8 +18,14 @@ public class UserService {
         return userDao.findAll();
     }
 
-    public void addUser(User user) throws SQLException {
-        userDao.add(user);
+    public void addUser(String email, String password) throws SQLException {
+        User newUser = User.builder()
+                .email(email)
+                .password(password)
+                .role(Role.USER)
+                .active(true)
+                .build();
+        userDao.add(newUser);
     }
 
     public Optional<User> findUser(String email, String password){

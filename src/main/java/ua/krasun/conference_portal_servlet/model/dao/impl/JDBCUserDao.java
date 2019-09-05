@@ -10,10 +10,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class JDBCUserDao implements UserDao {
-    private String queryAdd = "INSERT INTO user (email , password , role) VALUES (? ,? ,?)";
+    private String queryAdd = "INSERT INTO user (email , password , role , active) VALUES (? ,? ,? , ?)";
     private String queryFindByEmail = "SELECT * FROM user WHERE email = ?";
     private String queryFindAll = "SELECT * FROM user";
-    private String queryUpdateUser = "UPDATE user SET email = ? , password = ?, role = ? WHERE id = ?";
+    private String queryUpdateUser = "UPDATE user SET email = ? , password = ?, role = ?, active = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM user  WHERE id = ?";
     private Connection connection;
 
@@ -27,6 +27,7 @@ public class JDBCUserDao implements UserDao {
             ps.setString(1, entity.getEmail());
             ps.setString(2, entity.getPassword());
             ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
+            ps.setBoolean(4, entity.isActive());
             ps.executeUpdate();
         }
 //        catch (SQLException e) {
@@ -71,8 +72,9 @@ public class JDBCUserDao implements UserDao {
                 queryUpdateUser)) {
             ps.setString(1, entity.getEmail());
             ps.setString(2, entity.getPassword());
-            ps.setObject(3, entity.getRole());
-            ps.setLong(4, entity.getId());
+            ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
+            ps.setBoolean(4, entity.isActive());
+            ps.setLong(5, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -106,6 +108,7 @@ public class JDBCUserDao implements UserDao {
                 .email(rs.getString("email"))
                 .password(rs.getString("password"))
                 .role(Role.values()[rs.getInt("role")])
+                .active(rs.getBoolean("active"))
                 .build();
     }
 }

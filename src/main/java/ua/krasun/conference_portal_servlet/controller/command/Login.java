@@ -51,9 +51,7 @@ public class Login implements Command {
             CommandUtility.setUserRole(request, Role.USER, email);
             return "/WEB-INF/user/userbasic.jsp";
         } else {
-            CommandUtility.setUserRole(request, Role.GUEST, email);
-            return "redirect:/welcome.jsp";
+            return "redirect:/index.jsp";
         }
-
     }
 }
