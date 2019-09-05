@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Conference portal</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -30,13 +31,15 @@
 
         </ul>
 
-        <div class="navbar-text mr-3"> Guest</div>
+        <div class="navbar-text mr-3"> ${sessionScope.userEmail}</div>
 
+<c:if test="${sessionScope.userEmail ne null}">
         <div class="mr-3">
             <form action="${pageContext.request.contextPath}/conference/logout" method="post">
                 <button type="submit" class="btn btn-primary">Log out  <i class="fas fa-sign-out-alt"></i>
                 </button>
             </form>
         </div>
+</c:if>
     </div>
 </nav>

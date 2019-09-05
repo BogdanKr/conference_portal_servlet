@@ -10,7 +10,6 @@ import java.util.HashSet;
 class CommandUtility {
     static void setUserRole(HttpServletRequest request, Role role, String email) {
         HttpSession session = request.getSession();
-        ServletContext context = request.getServletContext();
         session.setAttribute("userEmail", email);
         session.setAttribute("role", role);
     }
@@ -19,22 +18,22 @@ class CommandUtility {
         @SuppressWarnings("unchecked")
         HashSet<String> loggedUsers = (HashSet<String>) request.getSession()
                 .getServletContext().getAttribute("loggedUsers");
+        if (loggedUsers == null) return false;
         if (loggedUsers.stream().anyMatch(email::equalsIgnoreCase)) return true;
         loggedUsers.add(email);
         request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
         return false;
     }
 
-    static void deleteUserFromContextAndSession(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        ServletContext context = request.getServletContext();
-        String email = (String) context.getAttribute("userEmail");
-        @SuppressWarnings("unchecked")
-        HashSet<String> loggedUsers = (HashSet<String>) request.getSession()
-                .getServletContext().getAttribute("loggedUsers");
-        loggedUsers.remove(email);
-        request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
-        setUserRole(request, Role.GUEST, "Guest");
-        //TODO listener
-    }
+//    static void deleteUserFromContextAndSession(HttpServletRequest request) {
+//        HttpSession session = request.getSession();
+//        ServletContext context = request.getServletContext();
+//        String email = (String) context.getAttribute("userEmail");
+//        @SuppressWarnings("unchecked")
+//        HashSet<String> loggedUsers = (HashSet<String>) request.getSession()
+//                .getServletContext().getAttribute("loggedUsers");
+//        loggedUsers.remove(email);
+//        request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
+//        setUserRole(request, Role.GUEST, "Guest");
+//    }
 }

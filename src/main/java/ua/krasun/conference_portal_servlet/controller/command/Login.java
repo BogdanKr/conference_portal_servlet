@@ -1,13 +1,19 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
+import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Optional;
+
 import static java.util.Objects.nonNull;
 
 public class Login implements Command {
+    private static final Logger logger = LogManager.getLogger(Login.class);
     private UserService userService;
 
     public Login(UserService userService) {
@@ -25,37 +31,28 @@ public class Login implements Command {
         userService.findAllUsers().forEach(System.out::println);
 
         if (nonNull(request.getSession().getAttribute("userEmail"))) return "/welcome.jsp";
-        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
+        Optional<User> user = userService.findUser(email, password);
+        if (!user.isPresent()) {
+            logger.info("Invalid attempt of user email: '" + email + "'");
             if (email != null) request.setAttribute("error", true);
             return "/login.jsp";
-        } else {
-            //todo: check login with DB
-
-//            Optional<Teacher> teacher = teacherService.login(name);
-//            if( teacher.isPresent() && teacher.get().getPassHash()
-//                    == pass.hashCode()){
-//                request.getSession().setAttribute("teacher" , teacher.get());
-//                logger.info("Teacher "+ name+" logged successfully.");
-//                return "/WEB-INF/studentlist.jsp";
-//
-//            }
-//            logger.info("Invalid attempt of login user:'"+ name+"'");
-//            return "/login.jsp";
-
-            if (CommandUtility.checkUserIsLogged(request, email)) {
-                throw new RuntimeException("You already logged");
-            }
-            if (email.equals("a@a")) {
-                CommandUtility.setUserRole(request, Role.ADMIN, email);
-                return "redirect:/conference/admin";
-            } else if (email.equals("u@u")) {
-                CommandUtility.setUserRole(request, Role.USER, email);
-                return "/WEB-INF/user/userbasic.jsp";
-            } else {
-                CommandUtility.setUserRole(request, Role.GUEST, email);
-                return "redirect:/welcome.jsp";
-            }
         }
+        if (CommandUtility.checkUserIsLogged(request, email)) {
+            logger.info("User email " + email + " already logged.");
+            throw new RuntimeException("You already logged");
+        }
+        logger.info("User email " + email + " logged successfully.");
+
+        if (user.get().getRole().equals(Role.ADMIN)) {
+            CommandUtility.setUserRole(request, Role.ADMIN, email);
+            return "redirect:/conference/admin";
+        } else if (user.get().getRole().equals(Role.USER)) {
+            CommandUtility.setUserRole(request, Role.USER, email);
+            return "/WEB-INF/user/userbasic.jsp";
+        } else {
+            CommandUtility.setUserRole(request, Role.GUEST, email);
+            return "redirect:/welcome.jsp";
+        }
+
     }
 }
-//  redirect:

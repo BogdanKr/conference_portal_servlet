@@ -2,12 +2,7 @@ package ua.krasun.conference_portal_servlet.controller.listener;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Set;
 
 public class SessionListener implements HttpSessionListener {
     @Override
