@@ -23,6 +23,7 @@ public class Login implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        if (nonNull(request.getSession().getAttribute("userEmail"))) return "redirect:/";
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (email == null) return "/login.jsp";
@@ -31,7 +32,6 @@ public class Login implements Command {
         System.out.println("entering DB : ");
         userService.findAllUsers().forEach(System.out::println);
 
-        if (nonNull(request.getSession().getAttribute("userEmail"))) return "/welcome.jsp";
         Optional<User> user = userService.findUser(email, password);
         if (!user.isPresent()) {
             logger.info("Invalid attempt of user email: '" + email + "'");
@@ -44,6 +44,7 @@ public class Login implements Command {
         }
         logger.info("User email " + email + " logged successfully.");
 
+        request.getSession().setAttribute("user", user.get());
         if (user.get().getRole().equals(Role.ADMIN)) {
             CommandUtility.setUserRole(request, Role.ADMIN, email);
             return "redirect:/conference/admin";

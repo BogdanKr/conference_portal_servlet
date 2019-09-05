@@ -13,7 +13,7 @@ public class UserList implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("userList", userService.findAllUsers());
+        request.getSession().setAttribute("userList", userService.findAllUsers());
         return "/WEB-INF/admin/userlist.jsp";
     }
 }

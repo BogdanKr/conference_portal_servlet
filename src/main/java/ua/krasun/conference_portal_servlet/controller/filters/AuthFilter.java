@@ -16,10 +16,9 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
-
         HttpSession session = req.getSession();
-        ServletContext context = req.getServletContext();
-        System.out.println("p------------------------------------------------p");
+        ServletContext context = session.getServletContext();
+        System.out.println("T------------------------------------------------T");
         System.out.println(session);
         System.out.println(session.getAttribute("role")+" " +session.getAttribute("userEmail"));
         System.out.println("Auth filter work: "+ context.getAttribute("loggedUsers"));

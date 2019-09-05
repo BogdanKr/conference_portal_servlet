@@ -2,9 +2,14 @@
 <%@ include file="/parts/head.jsp" %>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 
+<c:if test="${requestScope.error eq true}">
+    <div class="alert alert-danger" align="center">
+        <strong>Invalid input</strong>
+    </div>
+</c:if>
 
 <h5> User list</h5>
-
+<a href="${pageContext.request.contextPath}/conference/registration">Add user</a>
 <table>
     <thead>
     <tr>
@@ -16,14 +21,14 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${requestScope.userList}" var="usr">
+    <c:forEach items="${sessionScope.userList}" var="user">
 <%--        <c:out value="${operation}"/><br />--%>
     <tr>
-        <td>${usr.email}</td>
-        <td>${usr.password}</td>
-        <td>${usr.role}</td>
-        <td><c:if test="${usr.active}">Active</c:if></td>
-<%--        <td><a href="/registration/${usr.id}">Edit</a> </td>--%>
+        <td>${user.email}</td>
+        <td>${user.password}</td>
+        <td>${user.role}</td>
+        <td><c:if test="${user.active}">Active</c:if></td>
+        <td><a href="${pageContext.request.contextPath}/conference/admin/edit?id=${user.id}">Edit</a> </td>
     </tr>
     </c:forEach>
     </tbody>

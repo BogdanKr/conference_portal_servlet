@@ -29,9 +29,9 @@
         Registration
     </button>
 </form>
-
-<div class="mt-1">
-    <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
-</div>
-
+<c:if test="${sessionScope.userEmail eq null}">
+    <div class="mt-1">
+        <a href="${pageContext.request.contextPath}/conference/login">Login</a>
+    </div>
+</c:if>
 <%@ include file="parts/tail.jsp" %>

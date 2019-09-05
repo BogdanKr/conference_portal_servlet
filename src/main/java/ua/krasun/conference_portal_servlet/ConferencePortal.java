@@ -28,6 +28,7 @@ public class ConferencePortal extends HttpServlet {
         commands.put("admin", new AdminRole());
         commands.put("user", new UserRole());
         commands.put("admin/userlist", new UserList(userService));
+        commands.put("admin/edit", new UserEdit(userService));
 
     }
 

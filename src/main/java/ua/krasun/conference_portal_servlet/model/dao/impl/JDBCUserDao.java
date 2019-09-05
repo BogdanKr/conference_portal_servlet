@@ -12,6 +12,7 @@ import java.util.List;
 public class JDBCUserDao implements UserDao {
     private String queryAdd = "INSERT INTO user (email , password , role , active) VALUES (? ,? ,? , ?)";
     private String queryFindByEmail = "SELECT * FROM user WHERE email = ?";
+    private String queryFindById = "SELECT * FROM user WHERE id = ?";
     private String queryFindAll = "SELECT * FROM user";
     private String queryUpdateUser = "UPDATE user SET email = ? , password = ?, role = ?, active = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM user  WHERE id = ?";
@@ -40,6 +41,21 @@ public class JDBCUserDao implements UserDao {
         try (PreparedStatement ps = connection.prepareStatement
                 (queryFindByEmail)) {
             ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return extractFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    @Override
+    public User findById(int id) {
+        try (PreparedStatement ps = connection.prepareStatement
+                (queryFindById)) {
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return extractFromResultSet(rs);
