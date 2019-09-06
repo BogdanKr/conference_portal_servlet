@@ -12,6 +12,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/conference/"><i class="fas fa-home"></i>
                 </a>
             </li>
+            <c:if test="${sessionScope.userEmail ne null}">
             <li class="nav-item"><a class="nav-link"
                                     href="${pageContext.request.contextPath}/conference/">All conferences </a>
             </li>
@@ -27,7 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/">Edit my profile</a>
                 </li>
-            </c:if>
+            </c:if></c:if>
             <c:if test="${sessionScope.role eq 'ADMIN'}">
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/conference/admin/edit?id=${sessionScope.user.id}">Edit my profile</a>

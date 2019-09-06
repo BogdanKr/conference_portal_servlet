@@ -13,10 +13,12 @@ import java.util.Optional;
 
 public class UserService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private UserDao userDao = daoFactory.createUserDao();
+
 
     public List<User> findAllUsers() {
-        return userDao.findAll();
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findAll();
+        }
     }
 
     public void addUser(String email, String password) throws SQLException {
@@ -26,19 +28,25 @@ public class UserService {
                 .role(Role.USER)
                 .active(true)
                 .build();
-        userDao.add(newUser);
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            userDao.add(newUser);
+        }
     }
 
     public Optional<User> findUser(String email, String password) {
-        Optional<User> user = Optional.ofNullable((userDao.findByEmail(email)));
-        if (user.isPresent() && user.get().getPassword().equals(password)) {
-            return user;
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            Optional<User> user = Optional.ofNullable((userDao.findByEmail(email)));
+            if (user.isPresent() && user.get().getPassword().equals(password)) {
+                return user;
+            }
         }
         return Optional.empty();
     }
 
     public Optional<User> findUserById(int id) {
-        return Optional.ofNullable((userDao.findById(id)));
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return Optional.ofNullable((userDao.findById(id)));
+        }
     }
 
     public List<Role> getRoles() {
@@ -50,23 +58,25 @@ public class UserService {
                          String password,
                          String active,
                          String role) {
-        User user = userDao.findById(Integer.parseInt(id));
-        user.setEmail(email);
-        if (!password.isEmpty()) user.setPassword(password);
-        if (Optional.ofNullable(active).isPresent()) user.setActive(true);
-        else user.setActive(false);
-        switch (role) {
-            case "USER":
-                user.setRole(Role.USER);
-                break;
-            case "ADMIN":
-                user.setRole(Role.ADMIN);
-                break;
-            case "GUEST":
-                user.setRole(Role.GUEST);
-                break;
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            User user = userDao.findById(Integer.parseInt(id));
+            user.setEmail(email);
+            if (!password.isEmpty()) user.setPassword(password);
+            if (Optional.ofNullable(active).isPresent()) user.setActive(true);
+            else user.setActive(false);
+            switch (role) {
+                case "USER":
+                    user.setRole(Role.USER);
+                    break;
+                case "ADMIN":
+                    user.setRole(Role.ADMIN);
+                    break;
+                case "GUEST":
+                    user.setRole(Role.GUEST);
+                    break;
+            }
+            userDao.update(user);
         }
-        userDao.update(user);
     }
 
 }
