@@ -1,5 +1,7 @@
 package ua.krasun.conference_portal_servlet.model.entity;
 
+import java.util.Objects;
+
 public class User {
     private Long id;
     private String email;
@@ -94,5 +96,22 @@ public class User {
                 ", role=" + role +
                 ", active=" + active +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return active == user.active &&
+                email.equals(user.email) &&
+                password.equals(user.password) &&
+                role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, password, role, active);
     }
 }

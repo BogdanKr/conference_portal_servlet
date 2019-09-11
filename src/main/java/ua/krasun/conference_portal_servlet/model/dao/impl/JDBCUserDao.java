@@ -30,9 +30,6 @@ public class JDBCUserDao implements UserDao {
             ps.setBoolean(4, entity.isActive());
             ps.executeUpdate();
         }
-//        catch (SQLException e) {
-//            throw new RuntimeException("Invalid input");
-//        }
     }
 
     @Override
@@ -97,10 +94,9 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void delete(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(
-                queryDeleteById)) {
-            ps.setInt(1, id);
+    public void delete(long id) {
+        try (PreparedStatement ps = connection.prepareStatement(queryDeleteById)) {
+            ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
