@@ -13,25 +13,30 @@
                 </a>
             </li>
             <c:if test="${sessionScope.userEmail ne null}">
-            <li class="nav-item"><a class="nav-link"
-                                    href="${pageContext.request.contextPath}/conference/">All conferences </a>
-            </li>
-            <li class="nav-item"><a class="nav-link"
-                                    href="${pageContext.request.contextPath}/">My registration </a>
-            </li>
-            <li class="nav-item"><a class="nav-link"
-                                    href="${pageContext.request.contextPath}/">All presentation </a>
-            </li>
-            <li class="nav-item"><a class="nav-link"
-                                    href="${pageContext.request.contextPath}/">My presentation</a></li>
-            <c:if test="${sessionScope.role ne 'ADMIN'}">
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/">Edit my profile</a>
+                <li class="nav-item"><a class="nav-link"
+                                        href="${pageContext.request.contextPath}/conference/">All conferences </a>
                 </li>
-            </c:if></c:if>
+                <li class="nav-item"><a class="nav-link"
+                                        href="${pageContext.request.contextPath}/">My registration </a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="${pageContext.request.contextPath}/">All presentation </a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="${pageContext.request.contextPath}/">My presentation</a></li>
+                <c:if test="${sessionScope.role ne 'ADMIN'}">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="${pageContext.request.contextPath}/conference/user/edit">
+                            Edit my profile</a>
+                    </li>
+                </c:if>
+            </c:if>
             <c:if test="${sessionScope.role eq 'ADMIN'}">
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/conference/admin/edit?id=${sessionScope.user.id}">Edit my profile</a>
+                    <a class="nav-link"
+                       href="${pageContext.request.contextPath}/conference/admin/edit?id=${sessionScope.user.id}">Edit
+                        my profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/conference/admin/userlist">User

@@ -1,14 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="parts/head.jsp" %>
+<%@ include file="/WEB-INF/parts/head.jsp" %>
 
 <c:if test="${requestScope.error eq true}">
     <div class="alert alert-danger" align="center">
         <strong>${requestScope.message}</strong>
     </div>
 </c:if>
-
-
+<c:if test="${requestScope.success eq true}">
+    <div class="alert alert-success" align="center">
+        <strong>${requestScope.message}</strong>
+    </div>
+</c:if>
 <h5> Welcome <c:if test="${sessionScope.userEmail ne null}">${sessionScope.userEmail}</c:if>
     <c:if test="${sessionScope.userEmail eq null}">Guest</c:if>
 </h5>
@@ -30,4 +33,4 @@ This is a conference portal<br>
 <a href="${pageContext.request.contextPath}/conference/exception">Exception</a>
 
 
-<%@ include file="parts/tail.jsp" %>
+<%@ include file="WEB-INF/parts/tail.jsp" %>

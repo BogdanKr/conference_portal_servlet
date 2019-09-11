@@ -22,10 +22,13 @@ public class Registration implements Command {
         if (email == null) return "/registration.jsp";
         try {
             userService.addUser(email, password);
-            logger.info("User email " + email + " registrate successfully.");
+            logger.info("User email " + email + " registration successfully.");
         } catch (SQLException e) {
             request.setAttribute("error", true);
+            return "/registration.jsp";
         }
+        request.setAttribute("success", true);
+        request.setAttribute("message", "Success registration");
         return "/registration.jsp";
     }
 }

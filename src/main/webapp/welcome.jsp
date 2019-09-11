@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="parts/head.jsp" %>
+<%@ include file="WEB-INF/parts/head.jsp" %>
 
 
 
@@ -13,4 +13,4 @@
 
 
 
-<%@ include file="parts/tail.jsp" %>
+<%@ include file="WEB-INF/parts/tail.jsp" %>

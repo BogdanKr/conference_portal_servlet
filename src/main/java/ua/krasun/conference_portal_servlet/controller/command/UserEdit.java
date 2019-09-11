@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 public class UserEdit implements Command {
-    private static final Logger logger = LogManager.getLogger(UserEdit.class);
     private UserService userService;
+    private static final Logger logger = LogManager.getLogger(AdminEdit.class);
+
 
     public UserEdit(UserService userService) {
         this.userService = userService;
@@ -18,39 +19,21 @@ public class UserEdit implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String id = request.getParameter("id");
-        if (id == null) return "/WEB-INF/admin/userlist.jsp";
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) return "redirect:/";
+        if (!Optional.ofNullable(request.getParameter("userId")).isPresent()) {
+            request.setAttribute("user", user);
+            return "/WEB-INF/user/useredit.jsp";
+        }
+
+        String id = request.getParameter("userId");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String active = request.getParameter("active");
-        String role = request.getParameter("role");
 
-        System.out.println("ID: " + id);
-        System.out.println("pass: " + request.getParameter("password"));
-        System.out.println("active: " + request.getParameter("active"));
-        System.out.println("role: " + request.getParameter("role"));
-        System.out.println(request.getParameter("email"));
-        try {
-            int userId = Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            request.setAttribute("error", true);
-            return "/WEB-INF/admin/userlist.jsp";
-        }
-
-        if (!Optional.ofNullable(request.getParameter("userId")).isPresent()) {
-            System.out.println();
-            Optional<User> user = userService.findUserById(Integer.parseInt(id));
-            if (!user.isPresent()) {
-                logger.info("Invalid no such user ID '" + id + "'");
-                request.setAttribute("error", true);
-                return "/WEB-INF/admin/userlist.jsp";
-            }
-            request.setAttribute("user", user.get());
-            request.setAttribute("roles", userService.getRoles());
-            return "/WEB-INF/admin/usereditadmin.jsp";
-        }
-
-        userService.userEdit(id, email, password, active, role);
-        return "redirect:/conference/admin/userlist";
+        userService.userEditIfNotAdmin(id, email, password);
+        request.setAttribute("success", true);
+        request.setAttribute("message", "Success Save");
+        request.setAttribute("user", userService.findUserByEmail(email).orElse(user));
+        return "/WEB-INF/user/useredit.jsp";
     }
 }

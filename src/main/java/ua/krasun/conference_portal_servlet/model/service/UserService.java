@@ -79,4 +79,27 @@ public class UserService {
         }
     }
 
+    public void userEditIfNotAdmin(String id,
+                         String email,
+                         String password) {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            User user = userDao.findById(Integer.parseInt(id));
+            user.setEmail(email);
+            if (!password.isEmpty()) user.setPassword(password);
+            userDao.update(user);
+        }
+    }
+
+    public Optional<User> findUserByEmail(String email) {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return Optional.ofNullable((userDao.findByEmail(email)));
+        }
+    }
+
+    public void deleteUser(long id){
+        try (UserDao userDao = daoFactory.createUserDao()) {
+             userDao.delete(id);
+        }
+    }
+
 }

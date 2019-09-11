@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/parts/head.jsp" %>
+<%@ include file="/WEB-INF/parts/head.jsp" %>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 
 <c:if test="${requestScope.error eq true}">
     <div class="alert alert-danger" align="center">
-        <strong>Invalid input</strong>
+        <strong>${requestScope.message}</strong>
     </div>
 </c:if>
 
@@ -37,4 +37,4 @@
 <a href="${pageContext.request.contextPath}/index.jsp">Index Page</a>
 
 
-<%@ include file="/parts/tail.jsp" %>
+<%@ include file="/WEB-INF/parts/tail.jsp" %>

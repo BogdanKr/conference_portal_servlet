@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="parts/head.jsp" %>
+<%@ include file="WEB-INF/parts/head.jsp" %>
 
 
 <c:if test="${requestScope.error eq true}">
@@ -7,6 +7,12 @@
         <strong>Invalid email or password</strong>
     </div>
 </c:if>
+<c:if test="${requestScope.success eq true}">
+    <div class="alert alert-success" align="center">
+        <strong>${requestScope.message}</strong>
+    </div>
+</c:if>
+
 
 <form action="${pageContext.request.contextPath}/conference/registration" method="post">
 
@@ -34,4 +40,4 @@
         <a href="${pageContext.request.contextPath}/conference/login">Login</a>
     </div>
 </c:if>
-<%@ include file="parts/tail.jsp" %>
+<%@ include file="WEB-INF/parts/tail.jsp" %>

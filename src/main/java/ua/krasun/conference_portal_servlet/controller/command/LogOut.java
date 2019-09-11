@@ -5,8 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 public class LogOut implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-//        CommandUtility.deleteUserFromContextAndSession(request);
+        if (request.getSession().getAttribute("userEmail") == null) return "redirect:/";
+
         request.getSession().invalidate();
-        return "redirect:/index.jsp";
+        request.setAttribute("success", true);
+        request.setAttribute("message", "Success LogOut");
+        return "/index.jsp";
     }
 }
