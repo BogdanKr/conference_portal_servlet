@@ -6,7 +6,6 @@ import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class JDBCUserDao implements UserDao {
@@ -18,7 +17,7 @@ public class JDBCUserDao implements UserDao {
     private String queryDeleteById = "DELETE FROM user  WHERE id = ?";
     private Connection connection;
 
-    public JDBCUserDao(Connection connection) {
+    JDBCUserDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -27,7 +26,7 @@ public class JDBCUserDao implements UserDao {
         try (PreparedStatement ps = connection.prepareStatement(queryAdd)) {
             ps.setString(1, entity.getEmail());
             ps.setString(2, entity.getPassword());
-            ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
+            ps.setInt(3, entity.getRole().ordinal());
             ps.setBoolean(4, entity.isActive());
             ps.executeUpdate();
         }
@@ -88,7 +87,7 @@ public class JDBCUserDao implements UserDao {
                 queryUpdateUser)) {
             ps.setString(1, entity.getEmail());
             ps.setString(2, entity.getPassword());
-            ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
+            ps.setInt(3, entity.getRole().ordinal());
             ps.setBoolean(4, entity.isActive());
             ps.setLong(5, entity.getId());
             ps.executeUpdate();

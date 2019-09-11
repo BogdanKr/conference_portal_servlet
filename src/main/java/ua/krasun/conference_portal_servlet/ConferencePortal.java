@@ -58,11 +58,7 @@ public class ConferencePortal extends HttpServlet {
         } else {
             request.getRequestDispatcher(page).forward(request, response);
         }
-//      response.sendRedirect("/welcome.jsp");
-//      request.getRequestDispatcher("/welcome.jsp").forward(request, response);
     }
-
-
 }
 
 

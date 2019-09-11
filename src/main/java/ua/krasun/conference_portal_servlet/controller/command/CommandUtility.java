@@ -23,16 +23,4 @@ class CommandUtility {
         request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
         return false;
     }
-
-//    static void deleteUserFromContextAndSession(HttpServletRequest request) {
-//        HttpSession session = request.getSession();
-//        ServletContext context = request.getServletContext();
-//        String email = (String) context.getAttribute("userEmail");
-//        @SuppressWarnings("unchecked")
-//        HashSet<String> loggedUsers = (HashSet<String>) request.getSession()
-//                .getServletContext().getAttribute("loggedUsers");
-//        loggedUsers.remove(email);
-//        request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
-//        setUserRole(request, Role.GUEST, "Guest");
-//    }
 }

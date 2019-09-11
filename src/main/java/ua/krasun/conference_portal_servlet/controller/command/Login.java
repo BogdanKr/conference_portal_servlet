@@ -50,7 +50,7 @@ public class Login implements Command {
             return "redirect:/conference/admin";
         } else if (user.get().getRole().equals(Role.USER)) {
             CommandUtility.setUserRole(request, Role.USER, email);
-            return "/WEB-INF/user/userbasic.jsp";
+            return "redirect:/conference/user";
         } else {
             return "redirect:/index.jsp";
         }
