@@ -7,6 +7,7 @@ import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 public class ConferenceService {
@@ -15,7 +16,9 @@ public class ConferenceService {
 
     public List<Conference> findAllConference() {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
-            return conferenceDao.findAll();
+            List<Conference> conferenceList = conferenceDao.findAll();
+            conferenceList.sort(Comparator.comparing(Conference::getDate));
+            return conferenceList;
         }
     }
 
