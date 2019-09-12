@@ -7,10 +7,10 @@
 <form action="${pageContext.request.contextPath}/conference/admin/edit?id=${user.id}" method="post">
 
     <label>First Name
-        <input type="text" name="firstName"  value="${requestScope.user.firstName}">
+        <input type="text" name="firstName" value="${requestScope.user.firstName}">
     </label>
     <label>Email
-        <input type="email" name="email"  value="${requestScope.user.email}">
+        <input type="email" name="email" value="${requestScope.user.email}">
     </label>
     <label>Password
         <input type="password" name="password" value="">
@@ -25,7 +25,11 @@
         <c:if test="${requestScope.user.role eq role}"> checked </c:if>>${role}</label>
     </c:forEach>
     <input type="hidden" name="userId" value="${requestScope.user.id}">
-    <div><button type="submit">Edit</button></div>
+    <div>
+        <button class="btn btn-primary" name="submit" type="submit">
+            Save
+        </button>
+    </div>
 </form>
 
 <%@ include file="/WEB-INF/parts/deletemodal.jsp" %>

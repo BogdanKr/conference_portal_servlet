@@ -25,13 +25,14 @@ public class AccessFilter implements Filter {
             request.getRequestDispatcher("/").forward(request, response);
             return;
         }
-        if (path.contains("speaker") && (role == Role.USER || role == null) || path.contains("user") && role == null) {
+        if ((path.contains("speaker") && (role == Role.USER || role == null)) || (path.contains("user") && role == null)) {
             request.setAttribute("error", true);
             request.setAttribute("message", "AccessDenied");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
             return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
+
     }
 
     @Override
@@ -39,3 +40,10 @@ public class AccessFilter implements Filter {
 
     }
 }
+//if ((path.contains("speaker") && (role == Role.USER || role == null)) || (path.contains("user") && role == null)) {
+//        request.setAttribute("error", true);
+//        request.setAttribute("message", "AccessDenied");
+//        request.getRequestDispatcher("/index.jsp").forward(request, response);
+//        return;
+//        }
+

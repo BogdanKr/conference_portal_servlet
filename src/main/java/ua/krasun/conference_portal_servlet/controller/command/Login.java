@@ -47,11 +47,13 @@ public class Login implements Command {
         if (user.get().getRole().equals(Role.ADMIN)) {
             CommandUtility.setUserRole(request, Role.ADMIN, email);
             return "redirect:/conference/admin";
-        } else if (user.get().getRole().equals(Role.USER)) {
+        }
+        if (user.get().getRole().equals(Role.USER)) {
             CommandUtility.setUserRole(request, Role.USER, email);
             return "redirect:/conference/user";
-        } else {
-            return "redirect:/conference/speaker";
         }
+        else {
+            CommandUtility.setUserRole(request, Role.SPEAKER, email);
+            return "redirect:/conference/speaker";}
     }
 }
