@@ -2,9 +2,7 @@ package ua.krasun.conference_portal_servlet.model.dao.impl;
 
 import ua.krasun.conference_portal_servlet.model.dao.ConferenceDao;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.ConferenceMapper;
-import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
 import ua.krasun.conference_portal_servlet.model.entity.Conference;
-import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -38,14 +36,10 @@ public class JDBCConferenceDao implements ConferenceDao {
     @Override
     public Conference findById(int id) {
         try (PreparedStatement ps = connection.prepareStatement(queryFindById)) {
-            UserMapper userMapper = new UserMapper();
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Conference conference = conferenceMapper.extractFromResultSet(rs);
-                User author = userMapper.extractFromResultSet(rs);
-                conference.setAuthor(author);
-                return conference;
+                return conferenceMapper.extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -56,14 +50,10 @@ public class JDBCConferenceDao implements ConferenceDao {
     @Override
     public Conference findByDate(LocalDate date) {
         try (PreparedStatement ps = connection.prepareStatement(queryFindByDate)) {
-            UserMapper userMapper = new UserMapper();
             ps.setDate(1, Date.valueOf(date));
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Conference conference = conferenceMapper.extractFromResultSet(rs);
-                User author = userMapper.extractFromResultSet(rs);
-                conference.setAuthor(author);
-                return conference;
+                return conferenceMapper.extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -76,11 +66,8 @@ public class JDBCConferenceDao implements ConferenceDao {
         List<Conference> resultList = new ArrayList<>();
         try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
-            UserMapper userMapper = new UserMapper();
             while (rs.next()) {
                 Conference conference = conferenceMapper.extractFromResultSet(rs);
-                User author = userMapper.extractFromResultSet(rs);
-                conference.setAuthor(author);
                 resultList.add(conference);
             }
         } catch (SQLException e) {
@@ -121,4 +108,6 @@ public class JDBCConferenceDao implements ConferenceDao {
             throw new RuntimeException(e);
         }
     }
+
+
 }

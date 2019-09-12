@@ -19,9 +19,16 @@ public class AddConference implements Command {
         String date = request.getParameter("localDate");
         String subject = request.getParameter("subject");
         if (date == null) return "/";
+
         try {
-            User currentUser = (User) request.getSession().getAttribute("user");
-            conferenceService.addConference(currentUser, LocalDate.parse(date), subject);
+            if (!request.getParameter("conferenceEditId").isEmpty()) {
+                String confId = request.getParameter("conferenceEditId");
+                conferenceService.conferenceEdit(confId, LocalDate.parse(date), subject);
+                return "/conference/user/conferencelist";
+            } else {
+                User currentUser = (User) request.getSession().getAttribute("user");
+                conferenceService.addConference(currentUser, LocalDate.parse(date), subject);
+            }
         } catch (Exception e) {
             request.setAttribute("error", true);
             request.setAttribute("message", "Can't save ");
@@ -34,4 +41,5 @@ public class AddConference implements Command {
         request.setAttribute("message", "Conference added");
         return "/conference/admin";
     }
+
 }

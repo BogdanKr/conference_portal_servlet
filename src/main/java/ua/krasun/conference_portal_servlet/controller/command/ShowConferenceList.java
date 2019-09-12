@@ -10,6 +10,6 @@ public class ShowConferenceList implements Command {
     public String execute(HttpServletRequest request) {
         request.getSession().setAttribute("conferenceList", conferenceService.findAllConference());
         request.setAttribute("edit", true);
-        return "/WEB-INF/conferencelist.jsp";
+        return "/WEB-INF/user/conferencelist.jsp";
     }
 }

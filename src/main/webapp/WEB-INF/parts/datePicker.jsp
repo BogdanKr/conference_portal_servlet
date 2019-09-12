@@ -16,7 +16,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/conference/admin/addconference">
                     <div class="form-group form-group-sm">
-                        <label class="control-label  requiredField" for="${conference.id}">
+                        <label class="control-label  requiredField" for="localDate${conference.id}">
                             Date
                             <span class="asteriskField"> * </span>
                         </label>
@@ -25,7 +25,7 @@
                                     <i class="fa fa-calendar">
                                     </i>
                                 </div>
-                                <input class="form-control" id="${conference.id}" name="localDate" placeholder="yyyy-mm-dd" type="text"
+                                <input class="form-control" id="localDate${conference.id}" name="localDate" placeholder="yyyy-mm-dd" type="text"
                                        required value="${conference.date}"/>
                             </div>
                         <label class="control-label requiredField" for="subject">
@@ -38,7 +38,7 @@
                     <div class="form-group mb-1">
                             <input type="hidden" name="conferenceEditId" value="${conference.id}"/>
                             <button class="btn btn-primary btn-sm" name="submit" type="submit">
-                                Add conference
+                                Save
                             </button>
                     </div>
                 </form>
@@ -55,14 +55,14 @@
 
 <script>
     $(document).ready(function () {
-        var date_input = $('input[id="${conference.id}"]'); //our date input has the name "localDate"
-        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        var date_input = $('input[id="localDate${conference.id}"]'); //our date input has the name "localDate"
+        var container = $('.bootstrap-iso${conference.id} form').length > 0 ? $('.bootstrap-iso${conference.id} form').parent() : "body";
         date_input.datepicker({
             // language: "ru",
             format: 'yyyy-mm-dd',
             container: container,
             todayHighlight: true,
-            autoclose: true,
+            autoclose: true
         })
     })
 </script>

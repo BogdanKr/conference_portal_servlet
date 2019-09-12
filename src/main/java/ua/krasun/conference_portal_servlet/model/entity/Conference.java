@@ -79,7 +79,7 @@ public class Conference {
                 "id=" + id +
                 ", date=" + date +
                 ", subject='" + subject + '\'' +
-                ", author=" + author.getFirstName() +
+                ", author=" + author +
                 '}';
     }
 }

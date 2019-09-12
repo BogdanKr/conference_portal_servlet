@@ -17,15 +17,18 @@ public class AuthFilter implements Filter {
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
-//        if (session.getAttribute("role")==null) res.sendRedirect("/");
+//        if (session.getAttribute("role") == null) {
+//            request.getRequestDispatcher("/").forward(request, response);
+//            return;
+//        }
         ServletContext context = session.getServletContext();
         System.out.println("T------------------------------------------------T");
         System.out.println(session);
-        System.out.println(session.getAttribute("role")+" " +session.getAttribute("userEmail"));
-        System.out.println("Auth filter work: "+ context.getAttribute("loggedUsers"));
+        System.out.println(session.getAttribute("role") + " " + session.getAttribute("userEmail"));
+        System.out.println("Auth filter work: " + context.getAttribute("loggedUsers"));
         System.out.println("L________________________________________________|");
 
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
 
     }
 

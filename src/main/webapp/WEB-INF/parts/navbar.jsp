@@ -24,7 +24,7 @@
             <c:if test="${sessionScope.userEmail ne null}">
                 <li class="nav-item">
                     <a class="nav-link"
-                       href="${pageContext.request.contextPath}/conference/conferencelist">All conferences </a>
+                       href="${pageContext.request.contextPath}/conference/user/conferencelist">All conferences </a>
                 </li>
                 <li class="nav-item"><a class="nav-link"
                                         href="${pageContext.request.contextPath}/">My registration </a>
