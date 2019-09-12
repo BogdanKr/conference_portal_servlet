@@ -2,6 +2,7 @@ package ua.krasun.conference_portal_servlet.model.dao.impl;
 
 import ua.krasun.conference_portal_servlet.model.dao.ConferenceDao;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.ConferenceMapper;
+import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
 import ua.krasun.conference_portal_servlet.model.entity.Conference;
 
 import java.sql.*;
@@ -17,7 +18,6 @@ public class JDBCConferenceDao implements ConferenceDao {
     private String queryUpdateUser = "UPDATE conference SET date = ?, subject = ?, user_id = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM conference  WHERE id = ?";
     private Connection connection;
-    private ConferenceMapper conferenceMapper = new ConferenceMapper();
 
     JDBCConferenceDao(Connection connection) {
         this.connection = connection;
@@ -39,7 +39,7 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return conferenceMapper.extractFromResultSet(rs);
+                return extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -53,7 +53,7 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setDate(1, Date.valueOf(date));
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return conferenceMapper.extractFromResultSet(rs);
+                return extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -67,7 +67,7 @@ public class JDBCConferenceDao implements ConferenceDao {
         try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
             while (rs.next()) {
-                Conference conference = conferenceMapper.extractFromResultSet(rs);
+                Conference conference = extractFromResultSet(rs);
                 resultList.add(conference);
             }
         } catch (SQLException e) {
@@ -109,5 +109,14 @@ public class JDBCConferenceDao implements ConferenceDao {
         }
     }
 
+    private Conference extractFromResultSet(ResultSet rs) throws SQLException {
+        UserMapper userMapper = new UserMapper();
+        return Conference.builder()
+                .id(rs.getLong("id"))
+                .date(rs.getDate("date").toLocalDate())
+                .subject(rs.getString("subject"))
+                .author(userMapper.extractFromResultSet(rs))
+                .build();
+    }
 
 }

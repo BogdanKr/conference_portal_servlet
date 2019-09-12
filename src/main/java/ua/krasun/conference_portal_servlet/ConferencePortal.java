@@ -3,6 +3,7 @@ package ua.krasun.conference_portal_servlet;
 import ua.krasun.conference_portal_servlet.controller.command.*;
 import ua.krasun.conference_portal_servlet.controller.command.Exception;
 import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
+import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.ServletConfig;
@@ -21,6 +22,8 @@ public class ConferencePortal extends HttpServlet {
     public void init(ServletConfig servletConfig) {
         UserService userService = new UserService();
         ConferenceService conferenceService = new ConferenceService();
+        PresentationService presentationService = new PresentationService();
+
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
         commands.put("login", new Login(userService, conferenceService));
@@ -33,6 +36,7 @@ public class ConferencePortal extends HttpServlet {
         commands.put("admin/userlist", new UserList(userService));
         commands.put("admin/edit", new AdminEdit(userService));
         commands.put("admin/addconference", new AddConference(conferenceService));
+        commands.put("speaker/addpresentation", new AddPresentation(presentationService));
         commands.put("user/edit", new UserEdit(userService));
         commands.put("admin/delete_profile", new DeleteProfile(userService));
         commands.put("admin/delete_conference", new DeleteConference(conferenceService));

@@ -52,7 +52,7 @@ public class Presentation {
             return this;
         }
 
-        public Builder date(String theme) {
+        public Builder theme(String theme) {
             Presentation.this.theme = theme;
             return this;
         }

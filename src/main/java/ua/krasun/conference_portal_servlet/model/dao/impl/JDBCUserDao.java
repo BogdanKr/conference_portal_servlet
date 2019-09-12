@@ -1,7 +1,6 @@
 package ua.krasun.conference_portal_servlet.model.dao.impl;
 
 import ua.krasun.conference_portal_servlet.model.dao.UserDao;
-import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 

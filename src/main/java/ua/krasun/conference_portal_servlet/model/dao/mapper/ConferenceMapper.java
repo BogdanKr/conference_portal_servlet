@@ -11,7 +11,7 @@ public class ConferenceMapper implements ObjectMapper<Conference> {
     public Conference extractFromResultSet(ResultSet rs) throws SQLException {
         UserMapper userMapper = new UserMapper();
         return Conference.builder()
-                .id(rs.getLong("id"))
+                .id(rs.getLong("conference_id"))
                 .date(rs.getDate("date").toLocalDate())
                 .subject(rs.getString("subject"))
                 .author(userMapper.extractFromResultSet(rs))
