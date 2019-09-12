@@ -23,7 +23,7 @@ public class Login implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        if (nonNull(request.getSession().getAttribute("userEmail"))) return "redirect:/";
+        if (nonNull(request.getSession().getAttribute("userEmail"))) return "redirect:/conference/logout";
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (email == null) return "/login.jsp";

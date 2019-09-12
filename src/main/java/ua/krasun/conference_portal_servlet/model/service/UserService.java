@@ -74,8 +74,8 @@ public class UserService {
                 case "ADMIN":
                     user.setRole(Role.ADMIN);
                     break;
-                case "GUEST":
-                    user.setRole(Role.GUEST);
+                case "SPEAKER":
+                    user.setRole(Role.SPEAKER);
                     break;
             }
             userDao.update(user);
