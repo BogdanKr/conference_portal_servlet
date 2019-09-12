@@ -1,0 +1,24 @@
+package ua.krasun.conference_portal_servlet.model.dao.mapper;
+
+import ua.krasun.conference_portal_servlet.model.entity.Conference;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Map;
+
+public class ConferenceMapper implements ObjectMapper<Conference> {
+    @Override
+    public Conference extractFromResultSet(ResultSet rs) throws SQLException {
+        return Conference.builder()
+                .id(rs.getLong("id"))
+                .date(rs.getDate("date").toLocalDate())
+                .subject(rs.getString("subject"))
+                .build();
+    }
+
+    @Override
+    public Conference makeUnique(Map<Long, Conference> cache, Conference conference) {
+        cache.putIfAbsent(conference.getId(), conference);
+        return cache.get(conference.getId());
+    }
+}

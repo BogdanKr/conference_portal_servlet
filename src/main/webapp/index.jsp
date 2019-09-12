@@ -3,7 +3,6 @@
 <%@ include file="/WEB-INF/parts/head.jsp" %>
 
 
-<%@ include file="/WEB-INF/parts/addconferencemodal.jsp" %>
 
 <c:if test="${requestScope.error eq true}">
     <div class="alert alert-danger" align="center">

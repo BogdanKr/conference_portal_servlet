@@ -1,7 +1,7 @@
 package ua.krasun.conference_portal_servlet.model.dao.impl;
 
 import ua.krasun.conference_portal_servlet.model.dao.UserDao;
-import ua.krasun.conference_portal_servlet.model.entity.Role;
+import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.*;
@@ -16,6 +16,7 @@ public class JDBCUserDao implements UserDao {
     private String queryUpdateUser = "UPDATE user SET first_name = ?, email = ? , password = ?, role = ?, active = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM user  WHERE id = ?";
     private Connection connection;
+    private UserMapper userMapper = new UserMapper();
 
     JDBCUserDao(Connection connection) {
         this.connection = connection;
@@ -40,7 +41,7 @@ public class JDBCUserDao implements UserDao {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return extractFromResultSet(rs);
+                return userMapper.extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -55,7 +56,7 @@ public class JDBCUserDao implements UserDao {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return extractFromResultSet(rs);
+                return userMapper.extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -70,7 +71,7 @@ public class JDBCUserDao implements UserDao {
             ResultSet rs = ps.executeQuery(queryFindAll);
 
             while (rs.next()) {
-                User result = extractFromResultSet(rs);
+                User result = userMapper.extractFromResultSet(rs);
                 resultList.add(result);
             }
         } catch (SQLException e) {
@@ -112,17 +113,5 @@ public class JDBCUserDao implements UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private User extractFromResultSet(ResultSet rs)
-            throws SQLException {
-        return User.builder()
-                .id(rs.getLong("id"))
-                .firstName(rs.getString("first_name"))
-                .email(rs.getString("email"))
-                .password(rs.getString("password"))
-                .role(Role.values()[rs.getInt("role")])
-                .active(rs.getBoolean("active"))
-                .build();
     }
 }

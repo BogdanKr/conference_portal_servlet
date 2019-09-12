@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
+import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,12 @@ import static java.util.Objects.nonNull;
 public class Login implements Command {
     private static final Logger logger = LogManager.getLogger(Login.class);
     private UserService userService;
+    private ConferenceService conferenceService;
 
-    public Login(UserService userService) {
+    public Login(UserService userService, ConferenceService conferenceService) {
         this.userService = userService;
+        this.conferenceService = conferenceService;
     }
-
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -31,7 +33,7 @@ public class Login implements Command {
         Optional<User> user = userService.findUser(email, password);
         if (!user.isPresent()) {
             logger.info("Invalid attempt of user email: '" + email + "'");
-             request.setAttribute("error", true);
+            request.setAttribute("error", true);
             return "/login.jsp";
         }
         if (CommandUtility.checkUserIsLogged(request, email)) {
@@ -41,6 +43,7 @@ public class Login implements Command {
         logger.info("User email " + email + " logged successfully.");
 
         request.getSession().setAttribute("user", user.get());
+        request.getSession().setAttribute("conferenceList", conferenceService.findAllConference());
         if (user.get().getRole().equals(Role.ADMIN)) {
             CommandUtility.setUserRole(request, Role.ADMIN, email);
             return "redirect:/conference/admin";
@@ -48,7 +51,7 @@ public class Login implements Command {
             CommandUtility.setUserRole(request, Role.USER, email);
             return "redirect:/conference/user";
         } else {
-            return "redirect:/index.jsp";
+            return "redirect:/conference/speaker";
         }
     }
 }

@@ -3,12 +3,12 @@
 
 
 
-    <h5> Welcome USER !
+<h5> Welcome Speaker !
 
-    </h5>
-    This is a conference portal
-    Це портал конференцій!
-    <br>
+</h5>
+This is a conference portal
+Це портал конференцій!
+<br>
 
 <%@ include file="/WEB-INF/parts/main.jsp" %>
 

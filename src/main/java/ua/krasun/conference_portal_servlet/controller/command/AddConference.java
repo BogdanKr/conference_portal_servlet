@@ -1,9 +1,10 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
+import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
+import java.lang.Exception;
 import java.time.LocalDate;
 
 public class AddConference implements Command {
@@ -19,15 +20,16 @@ public class AddConference implements Command {
         String subject = request.getParameter("subject");
         if (date == null) return "/";
         try {
-            conferenceService.addConference(LocalDate.parse(date), subject);
-        } catch (SQLException e) {
+            User currentUser = (User) request.getSession().getAttribute("user");
+            conferenceService.addConference(currentUser, LocalDate.parse(date), subject);
+        } catch (Exception e) {
             request.setAttribute("error", true);
             request.setAttribute("message", "Can't save ");
 
-            return "/";
+            return "/conference/admin";
         }
         request.setAttribute("success", true);
         request.setAttribute("message", "Conference added");
-        return "/";
+        return "/conference/admin";
     }
 }

@@ -2,6 +2,16 @@
 <%@ include file="/WEB-INF/parts/head.jsp" %>
 
 
+<c:if test="${requestScope.error eq true}">
+    <div class="alert alert-danger" align="center">
+        <strong>${requestScope.message}</strong>
+    </div>
+</c:if>
+<c:if test="${requestScope.success eq true}">
+    <div class="alert alert-success" align="center">
+        <strong>${requestScope.message}</strong>
+    </div>
+</c:if>
 
     <h5> Welcome ADMIN !
 
@@ -9,6 +19,8 @@
     This is a conference portal
     Це портал конференцій!
     <br>
+
+<%@ include file="/WEB-INF/parts/main.jsp" %>
 
 
 

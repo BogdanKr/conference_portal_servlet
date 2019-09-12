@@ -32,6 +32,6 @@
     <div><button type="submit">Edit</button></div>
 </form>
 
-<%@ include file="/WEB-INF/parts/modal.jsp" %>
+<%@ include file="/WEB-INF/parts/deletemodal.jsp" %>
 
 <%@ include file="/WEB-INF/parts/tail.jsp" %>
