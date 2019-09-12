@@ -3,7 +3,7 @@
 
 
 
-<h5> Welcome <c:if test="${sessionScope.userEmail ne null}">${sessionScope.userEmail}</c:if>
+<h5> Welcome <c:if test="${sessionScope.userEmail ne null}">${sessionScope.user.firtsName}</c:if>
     <c:if test="${sessionScope.userEmail eq null}">Guest</c:if>
 </h5>
 

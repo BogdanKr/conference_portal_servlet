@@ -27,10 +27,6 @@ public class Login implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (email == null) return "/login.jsp";
-        System.out.println("user enter email: "+ email + " " + password);
-
-        System.out.println("entering DB : ");
-        userService.findAllUsers().forEach(System.out::println);
 
         Optional<User> user = userService.findUser(email, password);
         if (!user.isPresent()) {

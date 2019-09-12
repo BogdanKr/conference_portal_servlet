@@ -1,6 +1,7 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
 import ua.krasun.conference_portal_servlet.model.entity.Role;
+import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +21,15 @@ public class DeleteProfile implements Command {
         if (!Optional.ofNullable(deleteId).isPresent()) {
             return "redirect:/index.jsp";
         }
-        userService.deleteUser(Long.parseLong(deleteId));
-        request.setAttribute("error", true);
-        request.setAttribute("message", "Profile deleted");
-        if (request.getSession().getAttribute("role").equals(Role.ADMIN)){
-           return "/conference/admin/userlist";
+        User currentUser = (User) request.getSession().getAttribute("user");
+        System.out.println("currentUser Id = " + currentUser.getId());
+        if (currentUser.getId() == Long.parseLong(deleteId) || currentUser.getRole().equals(Role.ADMIN)) {
+            userService.deleteUser(Long.parseLong(deleteId));
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Profile deleted");
+        }
+        if (request.getSession().getAttribute("role").equals(Role.ADMIN)) {
+            return "/conference/admin/userlist";
         }
         request.getSession().invalidate();
         return "/index.jsp";

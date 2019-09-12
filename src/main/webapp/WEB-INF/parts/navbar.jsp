@@ -22,8 +22,11 @@
                 <li class="nav-item"><a class="nav-link"
                                         href="${pageContext.request.contextPath}/">All presentation </a>
                 </li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="${pageContext.request.contextPath}/">My presentation</a></li>
+                <c:if test="${sessionScope.role eq 'SPEAKER'}">
+                    <li class="nav-item"><a class="nav-link"
+                                            href="${pageContext.request.contextPath}/">My presentation</a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.role ne 'ADMIN'}">
                     <li class="nav-item">
                         <a class="nav-link"
@@ -45,7 +48,7 @@
             </c:if>
         </ul>
 
-        <div class="navbar-text mr-3"> ${sessionScope.userEmail}</div>
+        <div class="navbar-text mr-3"> ${sessionScope.user.firstName}</div>
 
         <c:if test="${sessionScope.userEmail ne null}">
             <div class="mr-3">

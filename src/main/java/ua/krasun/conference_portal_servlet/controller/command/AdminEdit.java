@@ -40,12 +40,13 @@ public class AdminEdit implements Command {
             return "/WEB-INF/admin/adminedit.jsp";
         }
 
+        String firstName = request.getParameter("firstName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String active = request.getParameter("active");
         String role = request.getParameter("role");
 
-        userService.userEdit(id, email, password, active, role);
+        userService.userEdit(id, firstName, email, password, active, role);
         return "redirect:/conference/admin/userlist";
     }
 }

@@ -6,6 +6,9 @@
 
 <form action="${pageContext.request.contextPath}/conference/admin/edit?id=${user.id}" method="post">
 
+    <label>First Name
+        <input type="text" name="firstName"  value="${requestScope.user.firstName}">
+    </label>
     <label>Email
         <input type="email" name="email"  value="${requestScope.user.email}">
     </label>

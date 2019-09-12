@@ -23,6 +23,7 @@ public class UserService {
 
     public void addUser(String email, String password) throws SQLException {
         User newUser = User.builder()
+                .firstName("")
                 .email(email)
                 .password(password)
                 .role(Role.USER)
@@ -54,12 +55,14 @@ public class UserService {
     }
 
     public void userEdit(String id,
+                         String firstName,
                          String email,
                          String password,
                          String active,
                          String role) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             User user = userDao.findById(Integer.parseInt(id));
+            user.setFirstName(firstName);
             user.setEmail(email);
             if (!password.isEmpty()) user.setPassword(password);
             if (Optional.ofNullable(active).isPresent()) user.setActive(true);
@@ -80,10 +83,12 @@ public class UserService {
     }
 
     public void userEditIfNotAdmin(String id,
+                         String firstName,
                          String email,
                          String password) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             User user = userDao.findById(Integer.parseInt(id));
+            user.setFirstName(firstName);
             user.setEmail(email);
             if (!password.isEmpty()) user.setPassword(password);
             userDao.update(user);

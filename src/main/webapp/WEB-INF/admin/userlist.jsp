@@ -13,6 +13,7 @@
 <table>
     <thead>
     <tr>
+        <th>First Name</th>
         <th>Email</th>
         <th>Password</th>
         <th>Active</th>
@@ -24,6 +25,7 @@
     <c:forEach items="${sessionScope.userList}" var="user">
 <%--        <c:out value="${operation}"/><br />--%>
     <tr>
+        <td>${user.firstName}</td>
         <td>${user.email}</td>
         <td>${user.password}</td>
         <td>${user.role}</td>

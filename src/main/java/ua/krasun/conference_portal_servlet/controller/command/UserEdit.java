@@ -27,10 +27,11 @@ public class UserEdit implements Command {
         }
 
         String id = request.getParameter("userId");
+        String firstName = request.getParameter("firstName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        userService.userEditIfNotAdmin(id, email, password);
+        userService.userEditIfNotAdmin(id, firstName, email, password);
         request.setAttribute("success", true);
         request.setAttribute("message", "Success Save");
         request.setAttribute("user", userService.findUserByEmail(email).orElse(user));
