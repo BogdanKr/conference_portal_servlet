@@ -17,6 +17,7 @@ public class AuthFilter implements Filter {
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
+//        if (session.getAttribute("role")==null) res.sendRedirect("/");
         ServletContext context = session.getServletContext();
         System.out.println("T------------------------------------------------T");
         System.out.println(session);

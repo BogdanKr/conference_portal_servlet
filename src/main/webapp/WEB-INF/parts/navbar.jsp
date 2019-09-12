@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="
-    <c:if test="${sessionScope.role eq 'ADMIN'}">${pageContext.request.contextPath}/conference/admin </c:if>
-    <c:if test="${sessionScope.role eq 'SPEAKER'}">${pageContext.request.contextPath}/conference/speaker </c:if>
-    <c:if test="${sessionScope.role eq 'USER'}">${pageContext.request.contextPath}/conference/user </c:if>
-    ">Conference portal</a>
+    <a class="navbar-brand" <c:if test="${sessionScope.role eq 'ADMIN'}">href="${pageContext.request.contextPath}/conference/admin"</c:if>
+       <c:if test="${sessionScope.role eq 'SPEAKER'}">href="${pageContext.request.contextPath}/conference/speaker" </c:if>
+       <c:if test="${sessionScope.role eq 'USER'}">href="${pageContext.request.contextPath}/conference/user" </c:if>
+       <c:if test="${sessionScope.role eq null}">href="${pageContext.request.contextPath}/" </c:if>
+    >Conference portal</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -13,16 +13,18 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="
-    <c:if test="${sessionScope.role eq 'ADMIN'}">${pageContext.request.contextPath}/conference/admin </c:if>
-    <c:if test="${sessionScope.role eq 'SPEAKER'}">${pageContext.request.contextPath}/conference/speaker </c:if>
-    <c:if test="${sessionScope.role eq 'USER'}">${pageContext.request.contextPath}/conference/user </c:if>
-    "><i class="fas fa-home"></i>
+                <a class="nav-link"
+                   <c:if test="${sessionScope.role eq 'ADMIN'}">href="${pageContext.request.contextPath}/conference/admin"</c:if>
+                   <c:if test="${sessionScope.role eq 'SPEAKER'}">href="${pageContext.request.contextPath}/conference/speaker" </c:if>
+                   <c:if test="${sessionScope.role eq 'USER'}">href="${pageContext.request.contextPath}/conference/user" </c:if>
+                   <c:if test="${sessionScope.role eq null}">href="${pageContext.request.contextPath}/" </c:if>>
+                    <i class="fas fa-home"></i>
                 </a>
             </li>
             <c:if test="${sessionScope.userEmail ne null}">
-                <li class="nav-item"><a class="nav-link"
-                                        href="${pageContext.request.contextPath}/conference/">All conferences </a>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="${pageContext.request.contextPath}/conference/conferencelist">All conferences </a>
                 </li>
                 <li class="nav-item"><a class="nav-link"
                                         href="${pageContext.request.contextPath}/">My registration </a>

@@ -28,6 +28,8 @@ public class AddConference implements Command {
 
             return "/conference/admin";
         }
+
+        request.getSession().setAttribute("conferenceList", conferenceService.findAllConference());
         request.setAttribute("success", true);
         request.setAttribute("message", "Conference added");
         return "/conference/admin";

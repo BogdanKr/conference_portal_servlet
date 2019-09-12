@@ -22,12 +22,14 @@ public class AccessFilter implements Filter {
         if (path.contains("admin") && role != Role.ADMIN) {
             request.setAttribute("error", true);
             request.setAttribute("message", "AccessDenied");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/").forward(request, response);
+            return;
         }
-        if (path.contains("speaker") && (role == Role.USER)) {
+        if (path.contains("speaker") && (role == Role.USER || role==null)) {
             request.setAttribute("error", true);
             request.setAttribute("message", "AccessDenied");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
+            return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

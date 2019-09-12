@@ -3,7 +3,7 @@
 
 
 
-    <h5> Welcome USER !
+    <h5> Welcome ${sessionScope.userEmail} !
 
     </h5>
     This is a conference portal

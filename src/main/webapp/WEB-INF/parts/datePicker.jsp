@@ -16,7 +16,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/conference/admin/addconference">
                     <div class="form-group form-group-sm">
-                        <label class="control-label  requiredField" for="localDate">
+                        <label class="control-label  requiredField" for="${conference.id}">
                             Date
                             <span class="asteriskField"> * </span>
                         </label>
@@ -25,18 +25,18 @@
                                     <i class="fa fa-calendar">
                                     </i>
                                 </div>
-                                <input class="form-control" id="localDate" name="localDate" placeholder="yyyy-mm-dd" type="text"
-                                       required value=""/>
+                                <input class="form-control" id="${conference.id}" name="localDate" placeholder="yyyy-mm-dd" type="text"
+                                       required value="${conference.date}"/>
                             </div>
                         <label class="control-label requiredField" for="subject">
                             Subject
                             <span class="asteriskField"> * </span>
                         </label>
                             <input class="form-control" id="subject" name="subject" type="text" required
-                                   value=""/>
+                                   value="${conference.subject}"/>
                     </div>
                     <div class="form-group mb-1">
-                            <input type="hidden" name="id" value=""/>
+                            <input type="hidden" name="conferenceEditId" value="${conference.id}"/>
                             <button class="btn btn-primary btn-sm" name="submit" type="submit">
                                 Add conference
                             </button>
@@ -55,7 +55,7 @@
 
 <script>
     $(document).ready(function () {
-        var date_input = $('input[name="localDate"]'); //our date input has the name "localDate"
+        var date_input = $('input[id="${conference.id}"]'); //our date input has the name "localDate"
         var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
         date_input.datepicker({
             // language: "ru",
