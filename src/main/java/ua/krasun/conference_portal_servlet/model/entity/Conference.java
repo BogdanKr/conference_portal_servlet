@@ -1,12 +1,14 @@
 package ua.krasun.conference_portal_servlet.model.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Conference {
     private long id;
     private LocalDate date;
     private String subject;
     private User author;
+    private List<Presentation> presentations;
 
     public long getId() {
         return id;
@@ -40,6 +42,14 @@ public class Conference {
         this.author = author;
     }
 
+    public List<Presentation> getPresentations() {
+        return presentations;
+    }
+
+    public void setPresentations(List<Presentation> presentations) {
+        this.presentations = presentations;
+    }
+
     //Builder
     public static Builder builder() {
         return new Conference().new Builder();
@@ -58,6 +68,7 @@ public class Conference {
             Conference.this.date = date;
             return this;
         }
+
         public Builder subject(String subject) {
             Conference.this.subject = subject;
             return this;
@@ -65,6 +76,11 @@ public class Conference {
 
         public Builder author(User author) {
             Conference.this.author = author;
+            return this;
+        }
+
+        public Builder presentations(List<Presentation> presentations) {
+            Conference.this.presentations = presentations;
             return this;
         }
 

@@ -29,8 +29,9 @@
                 <li class="nav-item"><a class="nav-link"
                                         href="${pageContext.request.contextPath}/">My registration </a>
                 </li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="${pageContext.request.contextPath}/">All presentation </a>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="${pageContext.request.contextPath}/conference/user/presentationlist">All presentation </a>
                 </li>
                 <c:if test="${sessionScope.role eq 'SPEAKER'}">
                     <li class="nav-item"><a class="nav-link"

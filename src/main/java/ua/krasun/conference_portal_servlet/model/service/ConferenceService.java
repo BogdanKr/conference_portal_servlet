@@ -9,15 +9,19 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class ConferenceService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
+    private PresentationService presentationService = new PresentationService();
 
 
     public List<Conference> findAllConference() {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             List<Conference> conferenceList = conferenceDao.findAll();
             conferenceList.sort(Comparator.comparing(Conference::getDate));
+            conferenceList
+                    .forEach(c -> c.setPresentations(presentationService.findByConferenceId(c.getId())));
             return conferenceList;
         }
     }
@@ -34,8 +38,8 @@ public class ConferenceService {
     }
 
     public void conferenceEdit(String id,
-                         LocalDate date,
-                         String subject) {
+                               LocalDate date,
+                               String subject) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             Conference conference = conferenceDao.findById(Integer.parseInt(id));
             conference.setDate(date);
@@ -44,9 +48,15 @@ public class ConferenceService {
         }
     }
 
-    public void deleteConference(long id){
+    public void deleteConference(long id) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             conferenceDao.delete(id);
+        }
+    }
+
+    public Optional<Conference> findById(int id) {
+        try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
+            return Optional.ofNullable(conferenceDao.findById(id));
         }
     }
 }

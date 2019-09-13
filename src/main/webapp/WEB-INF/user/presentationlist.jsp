@@ -11,19 +11,19 @@
     <thead>
     <tr>
         <th>Date</th>
-        <th>Subject</th>
+        <th>Presentation theme</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${sessionScope.conferenceList}" var="conference">
+    <c:forEach items="${requestScope.presentationList}" var="presentation">
         <tr>
-            <td>${conference.date}</td>
-            <td class="lm-2">${conference.subject}</td>
+            <td>${presentation.conference.date}</td>
+            <td class="lm-2">${presentation.theme}</td>
             <td>
-            <c:if test="${sessionScope.role eq 'ADMIN'}">
-                <%@ include file="/WEB-INF/parts/addconferencemodal.jsp" %>
-
+            <c:if test="${sessionScope.user.id eq presentation.author.id}">
+                <a href="${pageContext.request.contextPath}
+                /conference/speaker/addpresentation?presentationEditId=${presentation.id}">Edit </a>
             </c:if>
             </td>
         </tr>

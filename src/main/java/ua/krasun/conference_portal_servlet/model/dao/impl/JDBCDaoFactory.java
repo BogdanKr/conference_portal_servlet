@@ -32,7 +32,7 @@ public class JDBCDaoFactory extends DaoFactory {
 
     @Override
     public PresentationDao createPresentationDao() {
-        return null;
+        return new JDBCPresentationDao(getConnection());
     }
 
 

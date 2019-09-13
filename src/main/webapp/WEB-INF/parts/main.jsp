@@ -12,7 +12,7 @@
                 </div>
                 <c:if test="${sessionScope.role eq 'SPEAKER'}">
                     <div class="col-md-auto">
-                        <a href="${pageContext.request.contextPath}/conference/speaker/addpresentation"> Add
+                        <a href="${pageContext.request.contextPath}/conference/speaker/addpresentation?conf=${conference.id}"> Add
                             presentation</a>
                     </div>
                 </c:if>
@@ -28,16 +28,10 @@
                     </tr>
                     </thead>
                     <tbody style="color: blue">
-                    <c:forEach items="${sessionScope.presentationList}" var="presentation">
+                    <c:forEach items="${conference.presentations}" var="presentation">
                     <tr>
                         <td>${presentation.author.firstName}</td>
                         <td>${presentation.theme}</td>
-                        <#if (presentation.author.id==currentUserId || isAdmin)>
-                        <c:if test="${sessionScope.role eq 'ADMIN'}||${presentation.author.id eq sessionScope.user.id}">
-                        <td style="text-align: right">
-                            <a href="${pageContext.request.contextPath}/conference/speaker/addpresentation?presentation=${presentation.id}">Edit </a>
-                        </td>
-                        </c:if>
                     </tr>
                     </c:forEach>
                     </tbody>

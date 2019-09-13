@@ -2,8 +2,10 @@ package ua.krasun.conference_portal_servlet.model.dao.impl;
 
 import ua.krasun.conference_portal_servlet.model.dao.ConferenceDao;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.ConferenceMapper;
+import ua.krasun.conference_portal_servlet.model.dao.mapper.PresentationMapper;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
 import ua.krasun.conference_portal_servlet.model.entity.Conference;
+import ua.krasun.conference_portal_servlet.model.entity.Presentation;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -64,6 +66,8 @@ public class JDBCConferenceDao implements ConferenceDao {
     @Override
     public List<Conference> findAll() {
         List<Conference> resultList = new ArrayList<>();
+        PresentationMapper presentationMapper = new PresentationMapper();
+        List<Presentation> presentationList = new ArrayList<>();
         try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
             while (rs.next()) {

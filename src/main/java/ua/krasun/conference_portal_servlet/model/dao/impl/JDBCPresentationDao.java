@@ -18,6 +18,9 @@ public class JDBCPresentationDao implements PresentationDao {
     private String queryFindAll = "SELECT * FROM presentation " +
             "left join user on presentation.user_id = user.id " +
             "left join conference on presentation.conference_id = conference.id";
+    private String queryFindByConferenceID = "SELECT * FROM presentation " +
+            "left join conference on presentation.conference_id = conference.id " +
+            "left join user on presentation.user_id = user.id WHERE presentation.conference_id = ?";
     private String queryUpdateUser = "UPDATE presentation SET theme = ?, user_id = ?, conference_id = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM presentation  WHERE id = ?";
     private Connection connection;
@@ -55,6 +58,22 @@ public class JDBCPresentationDao implements PresentationDao {
         List<Presentation> resultList = new ArrayList<>();
         try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
+            while (rs.next()) {
+                Presentation presentation = extractFromResultSet(rs);
+                resultList.add(presentation);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Presentation> findByConferenceID(Long id) {
+        List<Presentation> resultList = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(queryFindByConferenceID)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Presentation presentation = extractFromResultSet(rs);
                 resultList.add(presentation);
