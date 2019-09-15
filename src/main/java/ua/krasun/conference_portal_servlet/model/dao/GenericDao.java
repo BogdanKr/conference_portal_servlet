@@ -1,6 +1,7 @@
 package ua.krasun.conference_portal_servlet.model.dao;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public interface GenericDao<T> extends AutoCloseable {
@@ -13,7 +14,7 @@ public interface GenericDao<T> extends AutoCloseable {
 
     void update(T entity);
 
-    void delete(long id);
+    void delete(long id) throws SQLException;
 
     void close();
 }

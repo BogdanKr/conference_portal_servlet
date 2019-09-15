@@ -101,7 +101,7 @@ public class UserService {
         }
     }
 
-    public void deleteUser(long id){
+    public void deleteUser(long id) throws SQLException {
         try (UserDao userDao = daoFactory.createUserDao()) {
              userDao.delete(id);
         }

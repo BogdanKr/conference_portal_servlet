@@ -6,6 +6,7 @@ import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -20,8 +21,6 @@ public class ConferenceService {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             List<Conference> conferenceList = conferenceDao.findAll();
             conferenceList.sort(Comparator.comparing(Conference::getDate));
-            conferenceList
-                    .forEach(c -> c.setPresentations(presentationService.findByConferenceId(c.getId())));
             return conferenceList;
         }
     }
@@ -48,7 +47,7 @@ public class ConferenceService {
         }
     }
 
-    public void deleteConference(long id) {
+    public void deleteConference(long id) throws SQLException {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             conferenceDao.delete(id);
         }

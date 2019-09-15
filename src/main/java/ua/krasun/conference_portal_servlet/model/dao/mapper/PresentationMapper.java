@@ -12,9 +12,9 @@ public class PresentationMapper implements ObjectMapper<Presentation> {
         UserMapper userMapper = new UserMapper();
         ConferenceMapper conferenceMapper = new ConferenceMapper();
         return Presentation.builder()
-                .id(rs.getLong("id"))
+                .id(rs.getLong(5))
                 .theme(rs.getString("theme"))
-                .conference(conferenceMapper.extractFromResultSet(rs))
+//                .conference(conferenceMapper.extractFromResultSet(rs))
                 .author(userMapper.extractFromResultSet(rs))
                 .build();
     }

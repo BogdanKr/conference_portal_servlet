@@ -95,12 +95,10 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(queryDeleteById)) {
             ps.setLong(1, id);
             ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 

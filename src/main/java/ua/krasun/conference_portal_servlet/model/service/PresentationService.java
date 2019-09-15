@@ -44,13 +44,7 @@ public class PresentationService {
         }
     }
 
-    public List<Presentation> findByConferenceId(Long id){
-        try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
-            return presentationDao.findByConferenceID(id);
-        }
-    }
-
-    public void deletePresentation(long id){
+    public void deletePresentation(long id) throws SQLException {
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
             presentationDao.delete(id);
         }

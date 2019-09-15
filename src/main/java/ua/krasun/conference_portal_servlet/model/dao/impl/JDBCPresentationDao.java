@@ -77,21 +77,21 @@ public class JDBCPresentationDao implements PresentationDao {
         return resultList;
     }
 
-    @Override
-    public List<Presentation> findByConferenceID(Long id) {
-        List<Presentation> resultList = new ArrayList<>();
-        try (PreparedStatement ps = connection.prepareStatement(queryFindByConferenceID)) {
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Presentation presentation = extractFromResultSet(rs);
-                resultList.add(presentation);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return resultList;
-    }
+//    @Override
+//    public List<Presentation> findByConferenceID(Long id) {
+//        List<Presentation> resultList = new ArrayList<>();
+//        try (PreparedStatement ps = connection.prepareStatement(queryFindByConferenceID)) {
+//            ps.setLong(1, id);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                Presentation presentation = extractFromResultSet(rs);
+//                resultList.add(presentation);
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return resultList;
+//    }
 
     @Override
     public void update(Presentation entity) {
@@ -107,12 +107,10 @@ public class JDBCPresentationDao implements PresentationDao {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(queryDeleteById)) {
             ps.setLong(1, id);
             ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
