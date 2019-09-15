@@ -36,10 +36,10 @@ public class AddPresentation implements Command {
         }
 
 
-        String presentationId = request.getParameter("presentationEditId");
+        String presentationEditId = request.getParameter("presentationEditId");
         String theme = request.getParameter("theme");
         confId = request.getParameter("presentationConfId");
-        if (presentationId.isEmpty()) {
+        if (presentationEditId.isEmpty()) {
             User currentUser = (User) request.getSession().getAttribute("user");
             Conference conference = conferenceService.findById(Integer.parseInt(confId)).get();
             try {
@@ -52,6 +52,8 @@ public class AddPresentation implements Command {
                 return "/conference/speaker";
             }
         }
+
+
         return null;
     }
 }

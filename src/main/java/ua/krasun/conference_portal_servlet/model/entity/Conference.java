@@ -1,6 +1,7 @@
 package ua.krasun.conference_portal_servlet.model.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Conference {
@@ -8,7 +9,7 @@ public class Conference {
     private LocalDate date;
     private String subject;
     private User author;
-    private List<Presentation> presentations;
+    private List<Presentation> presentations = new ArrayList<>();
 
     public long getId() {
         return id;

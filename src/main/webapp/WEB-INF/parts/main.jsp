@@ -12,8 +12,8 @@
                 </div>
                 <c:if test="${sessionScope.role eq 'SPEAKER'}">
                     <div class="col-md-auto">
-                        <a href="${pageContext.request.contextPath}/conference/speaker/addpresentation?conf=${conference.id}"> Add
-                            presentation</a>
+                        <a href="${pageContext.request.contextPath}
+                        /conference/speaker/addpresentation?conf=${conference.id}"> Add presentation</a>
                     </div>
                 </c:if>
             </div>

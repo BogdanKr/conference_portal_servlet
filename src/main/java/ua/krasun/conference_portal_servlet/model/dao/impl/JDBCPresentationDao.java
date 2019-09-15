@@ -3,11 +3,14 @@ package ua.krasun.conference_portal_servlet.model.dao.impl;
 import ua.krasun.conference_portal_servlet.model.dao.PresentationDao;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.ConferenceMapper;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
+import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.Presentation;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JDBCPresentationDao implements PresentationDao {
     private String queryAdd = "INSERT INTO presentation (theme, user_id, conference_id) VALUES (? ,?, ?)";
@@ -56,10 +59,16 @@ public class JDBCPresentationDao implements PresentationDao {
     @Override
     public List<Presentation> findAll() {
         List<Presentation> resultList = new ArrayList<>();
+        Map<Long, Conference> conferenceMap = new HashMap<>();
+        ConferenceMapper conferenceMapper = new ConferenceMapper();
         try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
             while (rs.next()) {
                 Presentation presentation = extractFromResultSet(rs);
+                Conference conference = conferenceMapper.extractFromResultSet(rs);
+                conference = conferenceMapper.makeUnique(conferenceMap, conference);
+                presentation.setConference(conference);
+                conference.getPresentations().add(presentation);
                 resultList.add(presentation);
             }
         } catch (SQLException e) {
@@ -118,11 +127,9 @@ public class JDBCPresentationDao implements PresentationDao {
 
     private Presentation extractFromResultSet(ResultSet rs) throws SQLException {
         UserMapper userMapper = new UserMapper();
-        ConferenceMapper conferenceMapper = new ConferenceMapper();
         return Presentation.builder()
                 .id(rs.getLong("id"))
                 .theme(rs.getString("theme"))
-                .conference(conferenceMapper.extractFromResultSet(rs))
                 .author(userMapper.extractFromResultSet(rs))
                 .build();
     }
