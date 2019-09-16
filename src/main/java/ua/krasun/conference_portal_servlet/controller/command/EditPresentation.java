@@ -9,18 +9,22 @@ import ua.krasun.conference_portal_servlet.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 
 public class EditPresentation implements Command {
-    private PresentationService presentationService = new PresentationService();
-    private ConferenceService conferenceService = new ConferenceService();
-    private UserService userService = new UserService();
-
     @Override
     public String execute(HttpServletRequest request) {
+        UserService userService = new UserService();
+        PresentationService presentationService = new PresentationService();
+        ConferenceService conferenceService = new ConferenceService();
         String presentationEditId = request.getParameter("presentationEditId");
-//        String theme = request.getParameter("theme");
 
         request.setAttribute("conferenceList", conferenceService.findAllConference());
         request.setAttribute("speakerList", userService.findAllSpeaker());
-        Presentation presentation = presentationService.findById(Integer.parseInt(presentationEditId)).orElse(new Presentation());
+        Presentation presentation = null;
+        try {
+            presentation = presentationService.findById(Integer.parseInt(presentationEditId)).orElse(new Presentation());
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Invalid number");
+        }
         request.setAttribute("presentation", presentation);
         if (request.getSession().getAttribute("role").equals(Role.ADMIN))
         return "/WEB-INF/admin/editpresentationadmin.jsp";

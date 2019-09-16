@@ -42,12 +42,12 @@ public class JDBCConferenceDao implements ConferenceDao {
     }
 
     @Override
-    public Conference findById(int id) {
+    public Conference findById(long id) {
         PresentationMapper presentationMapper = new PresentationMapper();
         ConferenceMapper conferenceMapper = new ConferenceMapper();
         Map<Long, Conference> conferenceMap = new HashMap<>();
         try (PreparedStatement ps = connection.prepareStatement(queryFindById)) {
-            ps.setInt(1, id);
+            ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             Conference conference = new Conference();
             while (rs.next()) {
@@ -87,7 +87,7 @@ public class JDBCConferenceDao implements ConferenceDao {
     }
 
     @Override
-    public void update(Conference entity) {
+    public void update(Conference entity) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(
                 queryUpdateUser)) {
             ps.setDate(1, Date.valueOf(entity.getDate()));
@@ -95,8 +95,6 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setLong(3, entity.getAuthor().getId());
             ps.setLong(4, entity.getId());
             ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 

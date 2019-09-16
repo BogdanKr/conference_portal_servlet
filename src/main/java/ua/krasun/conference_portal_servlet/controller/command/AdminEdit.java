@@ -11,14 +11,10 @@ import java.util.Optional;
 
 public class AdminEdit implements Command {
     private static final Logger logger = LogManager.getLogger(AdminEdit.class);
-    private UserService userService;
-
-    public AdminEdit(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public String execute(HttpServletRequest request) {
+        UserService userService = new UserService();
         String id = request.getParameter("id");
         try {
             int userId = Integer.parseInt(id);
@@ -27,10 +23,10 @@ public class AdminEdit implements Command {
             return "/WEB-INF/admin/userlist.jsp";
         }
 
-        if (!Optional.ofNullable(request.getParameter("userId")).isPresent()) {
+        if (Optional.ofNullable(request.getParameter("userId")).isEmpty()) {
             System.out.println();
             Optional<User> user = userService.findUserById(Integer.parseInt(id));
-            if (!user.isPresent()) {
+            if (user.isEmpty()) {
                 logger.info("Invalid no such user ID '" + id + "'");
                 request.setAttribute("error", true);
                 request.setAttribute("message", "Invalid input");
@@ -49,8 +45,11 @@ public class AdminEdit implements Command {
 
         try {
             userService.userEdit(id, firstName, email, password, active, role);
+            request.setAttribute("success", true);
+            request.setAttribute("message", "Success Save");
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Invalid input");
         }
         return "redirect:/conference/admin/userlist";
     }

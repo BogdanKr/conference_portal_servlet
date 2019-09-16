@@ -8,14 +8,9 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Optional;
 
 public class DeleteConference implements Command {
-   private ConferenceService conferenceService;
-
-    public DeleteConference(ConferenceService conferenceService) {
-        this.conferenceService = conferenceService;
-    }
-
     @Override
     public String execute(HttpServletRequest request) {
+        ConferenceService conferenceService = new ConferenceService();
         String confId = request.getParameter("confId");
         if (Optional.ofNullable(confId).isEmpty()) {
             return "redirect:/conference/";

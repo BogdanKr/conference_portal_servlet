@@ -10,16 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
 public class AddPresentation implements Command {
-    PresentationService presentationService;
-    ConferenceService conferenceService;
-
-    public AddPresentation(PresentationService presentationService, ConferenceService conferenceService) {
-        this.presentationService = presentationService;
-        this.conferenceService = conferenceService;
-    }
-
     @Override
     public String execute(HttpServletRequest request) {
+        PresentationService presentationService = new PresentationService();
+        ConferenceService conferenceService = new ConferenceService();
         String confId = request.getParameter("conf");
         if (confId != null) {
             Conference conference;

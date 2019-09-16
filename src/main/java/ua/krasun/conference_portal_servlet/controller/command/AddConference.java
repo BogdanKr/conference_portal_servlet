@@ -8,14 +8,9 @@ import java.lang.Exception;
 import java.time.LocalDate;
 
 public class AddConference implements Command {
-    private ConferenceService conferenceService;
-
-    public AddConference(ConferenceService conferenceService) {
-        this.conferenceService = conferenceService;
-    }
-
     @Override
     public String execute(HttpServletRequest request) {
+        ConferenceService conferenceService = new ConferenceService();
         String date = request.getParameter("localDate");
         String subject = request.getParameter("subject");
         if (date == null) return "/";
@@ -32,7 +27,6 @@ public class AddConference implements Command {
         } catch (Exception e) {
             request.setAttribute("error", true);
             request.setAttribute("message", "Can't save ");
-
             return "/conference/admin";
         }
 

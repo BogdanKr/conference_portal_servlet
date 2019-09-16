@@ -9,14 +9,9 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class DeleteProfile implements Command {
-    private UserService userService;
-
-    public DeleteProfile(UserService userService) {
-        this.userService = userService;
-    }
-
     @Override
     public String execute(HttpServletRequest request) {
+        UserService userService = new UserService();
         String deleteId = (String) request.getParameter("deleteId");
         System.out.println("delete id:" + deleteId);
         if (Optional.ofNullable(deleteId).isEmpty()) {

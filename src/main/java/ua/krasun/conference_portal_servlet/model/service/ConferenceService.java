@@ -37,7 +37,7 @@ public class ConferenceService {
 
     public void conferenceEdit(String id,
                                LocalDate date,
-                               String subject) {
+                               String subject) throws SQLException {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             Conference conference = conferenceDao.findById(Integer.parseInt(id));
             conference.setDate(date);
@@ -52,7 +52,7 @@ public class ConferenceService {
         }
     }
 
-    public Optional<Conference> findById(int id) {
+    public Optional<Conference> findById(long id) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             return Optional.ofNullable(conferenceDao.findById(id));
         }

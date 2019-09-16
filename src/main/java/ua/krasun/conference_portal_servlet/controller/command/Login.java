@@ -8,32 +8,27 @@ import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.Optional;
 
 import static java.util.Objects.nonNull;
 
 public class Login implements Command {
     private static final Logger logger = LogManager.getLogger(Login.class);
-    private UserService userService;
-    private ConferenceService conferenceService;
-
-    public Login(UserService userService, ConferenceService conferenceService) {
-        this.userService = userService;
-        this.conferenceService = conferenceService;
-    }
 
     @Override
     public String execute(HttpServletRequest request) {
+        UserService userService = new UserService();
+        ConferenceService conferenceService = new ConferenceService();
         if (nonNull(request.getSession().getAttribute("userEmail"))) return "redirect:/conference/logout";
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (email == null) return "/login.jsp";
 
         Optional<User> user = userService.findUser(email, password);
-        if (!user.isPresent()) {
+        if (user.isEmpty()) {
             logger.info("Invalid attempt of user email: '" + email + "'");
             request.setAttribute("error", true);
+            request.setAttribute("message", "Invalid email or password");
             return "/login.jsp";
         }
         if (CommandUtility.checkUserIsLogged(request, email)) {
@@ -51,9 +46,9 @@ public class Login implements Command {
         if (user.get().getRole().equals(Role.USER)) {
             CommandUtility.setUserRole(request, Role.USER, email);
             return "redirect:/conference/user";
-        }
-        else {
+        } else {
             CommandUtility.setUserRole(request, Role.SPEAKER, email);
-            return "redirect:/conference/speaker";}
+            return "redirect:/conference/speaker";
+        }
     }
 }

@@ -2,11 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="WEB-INF/parts/head.jsp" %>
 
-<c:if test="${requestScope.error eq true}">
-    <div class="alert alert-danger" align="center">
-        <strong>Invalid email or password</strong>
-    </div>
-</c:if>
 
 <form action="${pageContext.request.contextPath}/conference/login" method="post">
 

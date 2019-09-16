@@ -9,14 +9,10 @@ import java.sql.SQLException;
 
 public class Registration implements Command {
     private static final Logger logger = LogManager.getLogger(Login.class);
-    private UserService userService;
-
-    public Registration(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public String execute(HttpServletRequest request) {
+        UserService userService = new UserService();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (email == null) return "/registration.jsp";

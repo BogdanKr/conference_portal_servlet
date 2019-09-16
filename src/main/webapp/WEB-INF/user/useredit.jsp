@@ -2,17 +2,6 @@
 <%@ include file="/WEB-INF/parts/head.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${requestScope.error eq true}">
-    <div class="alert alert-danger" align="center">
-        <strong>${requestScope.message}</strong>
-    </div>
-</c:if>
-<c:if test="${requestScope.success eq true}">
-    <div class="alert alert-success" align="center">
-        <strong>${requestScope.message}</strong>
-    </div>
-</c:if>
-
 <h5> User edit form</h5>
 
 

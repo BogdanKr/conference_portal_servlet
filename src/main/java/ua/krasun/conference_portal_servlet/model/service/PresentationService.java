@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class PresentationService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
@@ -36,7 +37,7 @@ public class PresentationService {
     }
 
     public void presentationEdit(String presentationEditId, String theme,
-                                 String chooseSpeakerID, String chooseConferenceID) {
+                                 String chooseSpeakerID, String chooseConferenceID) throws SQLException, WrongInputException {
         UserService userService = new UserService();
         ConferenceService conferenceService = new ConferenceService();
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
@@ -48,11 +49,6 @@ public class PresentationService {
                     .orElseThrow(() -> new WrongInputException("No such Conference"));
             presentation.setConference(conference);
             presentationDao.update(presentation);
-
-//            presentationDao.upDateWithParam(Long.parseLong(presentationEditId), theme,
-//                    Long.parseLong(chooseSpeakerID),Long.parseLong(chooseConferenceID));
-        } catch (WrongInputException e) {
-            e.printStackTrace();
         }
     }
 
@@ -62,9 +58,13 @@ public class PresentationService {
         }
     }
 
-    public Optional<Presentation> findById(int id){
+    public Optional<Presentation> findById(int id) {
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
             return Optional.ofNullable(presentationDao.findById(id));
         }
+    }
+
+    public List<Presentation> findAllByAuthorId(long id) {
+        return findAllPresentation().stream().filter(p -> p.getAuthor().getId() == id).collect(Collectors.toList());
     }
 }

@@ -3,17 +3,24 @@ package ua.krasun.conference_portal_servlet.controller.command;
 import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 public class ShowPresentationList implements Command {
-    PresentationService presentationService ;
-
-    public ShowPresentationList(PresentationService presentationService) {
-        this.presentationService = presentationService;
-    }
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("presentationList", presentationService.findAllPresentation());
+        PresentationService presentationService = new PresentationService();
+        try {
+            Optional<String> speakerID = Optional.ofNullable(request.getParameter("speakerID"));
+            if (speakerID.isEmpty())
+                request.setAttribute("presentationList", presentationService.findAllPresentation());
+            else
+                request.setAttribute("presentationList", presentationService.findAllByAuthorId(Long.parseLong(speakerID.get())));
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Invalid number");
+        }
+
         return "/WEB-INF/user/presentationlist.jsp";
     }
 }

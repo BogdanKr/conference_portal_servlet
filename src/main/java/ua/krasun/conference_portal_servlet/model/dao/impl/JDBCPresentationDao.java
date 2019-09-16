@@ -39,12 +39,14 @@ public class JDBCPresentationDao implements PresentationDao {
     }
 
     @Override
-    public Presentation findById(int id) {
+    public Presentation findById(long id) {
         try (PreparedStatement ps = connection.prepareStatement(queryFindById)) {
-            ps.setInt(1, id);
+            ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return extractFromResultSet(rs);
+                Presentation presentation = extractFromResultSet(rs);
+                presentation.getConference().getPresentations().add(presentation);
+                return presentation;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -74,7 +76,7 @@ public class JDBCPresentationDao implements PresentationDao {
     }
 
     @Override
-    public void update(Presentation entity) {
+    public void update(Presentation entity) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(
                 queryUpdatePresentation)) {
             ps.setString(1, entity.getTheme());
@@ -82,9 +84,6 @@ public class JDBCPresentationDao implements PresentationDao {
             ps.setLong(3, entity.getConference().getId());
             ps.setLong(4, entity.getId());
             ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
-            throw new RuntimeException("Can't Update");
         }
     }
 

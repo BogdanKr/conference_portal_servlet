@@ -66,10 +66,10 @@ public class JDBCUserDao implements UserDao {
 
 
     @Override
-    public User findById(int id) {
+    public User findById(long id) {
         try (PreparedStatement ps = connection.prepareStatement
                 (queryFindById)) {
-            ps.setInt(1, id);
+            ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return extractFromResultSet(rs);

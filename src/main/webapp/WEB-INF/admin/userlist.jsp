@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/parts/head.jsp" %>
 
-<c:if test="${requestScope.error eq true}">
-    <div class="alert alert-danger" align="center">
-        <strong>${requestScope.message}</strong>
-    </div>
-</c:if>
-<c:if test="${requestScope.success eq true}">
-    <div class="alert alert-success" align="center">
-        <strong>${requestScope.message}</strong>
-    </div>
-</c:if>
 
 <h5> User list</h5>
 <a href="${pageContext.request.contextPath}/conference/registration">Add user</a>

@@ -10,16 +10,11 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class UserEdit implements Command {
-    private UserService userService;
     private static final Logger logger = LogManager.getLogger(AdminEdit.class);
-
-
-    public UserEdit(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public String execute(HttpServletRequest request) {
+        UserService userService = new UserService();
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) return "redirect:/";
         if (Optional.ofNullable(request.getParameter("userId")).isEmpty()) {
@@ -41,7 +36,7 @@ public class UserEdit implements Command {
             request.setAttribute("message", "Invalid input");
         }
 
-        request.setAttribute("user", userService.findUserByEmail(email).orElse(user));
+        request.setAttribute("user", userService.findUserById(user.getId()).orElse(new User()));
         return "/WEB-INF/user/useredit.jsp";
     }
 }

@@ -35,7 +35,8 @@
                 </li>
                 <c:if test="${sessionScope.role eq 'SPEAKER'}">
                     <li class="nav-item"><a class="nav-link"
-                                            href="${pageContext.request.contextPath}/">My presentation</a>
+                                            href="${pageContext.request.contextPath}
+                                            /conference/user/presentationlist?speakerID=${sessionScope.user.id}">My presentation</a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.role ne 'ADMIN'}">

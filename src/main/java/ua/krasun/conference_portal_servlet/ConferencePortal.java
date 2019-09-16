@@ -1,10 +1,7 @@
 package ua.krasun.conference_portal_servlet;
 
-import ua.krasun.conference_portal_servlet.controller.command.*;
 import ua.krasun.conference_portal_servlet.controller.command.Exception;
-import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
-import ua.krasun.conference_portal_servlet.model.service.PresentationService;
-import ua.krasun.conference_portal_servlet.model.service.UserService;
+import ua.krasun.conference_portal_servlet.controller.command.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,30 +17,26 @@ public class ConferencePortal extends HttpServlet {
     private Map<String, Command> commands = new HashMap<>();
 
     public void init(ServletConfig servletConfig) {
-        UserService userService = new UserService();
-        ConferenceService conferenceService = new ConferenceService();
-        PresentationService presentationService = new PresentationService();
-
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
-        commands.put("login", new Login(userService, conferenceService));
-        commands.put("registration", new Registration(userService));
+        commands.put("login", new Login());
+        commands.put("registration", new Registration());
         commands.put("logout", new LogOut());
         commands.put("exception", new Exception());
         commands.put("admin", new AdminRole());
         commands.put("user", new UserRole());
         commands.put("speaker", new SpeakerRole());
-        commands.put("admin/userlist", new UserList(userService));
-        commands.put("admin/edit", new AdminEdit(userService));
-        commands.put("admin/addconference", new AddConference(conferenceService));
-        commands.put("speaker/addpresentation", new AddPresentation(presentationService, conferenceService));
+        commands.put("admin/userlist", new UserList());
+        commands.put("admin/edit", new AdminEdit());
+        commands.put("admin/addconference", new AddConference());
+        commands.put("speaker/addpresentation", new AddPresentation());
         commands.put("speaker/editpresentation", new EditPresentation());
         commands.put("speaker/saveeditpresentation", new SaveEditPresentation());
-        commands.put("user/edit", new UserEdit(userService));
-        commands.put("admin/delete_profile", new DeleteProfile(userService));
-        commands.put("admin/delete_conference", new DeleteConference(conferenceService));
+        commands.put("user/edit", new UserEdit());
+        commands.put("admin/delete_profile", new DeleteProfile());
+        commands.put("admin/delete_conference", new DeleteConference());
         commands.put("user/conferencelist", new ShowConferenceList());
-        commands.put("user/presentationlist", new ShowPresentationList(presentationService));
+        commands.put("user/presentationlist", new ShowPresentationList());
 
     }
 

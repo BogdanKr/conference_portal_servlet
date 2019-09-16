@@ -44,7 +44,7 @@ public class UserService {
         return Optional.empty();
     }
 
-    public Optional<User> findUserById(int id) {
+    public Optional<User> findUserById(long id) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return Optional.ofNullable((userDao.findById(id)));
         }
