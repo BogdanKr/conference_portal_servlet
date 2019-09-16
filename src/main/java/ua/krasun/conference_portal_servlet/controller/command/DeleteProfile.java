@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class DeleteProfile implements Command {
-    UserService userService;
+    private UserService userService;
 
     public DeleteProfile(UserService userService) {
         this.userService = userService;

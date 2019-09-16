@@ -6,7 +6,6 @@ import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;

@@ -10,11 +10,9 @@ public class PresentationMapper implements ObjectMapper<Presentation> {
     @Override
     public Presentation extractFromResultSet(ResultSet rs) throws SQLException {
         UserMapper userMapper = new UserMapper();
-        ConferenceMapper conferenceMapper = new ConferenceMapper();
         return Presentation.builder()
                 .id(rs.getLong(5))
                 .theme(rs.getString("theme"))
-//                .conference(conferenceMapper.extractFromResultSet(rs))
                 .author(userMapper.extractFromResultSet(rs))
                 .build();
     }

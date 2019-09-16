@@ -14,17 +14,13 @@ import java.util.Map;
 
 public class JDBCPresentationDao implements PresentationDao {
     private String queryAdd = "INSERT INTO presentation (theme, user_id, conference_id) VALUES (? ,?, ?)";
-    private String queryFindById = "SELECT * FROM presentation " +
-            "left join user on presentation.user_id = user.id " +
-            "left join conference on presentation.conference_id = conference.id " +
-            "WHERE presentation.id = ?";
+    private String queryFindById = "select * from presentation " +
+            "left join user u on presentation.user_id = u.id " +
+            "left join conference c on presentation.conference_id = c.id where presentation.id = ?";
     private String queryFindAll = "SELECT * FROM presentation " +
             "left join user on presentation.user_id = user.id " +
             "left join conference on presentation.conference_id = conference.id";
-    private String queryFindByConferenceID = "SELECT * FROM presentation " +
-            "left join conference on presentation.conference_id = conference.id " +
-            "left join user on presentation.user_id = user.id WHERE presentation.conference_id = ?";
-    private String queryUpdateUser = "UPDATE presentation SET theme = ?, user_id = ?, conference_id = ? WHERE id = ?";
+    private String queryUpdatePresentation = "UPDATE presentation SET theme = ?, user_id = ?, conference_id = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM presentation  WHERE id = ?";
     private Connection connection;
 
@@ -77,32 +73,34 @@ public class JDBCPresentationDao implements PresentationDao {
         return resultList;
     }
 
-//    @Override
-//    public List<Presentation> findByConferenceID(Long id) {
-//        List<Presentation> resultList = new ArrayList<>();
-//        try (PreparedStatement ps = connection.prepareStatement(queryFindByConferenceID)) {
-//            ps.setLong(1, id);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Presentation presentation = extractFromResultSet(rs);
-//                resultList.add(presentation);
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return resultList;
-//    }
-
     @Override
     public void update(Presentation entity) {
         try (PreparedStatement ps = connection.prepareStatement(
-                queryUpdateUser)) {
+                queryUpdatePresentation)) {
             ps.setString(1, entity.getTheme());
             ps.setLong(2, entity.getAuthor().getId());
             ps.setLong(3, entity.getConference().getId());
+            ps.setLong(4, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
+            throw new RuntimeException("Can't Update");
+        }
+    }
+
+    @Override
+    public void upDateWithParam(Long presentationEditId, String theme,
+                                Long chooseSpeakerID, Long chooseConferenceID) {
+        try (PreparedStatement ps = connection.prepareStatement(
+                queryUpdatePresentation)) {
+            ps.setString(1, theme);
+            ps.setLong(2, chooseSpeakerID);
+            ps.setLong(3, chooseConferenceID);
+            ps.setLong(4, presentationEditId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new RuntimeException("Can't Update");
         }
     }
 
@@ -125,10 +123,12 @@ public class JDBCPresentationDao implements PresentationDao {
 
     private Presentation extractFromResultSet(ResultSet rs) throws SQLException {
         UserMapper userMapper = new UserMapper();
+        ConferenceMapper conferenceMapper = new ConferenceMapper();
         return Presentation.builder()
                 .id(rs.getLong("id"))
                 .theme(rs.getString("theme"))
                 .author(userMapper.extractFromResultSet(rs))
+                .conference(conferenceMapper.extractFromResultSet(rs))
                 .build();
     }
 

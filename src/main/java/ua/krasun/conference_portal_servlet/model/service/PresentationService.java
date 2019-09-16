@@ -5,6 +5,7 @@ import ua.krasun.conference_portal_servlet.model.dao.PresentationDao;
 import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.Presentation;
 import ua.krasun.conference_portal_servlet.model.entity.User;
+import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
 import java.sql.SQLException;
 import java.util.Comparator;
@@ -34,13 +35,24 @@ public class PresentationService {
         }
     }
 
-    public void presentationEdit(String id, String theme, User user, Conference conference) {
+    public void presentationEdit(String presentationEditId, String theme,
+                                 String chooseSpeakerID, String chooseConferenceID) {
+        UserService userService = new UserService();
+        ConferenceService conferenceService = new ConferenceService();
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
-            Presentation presentation = presentationDao.findById(Integer.parseInt(id));
+            Presentation presentation = presentationDao.findById(Integer.parseInt(presentationEditId));
             presentation.setTheme(theme);
-            presentation.setAuthor(user);
+            presentation.setAuthor(userService.findUserById(Integer.parseInt(chooseSpeakerID)).orElseThrow());
+            int chooseConferenceIDinteger = Integer.parseInt(chooseConferenceID);
+            Conference conference = conferenceService.findById(chooseConferenceIDinteger)
+                    .orElseThrow(() -> new WrongInputException("No such Conference"));
             presentation.setConference(conference);
             presentationDao.update(presentation);
+
+//            presentationDao.upDateWithParam(Long.parseLong(presentationEditId), theme,
+//                    Long.parseLong(chooseSpeakerID),Long.parseLong(chooseConferenceID));
+        } catch (WrongInputException e) {
+            e.printStackTrace();
         }
     }
 

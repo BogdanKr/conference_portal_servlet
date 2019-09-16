@@ -107,4 +107,10 @@ public class UserService {
         }
     }
 
+    public List<User> findAllSpeaker(){
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findAllSpeaker();
+        }
+    }
+
 }

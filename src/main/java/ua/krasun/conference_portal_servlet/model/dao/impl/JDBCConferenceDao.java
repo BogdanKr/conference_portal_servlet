@@ -6,6 +6,7 @@ import ua.krasun.conference_portal_servlet.model.dao.mapper.PresentationMapper;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
 import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.Presentation;
+import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -16,8 +17,9 @@ import java.util.Map;
 
 public class JDBCConferenceDao implements ConferenceDao {
     private String queryAdd = "INSERT INTO conference (date, subject, user_id) VALUES (? ,?, ?)";
-    private String queryFindByDate = "SELECT * FROM conference left join user on user_id = user.id WHERE date = ?";
-    private String queryFindById = "SELECT * FROM conference left join user on user_id = user.id WHERE conference.id = ? ";
+    private String queryFindById = "select * from conference " +
+            "left join presentation p on conference.id = p.conference_id " +
+            "left join user u on p.user_id = u.id where conference_id = ?";
     private String queryFindAll = "select * from conference " +
             "left join presentation p on conference.id = p.conference_id " +
             "left join user u on p.user_id = u.id";
@@ -41,30 +43,25 @@ public class JDBCConferenceDao implements ConferenceDao {
 
     @Override
     public Conference findById(int id) {
+        PresentationMapper presentationMapper = new PresentationMapper();
+        ConferenceMapper conferenceMapper = new ConferenceMapper();
+        Map<Long, Conference> conferenceMap = new HashMap<>();
         try (PreparedStatement ps = connection.prepareStatement(queryFindById)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return extractFromResultSet(rs);
+            Conference conference = new Conference();
+            while (rs.next()) {
+                conference = extractFromResultSet(rs);
+                conference.setId(rs.getLong(1));
+                conference = conferenceMapper.makeUnique(conferenceMap, conference);
+                Presentation presentation = presentationMapper.extractFromResultSet(rs);
+                presentation.getAuthor().setId(rs.getLong(7));
+                conference.getPresentations().add(presentation);
             }
+            return conference;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
-    }
-
-    @Override
-    public Conference findByDate(LocalDate date) {
-        try (PreparedStatement ps = connection.prepareStatement(queryFindByDate)) {
-            ps.setDate(1, Date.valueOf(date));
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return extractFromResultSet(rs);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
     }
 
     @Override
@@ -112,6 +109,7 @@ public class JDBCConferenceDao implements ConferenceDao {
         }
     }
 
+
     @Override
     public void close() {
         try {
@@ -123,12 +121,13 @@ public class JDBCConferenceDao implements ConferenceDao {
 
     private Conference extractFromResultSet(ResultSet rs) throws SQLException {
         UserMapper userMapper = new UserMapper();
+        User user = new User();
+        user.setId(rs.getLong("user_id"));
         return Conference.builder()
                 .id(rs.getLong("id"))
                 .date(rs.getDate("date").toLocalDate())
                 .subject(rs.getString("subject"))
-                .author(userMapper.extractFromResultSet(rs))
+                .author(user)
                 .build();
     }
-
 }

@@ -15,6 +15,8 @@ public class JDBCUserDao implements UserDao {
     private String queryFindAll = "SELECT * FROM user";
     private String queryUpdateUser = "UPDATE user SET first_name = ?, email = ? , password = ?, role = ?, active = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM user  WHERE id = ?";
+    private String queryFindAllSpeaker = "SELECT * FROM user WHERE role = 2";
+
     private Connection connection;
 
     JDBCUserDao(Connection connection) {
@@ -48,6 +50,21 @@ public class JDBCUserDao implements UserDao {
         return null;
     }
 
+    public List<User> findAllSpeaker() {
+        List<User> resultList = new ArrayList<>();
+        try (Statement ps = connection.createStatement()) {
+            ResultSet rs = ps.executeQuery(queryFindAllSpeaker);
+            while (rs.next()) {
+                User result = extractFromResultSet(rs);
+                resultList.add(result);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultList;
+    }
+
+
     @Override
     public User findById(int id) {
         try (PreparedStatement ps = connection.prepareStatement
@@ -68,7 +85,6 @@ public class JDBCUserDao implements UserDao {
         List<User> resultList = new ArrayList<>();
         try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
-
             while (rs.next()) {
                 User result = extractFromResultSet(rs);
                 resultList.add(result);

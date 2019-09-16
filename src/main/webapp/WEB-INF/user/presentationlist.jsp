@@ -11,6 +11,7 @@
     <thead>
     <tr>
         <th>Date</th>
+        <th>Conference</th>
         <th>Presentation theme</th>
         <th></th>
     </tr>
@@ -19,12 +20,17 @@
     <c:forEach items="${requestScope.presentationList}" var="presentation">
         <tr>
             <td>${presentation.conference.date}</td>
+            <td>${presentation.conference.subject}</td>
             <td class="lm-2">${presentation.theme}</td>
             <td>
             <c:if test="${sessionScope.user.id eq presentation.author.id}">
                 <a href="${pageContext.request.contextPath}
-                /conference/speaker/addpresentation?presentationEditId=${presentation.id}">Edit </a>
+                /conference/speaker/editpresentation?presentationEditId=${presentation.id}">Edit </a>
             </c:if>
+                <c:if test="${sessionScope.role eq 'ADMIN'}">
+                    <a href="${pageContext.request.contextPath}
+                /conference/speaker/editpresentation?presentationEditId=${presentation.id}">Edit admin</a>
+                </c:if>
             </td>
         </tr>
     </c:forEach>

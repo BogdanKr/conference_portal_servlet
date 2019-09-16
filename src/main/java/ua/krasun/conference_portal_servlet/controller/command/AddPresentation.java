@@ -35,25 +35,19 @@ public class AddPresentation implements Command {
             return "/WEB-INF/speaker/addpresentation.jsp";
         }
 
-
-        String presentationEditId = request.getParameter("presentationEditId");
         String theme = request.getParameter("theme");
         confId = request.getParameter("presentationConfId");
-        if (presentationEditId.isEmpty()) {
-            User currentUser = (User) request.getSession().getAttribute("user");
-            Conference conference = conferenceService.findById(Integer.parseInt(confId)).get();
-            try {
-                presentationService.addPresentation(theme, currentUser, conference);
-                request.getSession().setAttribute("conferenceList", conferenceService.findAllConference());
-                return "/conference/speaker";
-            } catch (SQLException e) {
-                request.setAttribute("error", true);
-                request.setAttribute("message", "Can't add presentation ");
-                return "/conference/speaker";
-            }
+        User currentUser = (User) request.getSession().getAttribute("user");
+        try {
+            Conference conference = conferenceService.findById(Integer.parseInt(confId))
+                    .orElseThrow(() -> new WrongInputException("No such Conference"));
+            presentationService.addPresentation(theme, currentUser, conference);
+            request.getSession().setAttribute("conferenceList", conferenceService.findAllConference());
+            return "/conference/speaker";
+        } catch (SQLException | WrongInputException e) {
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Can't add presentation ");
+            return "/conference/speaker";
         }
-
-
-        return null;
     }
 }

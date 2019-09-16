@@ -37,6 +37,8 @@ public class ConferencePortal extends HttpServlet {
         commands.put("admin/edit", new AdminEdit(userService));
         commands.put("admin/addconference", new AddConference(conferenceService));
         commands.put("speaker/addpresentation", new AddPresentation(presentationService, conferenceService));
+        commands.put("speaker/editpresentation", new EditPresentation());
+        commands.put("speaker/saveeditpresentation", new SaveEditPresentation());
         commands.put("user/edit", new UserEdit(userService));
         commands.put("admin/delete_profile", new DeleteProfile(userService));
         commands.put("admin/delete_conference", new DeleteConference(conferenceService));
