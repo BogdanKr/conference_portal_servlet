@@ -96,7 +96,7 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void update(User entity) {
+    public void update(User entity) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(queryUpdateUser)) {
             ps.setString(1, entity.getFirstName());
             ps.setString(2, entity.getEmail());
@@ -105,8 +105,6 @@ public class JDBCUserDao implements UserDao {
             ps.setBoolean(5, entity.isActive());
             ps.setLong(6, entity.getId());
             ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 

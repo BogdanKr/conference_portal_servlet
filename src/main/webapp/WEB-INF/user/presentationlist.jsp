@@ -12,6 +12,7 @@
     <tr>
         <th>Date</th>
         <th>Conference</th>
+        <th>Speaker</th>
         <th>Presentation theme</th>
         <th></th>
     </tr>
@@ -21,6 +22,7 @@
         <tr>
             <td>${presentation.conference.date}</td>
             <td>${presentation.conference.subject}</td>
+            <td>${presentation.author.firstName}</td>
             <td class="lm-2">${presentation.theme}</td>
             <td>
             <c:if test="${sessionScope.user.id eq presentation.author.id}">

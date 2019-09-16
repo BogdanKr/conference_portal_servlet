@@ -17,9 +17,9 @@ import java.util.Map;
 
 public class JDBCConferenceDao implements ConferenceDao {
     private String queryAdd = "INSERT INTO conference (date, subject, user_id) VALUES (? ,?, ?)";
-    private String queryFindById = "select * from conference " +
-            "left join presentation p on conference.id = p.conference_id " +
-            "left join user u on p.user_id = u.id where conference_id = ?";
+    private String queryFindById = "select * from conference c " +
+            "left join presentation p on c.id = p.conference_id " +
+            "left join user u on p.user_id = u.id where c.id = ?";
     private String queryFindAll = "select * from conference " +
             "left join presentation p on conference.id = p.conference_id " +
             "left join user u on p.user_id = u.id";
@@ -56,7 +56,7 @@ public class JDBCConferenceDao implements ConferenceDao {
                 conference = conferenceMapper.makeUnique(conferenceMap, conference);
                 Presentation presentation = presentationMapper.extractFromResultSet(rs);
                 presentation.getAuthor().setId(rs.getLong(7));
-                conference.getPresentations().add(presentation);
+                if (presentation.getAuthor().getId()!=0) conference.getPresentations().add(presentation);
             }
             return conference;
         } catch (SQLException e) {
@@ -73,12 +73,11 @@ public class JDBCConferenceDao implements ConferenceDao {
         try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
             while (rs.next()) {
-                Conference conference = conferenceMapper.extractFromResultSet(rs);
-                conference.setId(rs.getLong(1));
+                Conference conference = extractFromResultSet(rs);
                 conference = conferenceMapper.makeUnique(conferenceMap, conference);
                 Presentation presentation = presentationMapper.extractFromResultSet(rs);
                 presentation.getAuthor().setId(rs.getLong(7));
-                conference.getPresentations().add(presentation);
+                if (presentation.getAuthor().getId()!=0) conference.getPresentations().add(presentation);
             }
             resultList = new ArrayList<>(conferenceMap.values());
         } catch (SQLException e) {
@@ -120,7 +119,6 @@ public class JDBCConferenceDao implements ConferenceDao {
     }
 
     private Conference extractFromResultSet(ResultSet rs) throws SQLException {
-        UserMapper userMapper = new UserMapper();
         User user = new User();
         user.setId(rs.getLong("user_id"));
         return Conference.builder()

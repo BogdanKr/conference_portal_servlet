@@ -17,6 +17,7 @@
     <tr>
         <th>Date</th>
         <th>Subject</th>
+        <th>Presentations</th>
         <th></th>
     </tr>
     </thead>
@@ -25,6 +26,7 @@
         <tr>
             <td>${conference.date}</td>
             <td class="lm-2">${conference.subject}</td>
+            <td class="lm-2">${conference.presentations.size()}</td>
             <td>
             <c:if test="${sessionScope.role eq 'ADMIN'}">
                 <%@ include file="/WEB-INF/parts/addconferencemodal.jsp" %>

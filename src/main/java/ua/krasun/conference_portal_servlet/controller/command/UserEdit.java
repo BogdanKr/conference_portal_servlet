@@ -6,6 +6,7 @@ import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class UserEdit implements Command {
@@ -21,7 +22,7 @@ public class UserEdit implements Command {
     public String execute(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) return "redirect:/";
-        if (!Optional.ofNullable(request.getParameter("userId")).isPresent()) {
+        if (Optional.ofNullable(request.getParameter("userId")).isEmpty()) {
             request.setAttribute("user", user);
             return "/WEB-INF/user/useredit.jsp";
         }
@@ -31,9 +32,15 @@ public class UserEdit implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        userService.userEditIfNotAdmin(id, firstName, email, password);
-        request.setAttribute("success", true);
-        request.setAttribute("message", "Success Save");
+        try {
+            userService.userEditIfNotAdmin(id, firstName, email, password);
+            request.setAttribute("success", true);
+            request.setAttribute("message", "Success Save");
+        } catch (SQLException e) {
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Invalid input");
+        }
+
         request.setAttribute("user", userService.findUserByEmail(email).orElse(user));
         return "/WEB-INF/user/useredit.jsp";
     }

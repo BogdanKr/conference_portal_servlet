@@ -18,7 +18,7 @@
                     <input type="hidden" name="deleteId" value="${requestScope.user.id}">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
             </div>
         </div>
     </div>

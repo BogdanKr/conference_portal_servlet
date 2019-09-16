@@ -59,7 +59,7 @@ public class UserService {
                          String email,
                          String password,
                          String active,
-                         String role) {
+                         String role) throws SQLException {
         try (UserDao userDao = daoFactory.createUserDao()) {
             User user = userDao.findById(Integer.parseInt(id));
             user.setFirstName(firstName);
@@ -85,7 +85,7 @@ public class UserService {
     public void userEditIfNotAdmin(String id,
                          String firstName,
                          String email,
-                         String password) {
+                         String password) throws SQLException {
         try (UserDao userDao = daoFactory.createUserDao()) {
             User user = userDao.findById(Integer.parseInt(id));
             user.setFirstName(firstName);

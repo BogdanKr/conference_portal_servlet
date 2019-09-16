@@ -6,6 +6,7 @@ import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class AdminEdit implements Command {
@@ -46,7 +47,11 @@ public class AdminEdit implements Command {
         String active = request.getParameter("active");
         String role = request.getParameter("role");
 
-        userService.userEdit(id, firstName, email, password, active, role);
+        try {
+            userService.userEdit(id, firstName, email, password, active, role);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return "redirect:/conference/admin/userlist";
     }
 }
