@@ -66,7 +66,7 @@ public class JDBCUserDao implements UserDao {
 
 
     @Override
-    public User findById(long id) {
+    public User findById(long id) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement
                 (queryFindById)) {
             ps.setLong(1, id);
@@ -74,8 +74,6 @@ public class JDBCUserDao implements UserDao {
             if (rs.next()) {
                 return extractFromResultSet(rs);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
         return null;
     }

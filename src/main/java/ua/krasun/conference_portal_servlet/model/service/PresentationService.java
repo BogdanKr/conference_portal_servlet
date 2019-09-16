@@ -58,7 +58,7 @@ public class PresentationService {
         }
     }
 
-    public Optional<Presentation> findById(int id) {
+    public Optional<Presentation> findById(int id) throws SQLException {
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
             return Optional.ofNullable(presentationDao.findById(id));
         }

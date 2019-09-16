@@ -1,5 +1,6 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
+import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,12 @@ public class ShowPresentationList implements Command {
             request.setAttribute("error", true);
             request.setAttribute("message", "Invalid number");
         }
+        if (request.getSession().getAttribute("role").equals(Role.ADMIN))
+            return "/WEB-INF/admin/presentationlistadmin.jsp";
+        else if (request.getSession().getAttribute("role").equals(Role.SPEAKER))
+            return "/WEB-INF/speaker/presentationlistspeaker.jsp";
+        else
+            return "/WEB-INF/user/presentationlist.jsp";
 
-        return "/WEB-INF/user/presentationlist.jsp";
     }
 }

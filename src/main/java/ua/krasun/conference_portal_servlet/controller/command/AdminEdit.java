@@ -16,25 +16,27 @@ public class AdminEdit implements Command {
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
         String id = request.getParameter("id");
-        try {
-            int userId = Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            request.setAttribute("error", true);
-            return "/WEB-INF/admin/userlist.jsp";
-        }
+//        try {
+//            int userId = Integer.parseInt(id);
+//        } catch (NumberFormatException e) {
+//            request.setAttribute("error", true);
+//            request.setAttribute("message", "Invalid input");
+//            return "/WEB-INF/admin/userlist.jsp";
+//        }
 
         if (Optional.ofNullable(request.getParameter("userId")).isEmpty()) {
             System.out.println();
-            Optional<User> user = userService.findUserById(Integer.parseInt(id));
-            if (user.isEmpty()) {
+            try {
+                Optional<User> user = userService.findUserById(Integer.parseInt(id));
+                request.setAttribute("user", user.orElseThrow(SQLException::new));
+                request.setAttribute("roles", userService.getRoles());
+                return "/WEB-INF/admin/adminedit.jsp";
+            } catch (SQLException e) {
                 logger.info("Invalid no such user ID '" + id + "'");
                 request.setAttribute("error", true);
                 request.setAttribute("message", "Invalid input");
                 return "/WEB-INF/admin/userlist.jsp";
             }
-            request.setAttribute("user", user.get());
-            request.setAttribute("roles", userService.getRoles());
-            return "/WEB-INF/admin/adminedit.jsp";
         }
 
         String firstName = request.getParameter("firstName");
@@ -51,6 +53,6 @@ public class AdminEdit implements Command {
             request.setAttribute("error", true);
             request.setAttribute("message", "Invalid input");
         }
-        return "redirect:/conference/admin/userlist";
+        return "/conference/admin/userlist";
     }
 }

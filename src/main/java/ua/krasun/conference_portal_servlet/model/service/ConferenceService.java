@@ -52,7 +52,7 @@ public class ConferenceService {
         }
     }
 
-    public Optional<Conference> findById(long id) {
+    public Optional<Conference> findById(long id) throws SQLException {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             return Optional.ofNullable(conferenceDao.findById(id));
         }

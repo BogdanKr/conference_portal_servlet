@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="/WEB-INF/parts/head.jsp" %>
+<%@ include file="/WEB-INF/admin/partadmin/headadmin.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h5> Admin edit form</h5>
 
-<form action="${pageContext.request.contextPath}/conference/admin/edit?id=${user.id}" method="post">
+<form action="${pageContext.request.contextPath}
+    /conference/admin/edit?id=${user.id}" method="post">
 
     <label>First Name
         <input type="text" name="firstName" value="${requestScope.user.firstName}">
@@ -32,6 +33,6 @@
     </div>
 </form>
 
-<%@ include file="/WEB-INF/parts/deletemodal.jsp" %>
+<%@ include file="/WEB-INF/admin/partadmin/deletemodal.jsp" %>
 
-<%@ include file="/WEB-INF/parts/tail.jsp" %>
+<%@ include file="/WEB-INF/admin/partadmin/tailadmin.jsp" %>

@@ -1,5 +1,6 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
+import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,11 @@ public class ShowConferenceList implements Command {
         ConferenceService conferenceService = new ConferenceService();
         request.getSession().setAttribute("conferenceList", conferenceService.findAllConference());
         request.setAttribute("edit", true);
-        return "/WEB-INF/user/conferencelist.jsp";
+        if (request.getSession().getAttribute("role").equals(Role.ADMIN))
+            return "/WEB-INF/admin/conferencelistadmin.jsp";
+        else if (request.getSession().getAttribute("role").equals(Role.SPEAKER))
+            return "/WEB-INF/speaker/conferencelistspeaker.jsp";
+        else
+            return "/WEB-INF/user/conferencelist.jsp";
     }
 }

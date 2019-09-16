@@ -7,6 +7,7 @@ import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 public class EditPresentation implements Command {
     @Override
@@ -21,13 +22,13 @@ public class EditPresentation implements Command {
         Presentation presentation = null;
         try {
             presentation = presentationService.findById(Integer.parseInt(presentationEditId)).orElse(new Presentation());
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | SQLException e){
             request.setAttribute("error", true);
             request.setAttribute("message", "Invalid number");
         }
         request.setAttribute("presentation", presentation);
         if (request.getSession().getAttribute("role").equals(Role.ADMIN))
-        return "/WEB-INF/admin/editpresentationadmin.jsp";
+            return "/WEB-INF/admin/editpresentationadmin.jsp";
         else return "/WEB-INF/speaker/editpresentationspeaker.jsp";
     }
 }

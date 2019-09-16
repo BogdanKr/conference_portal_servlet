@@ -44,7 +44,7 @@ public class UserService {
         return Optional.empty();
     }
 
-    public Optional<User> findUserById(long id) {
+    public Optional<User> findUserById(long id) throws SQLException {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return Optional.ofNullable((userDao.findById(id)));
         }
