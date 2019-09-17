@@ -14,7 +14,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <form action="${pageContext.request.contextPath}/conference/admin/delete_profile" method="post">
+                <form action="${pageContext.request.contextPath}/conference/user/delete_profile" method="post">
                     <input type="hidden" name="deleteId" value="${requestScope.user.id}">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
@@ -23,8 +23,7 @@
         </div>
     </div>
 </div>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

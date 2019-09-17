@@ -16,13 +16,6 @@ public class AdminEdit implements Command {
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
         String id = request.getParameter("id");
-//        try {
-//            int userId = Integer.parseInt(id);
-//        } catch (NumberFormatException e) {
-//            request.setAttribute("error", true);
-//            request.setAttribute("message", "Invalid input");
-//            return "/WEB-INF/admin/userlist.jsp";
-//        }
 
         if (Optional.ofNullable(request.getParameter("userId")).isEmpty()) {
             System.out.println();
@@ -31,11 +24,11 @@ public class AdminEdit implements Command {
                 request.setAttribute("user", user.orElseThrow(SQLException::new));
                 request.setAttribute("roles", userService.getRoles());
                 return "/WEB-INF/admin/adminedit.jsp";
-            } catch (SQLException e) {
+            } catch (SQLException | NumberFormatException e) {
                 logger.info("Invalid no such user ID '" + id + "'");
                 request.setAttribute("error", true);
                 request.setAttribute("message", "Invalid input");
-                return "/WEB-INF/admin/userlist.jsp";
+                return "/conference/admin/userlist";
             }
         }
 
@@ -49,7 +42,7 @@ public class AdminEdit implements Command {
             userService.userEdit(id, firstName, email, password, active, role);
             request.setAttribute("success", true);
             request.setAttribute("message", "Success Save");
-        } catch (SQLException e) {
+        } catch (SQLException | NumberFormatException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", "Invalid input");
         }

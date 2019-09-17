@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="WEB-INF/partsguest/head.jsp" %>
+<%@ include file="/WEB-INF/admin/partadmin/headadmin.jsp" %>
 
 <form action="${pageContext.request.contextPath}
 /conference/registration" method="post">
@@ -21,8 +21,5 @@
         Registration
     </button>
 </form>
-    <div class="mt-1">
-        <a href="${pageContext.request.contextPath}
-        /conference/login">Login</a>
-    </div>
-<%@ include file="WEB-INF/partsguest/tail.jsp" %>
+
+<%@ include file="/WEB-INF/admin/partadmin/tailadmin.jsp" %>

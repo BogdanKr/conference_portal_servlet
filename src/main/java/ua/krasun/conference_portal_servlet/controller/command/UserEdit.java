@@ -17,10 +17,13 @@ public class UserEdit implements Command {
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
         User user = (User) request.getSession().getAttribute("user");
-        if (user == null) return "redirect:/";
+        if (user == null) return "redirect:/conference/";
         if (Optional.ofNullable(request.getParameter("userId")).isEmpty()) {
             request.setAttribute("user", user);
-            return "/conference/logout";
+             if (request.getSession().getAttribute("role").equals(Role.SPEAKER))
+                return "/WEB-INF/speaker/speakeredit.jsp";
+            else
+                return "/WEB-INF/user/useredit.jsp";
         }
 
         String id = request.getParameter("userId");
@@ -29,19 +32,18 @@ public class UserEdit implements Command {
         String password = request.getParameter("password");
 
         try {
-            userService.userEditIfNotAdmin(id, firstName, email, password);
+            User newUser = userService.userEditIfNotAdmin(id, firstName, email, password);
+            CommandUtility.setUserInSession(newUser, request);
             request.setAttribute("success", true);
             request.setAttribute("message", "Success Save");
-            request.setAttribute("user", userService.findUserById(user.getId()).orElseThrow(SQLException::new));
+            request.setAttribute("user", newUser);
         } catch (SQLException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", "Invalid input");
+            request.setAttribute("user", user);
         }
 
-
-        if (request.getSession().getAttribute("role").equals(Role.ADMIN))
-            return "/WEB-INF/admin/adminedit.jsp";
-        else if (request.getSession().getAttribute("role").equals(Role.SPEAKER))
+        if (request.getSession().getAttribute("role").equals(Role.SPEAKER))
             return "/WEB-INF/speaker/speakeredit.jsp";
         else
             return "/WEB-INF/user/useredit.jsp";

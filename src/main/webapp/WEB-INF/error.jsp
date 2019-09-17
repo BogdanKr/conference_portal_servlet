@@ -1,5 +1,5 @@
 <%@ page language="java" isErrorPage="true"  contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="parts/head.jsp" %>
+<%@ include file="partsguest/head.jsp" %>
 
 
 <h2>
@@ -10,4 +10,4 @@
 <a href="${pageContext.request.contextPath}/index.jsp">Index Page</a>
 
 
-<%@ include file="parts/tail.jsp" %>
+<%@ include file="partsguest/tail.jsp" %>

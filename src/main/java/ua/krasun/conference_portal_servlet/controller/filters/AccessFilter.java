@@ -19,18 +19,18 @@ public class AccessFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String path = request.getRequestURI();
         Role role = (Role) request.getSession().getAttribute("role");
-        if (path.contains("admin") && role != Role.ADMIN) {
+
+        if ((path.contains("speaker") && (role == Role.USER || role == null))
+                || (path.contains("user") && role == null)
+                || (path.contains("admin") && role != Role.ADMIN)) {
             request.setAttribute("error", true);
             request.setAttribute("message", "AccessDenied");
-            request.getRequestDispatcher("/").forward(request, response);
+//            response.sendRedirect(request.getHeader("referer"));
+            request.getRequestDispatcher("/conference/").forward(request, response);
             return;
         }
-        if ((path.contains("speaker") && (role == Role.USER || role == null)) || (path.contains("user") && role == null)) {
-            request.setAttribute("error", true);
-            request.setAttribute("message", "AccessDenied");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-            return;
-        }
+
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

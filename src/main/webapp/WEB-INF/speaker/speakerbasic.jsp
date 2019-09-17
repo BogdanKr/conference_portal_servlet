@@ -2,8 +2,7 @@
 <%@ include file="/WEB-INF/speaker/partspeaker/headspeaker.jsp" %>
 
 
-
-<h5> Welcome Speaker !
+<h5> Welcome speaker ${sessionScope.user.firstName} !
 
 </h5>
 This is a conference portal, you could add presentation

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/parts/head.jsp" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/user/partuser/headuser.jsp" %>
 
 <table>
     <thead>
@@ -19,14 +19,6 @@
             <td>${presentation.author.firstName}</td>
             <td class="lm-2">${presentation.theme}</td>
             <td>
-            <c:if test="${sessionScope.user.id eq presentation.author.id}">
-                <a href="${pageContext.request.contextPath}
-                /conference/speaker/editpresentation?presentationEditId=${presentation.id}">Edit </a>
-            </c:if>
-                <c:if test="${sessionScope.role eq 'ADMIN'}">
-                    <a href="${pageContext.request.contextPath}
-                /conference/speaker/editpresentation?presentationEditId=${presentation.id}">Edit admin</a>
-                </c:if>
             </td>
         </tr>
     </c:forEach>
@@ -34,4 +26,4 @@
 </table>
 
 
-<%@ include file="/WEB-INF/parts/tail.jsp" %>
+<%@ include file="/WEB-INF/user/partuser/tailuser.jsp" %>

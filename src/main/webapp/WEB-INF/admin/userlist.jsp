@@ -4,7 +4,7 @@
 
 <h5> User list</h5>
 <a href="${pageContext.request.contextPath}
-/conference/registration">Add user</a>
+/conference/admin/adduser">Add user</a>
 <table>
     <thead>
     <tr>
@@ -30,8 +30,6 @@
     </c:forEach>
     </tbody>
 </table>
-
-<a href="${pageContext.request.contextPath}/index.jsp">Index Page</a>
 
 
 <%@ include file="/WEB-INF/admin/partadmin/tailadmin.jsp" %>

@@ -1,6 +1,3 @@
-<c:if test="${sessionScope.role eq 'ADMIN'}">
-    <%@ include file="/WEB-INF/parts/addconferencemodal.jsp" %>
-</c:if>
 
 <div class="card-columns">
     <c:forEach items="${sessionScope.conferenceList}" var="conference">
@@ -10,12 +7,6 @@
                     <div class="col-5"> ${conference.date}</div>
                     <div class="col pr-0 pl-0"> ${conference.subject}</div>
                 </div>
-                <c:if test="${sessionScope.role eq 'SPEAKER'}">
-                    <div class="col-md-auto">
-                        <a href="${pageContext.request.contextPath}
-                        /conference/speaker/addpresentation?conf=${conference.id}"> Add presentation</a>
-                    </div>
-                </c:if>
             </div>
 
             <div class="card-body ">

@@ -1,6 +1,7 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
 import ua.krasun.conference_portal_servlet.model.entity.Role;
+import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,5 +23,10 @@ class CommandUtility {
         loggedUsers.add(email);
         request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
         return false;
+    }
+
+
+    static void setUserInSession(User user, HttpServletRequest request) {
+        request.getSession().setAttribute("user", user);
     }
 }

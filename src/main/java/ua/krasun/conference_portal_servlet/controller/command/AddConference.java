@@ -13,7 +13,7 @@ public class AddConference implements Command {
         ConferenceService conferenceService = new ConferenceService();
         String date = request.getParameter("localDate");
         String subject = request.getParameter("subject");
-        if (date == null) return "/";
+        if (date == null) return "/conference/";
 
         try {
             if (!request.getParameter("conferenceEditId").isEmpty()) {

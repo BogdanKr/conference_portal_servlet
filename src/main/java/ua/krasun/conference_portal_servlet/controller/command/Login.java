@@ -37,7 +37,7 @@ public class Login implements Command {
         }
         logger.info("User email " + email + " logged successfully.");
 
-        request.getSession().setAttribute("user", user.get());
+        CommandUtility.setUserInSession(user.get(), request);
         request.getSession().setAttribute("conferenceList", conferenceService.findAllConference());
         if (user.get().getRole().equals(Role.ADMIN)) {
             CommandUtility.setUserRole(request, Role.ADMIN, email);

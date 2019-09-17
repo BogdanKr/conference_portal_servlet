@@ -1,5 +1,5 @@
 <c:if test="${sessionScope.role eq 'ADMIN'}">
-    <%@ include file="/WEB-INF/parts/addconferencemodal.jsp" %>
+    <%@ include file="/WEB-INF/admin/partadmin/addconfmodal.jsp" %>
 </c:if>
 
 <div class="card-columns">

@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="/WEB-INF/parts/head.jsp" %>
+<%@ include file="/WEB-INF/user/partuser/headuser.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h5> User edit form</h5>
 
 
-<form action="${pageContext.request.contextPath}/conference/user/edit" method="post">
+<form action="${pageContext.request.contextPath}
+/conference/user/edit" method="post">
 
     <label>First Name
-        <input type="text" name="firstName"  value="${requestScope.user.firstName}">
+        <input type="text" name="firstName" value="${requestScope.user.firstName}">
     </label>
     <label>Email
-        <input type="email" name="email"  value="${requestScope.user.email}">
+        <input type="email" name="email" value="${requestScope.user.email}">
     </label>
     <label>Password
         <input type="password" name="password" value="">
@@ -23,9 +24,11 @@
     </div>
 
     <input type="hidden" name="userId" value="${sessionScope.user.id}">
-    <div><button type="submit">Edit</button></div>
+    <div>
+        <button type="submit">Edit</button>
+    </div>
 </form>
 
-<%@ include file="/WEB-INF/parts/deletemodal.jsp" %>
+<%@ include file="/WEB-INF/user/partuser/deletemodal.jsp" %>
 
-<%@ include file="/WEB-INF/parts/tail.jsp" %>
+<%@ include file="/WEB-INF/user/partuser/tailuser.jsp" %>

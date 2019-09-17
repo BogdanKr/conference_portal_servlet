@@ -12,27 +12,30 @@ public class DeleteProfile implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
-        String deleteId = (String) request.getParameter("deleteId");
+        String deleteId = request.getParameter("deleteId");
         System.out.println("delete id:" + deleteId);
         if (Optional.ofNullable(deleteId).isEmpty()) {
-            return "redirect:/index.jsp";
+            return "/conference/";
         }
         User currentUser = (User) request.getSession().getAttribute("user");
         System.out.println("currentUser Id = " + currentUser.getId());
-        if (currentUser.getId() == Long.parseLong(deleteId) || currentUser.getRole().equals(Role.ADMIN)) {
-            try {
+        try {
+            if (currentUser.getId() == Long.parseLong(deleteId) || currentUser.getRole().equals(Role.ADMIN))
                 userService.deleteUser(Long.parseLong(deleteId));
-                request.setAttribute("error", true);
-                request.setAttribute("message", "Profile deleted");
-            } catch (SQLException e) {
-                request.setAttribute("error", true);
-                request.setAttribute("message", "Sorry, can't delete");
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Profile deleted");
+        } catch (SQLException | NumberFormatException e) {
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Sorry, can't delete");
+            if (!request.getSession().getAttribute("role").equals(Role.ADMIN)) {
+                return "/conference/user/edit";
             }
         }
+
         if (request.getSession().getAttribute("role").equals(Role.ADMIN)) {
             return "/conference/admin/userlist";
         }
         request.getSession().invalidate();
-        return "/index.jsp";
+        return "/conference/";
     }
 }

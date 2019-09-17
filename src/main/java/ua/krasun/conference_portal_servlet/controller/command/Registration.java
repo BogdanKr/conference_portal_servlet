@@ -25,6 +25,7 @@ public class Registration implements Command {
         }
         request.setAttribute("success", true);
         request.setAttribute("message", "Success registration");
-        return "/registration.jsp";
+        if (request.getParameter("role")==null) return "/registration.jsp";
+        else return "/conference/admin/userlist";
     }
 }

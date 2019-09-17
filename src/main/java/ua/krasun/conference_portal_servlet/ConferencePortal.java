@@ -19,6 +19,7 @@ public class ConferencePortal extends HttpServlet {
     public void init(ServletConfig servletConfig) {
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
+        commands.put("", new RolePath());
         commands.put("login", new Login());
         commands.put("registration", new Registration());
         commands.put("logout", new LogOut());
@@ -29,11 +30,12 @@ public class ConferencePortal extends HttpServlet {
         commands.put("admin/userlist", new UserList());
         commands.put("admin/edit", new AdminEdit());
         commands.put("admin/addconference", new AddConference());
+        commands.put("admin/adduser", new AdminAddUser());
         commands.put("speaker/addpresentation", new AddPresentation());
         commands.put("speaker/editpresentation", new EditPresentation());
         commands.put("speaker/saveeditpresentation", new SaveEditPresentation());
         commands.put("user/edit", new UserEdit());
-        commands.put("admin/delete_profile", new DeleteProfile());
+        commands.put("user/delete_profile", new DeleteProfile());
         commands.put("admin/delete_conference", new DeleteConference());
         commands.put("user/conferencelist", new ShowConferenceList());
         commands.put("user/presentationlist", new ShowPresentationList());
@@ -59,7 +61,7 @@ public class ConferencePortal extends HttpServlet {
         String path = request.getRequestURI();
         path = path.replaceAll(".*/conference/", "");
 
-        Command command = commands.getOrDefault(path, (r) -> "/index.jsp");
+        Command command = commands.getOrDefault(path, (r) -> "/conference/");
         String page = command.execute(request);
         if (page.contains("redirect")) {
             response.sendRedirect(page.replace("redirect:", ""));

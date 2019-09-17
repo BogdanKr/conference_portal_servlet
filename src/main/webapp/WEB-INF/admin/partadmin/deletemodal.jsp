@@ -14,7 +14,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <form action="${pageContext.request.contextPath}/conference/admin/delete_profile" method="post">
+                <form action="${pageContext.request.contextPath}/conference/user/delete_profile" method="post">
                     <input type="hidden" name="deleteId" value="${requestScope.user.id}">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>

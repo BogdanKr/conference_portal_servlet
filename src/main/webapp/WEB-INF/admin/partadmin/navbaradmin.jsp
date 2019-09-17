@@ -19,7 +19,8 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}
                     /conference/user/conferencelist">All conferences </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/">My registration </a>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}
+            /conference/admin">My registration </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}

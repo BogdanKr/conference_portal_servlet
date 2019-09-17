@@ -37,7 +37,7 @@ public class UserService {
     public Optional<User> findUser(String email, String password) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             Optional<User> user = Optional.ofNullable((userDao.findByEmail(email)));
-            if (user.isPresent() && user.get().getPassword().equals(password)) {
+            if (user.isPresent() && user.get().getPassword().equals(password) && user.get().isActive()) {
                 return user;
             }
         }
@@ -82,16 +82,17 @@ public class UserService {
         }
     }
 
-    public void userEditIfNotAdmin(String id,
-                         String firstName,
-                         String email,
-                         String password) throws SQLException {
+    public User userEditIfNotAdmin(String id,
+                                   String firstName,
+                                   String email,
+                                   String password) throws SQLException {
         try (UserDao userDao = daoFactory.createUserDao()) {
             User user = userDao.findById(Integer.parseInt(id));
             user.setFirstName(firstName);
             user.setEmail(email);
             if (!password.isEmpty()) user.setPassword(password);
             userDao.update(user);
+            return user;
         }
     }
 
@@ -103,11 +104,11 @@ public class UserService {
 
     public void deleteUser(long id) throws SQLException {
         try (UserDao userDao = daoFactory.createUserDao()) {
-             userDao.delete(id);
+            userDao.delete(id);
         }
     }
 
-    public List<User> findAllSpeaker(){
+    public List<User> findAllSpeaker() {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return userDao.findAllSpeaker();
         }
