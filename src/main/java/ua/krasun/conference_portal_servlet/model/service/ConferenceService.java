@@ -16,9 +16,9 @@ public class ConferenceService {
     private PresentationService presentationService = new PresentationService();
 
 
-    public List<Conference> findAllConference() {
+    public List<Conference> findAllConference(long currentUserId) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
-            List<Conference> conferenceList = conferenceDao.findAll();
+            List<Conference> conferenceList = conferenceDao.findAll(currentUserId);
             conferenceList.sort(Comparator.comparing(Conference::getDate));
             return conferenceList;
         }
@@ -55,6 +55,18 @@ public class ConferenceService {
     public Optional<Conference> findById(long id) throws SQLException {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             return Optional.ofNullable(conferenceDao.findById(id));
+        }
+    }
+
+    public void registration(long confId, long currentUserId) {
+        try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
+            if (conferenceDao.checkRegistration(confId, currentUserId) == 0) {
+                System.out.println("зарегился");
+                conferenceDao.addConfRegistration(confId, currentUserId);
+            } else {
+                conferenceDao.deleteConfRegistration(confId, currentUserId);
+                System.out.println("отписался");
+            }
         }
     }
 }

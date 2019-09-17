@@ -4,7 +4,11 @@ import ua.krasun.conference_portal_servlet.model.entity.Conference;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.util.List;
 
 public interface ConferenceDao extends GenericDao<Conference> {
-//    Conference findByDate(LocalDate date);
+    List<Conference> findAll(long currentUserId);
+    void addConfRegistration(long conferenceId, long userId);
+    void deleteConfRegistration(long conferenceId, long userId);
+    int checkRegistration(long conferenceId, long userId);
 }

@@ -12,6 +12,7 @@ public class Conference {
     private User author;
     private List<Presentation> presentations = new ArrayList<>();
     private List<User> userRegistrations = new ArrayList<>();
+    private boolean currentUserRegistered;
 
     public long getId() {
         return id;
@@ -59,6 +60,14 @@ public class Conference {
 
     public void setUserRegistrations(List<User> userRegistrations) {
         this.userRegistrations = userRegistrations;
+    }
+
+    public boolean isCurrentUserRegistered() {
+        return currentUserRegistered;
+    }
+
+    public void setCurrentUserRegistered(boolean currentUserRegistered) {
+        this.currentUserRegistered = currentUserRegistered;
     }
 
     //Builder

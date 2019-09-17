@@ -2,6 +2,7 @@ package ua.krasun.conference_portal_servlet.controller.command;
 
 import ua.krasun.conference_portal_servlet.model.entity.Presentation;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
+import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
@@ -17,7 +18,8 @@ public class EditPresentation implements Command {
         ConferenceService conferenceService = new ConferenceService();
         String presentationEditId = request.getParameter("presentationEditId");
 
-        request.setAttribute("conferenceList", conferenceService.findAllConference());
+        request.setAttribute("conferenceList",
+                conferenceService.findAllConference(((User) request.getSession().getAttribute("user")).getId()));
         request.setAttribute("speakerList", userService.findAllSpeaker());
         Presentation presentation = null;
         try {

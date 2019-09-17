@@ -36,7 +36,7 @@ public class AddPresentation implements Command {
             Conference conference = conferenceService.findById(Integer.parseInt(confId))
                     .orElseThrow(() -> new WrongInputException("No such Conference"));
             presentationService.addPresentation(theme, currentUser, conference);
-            request.getSession().setAttribute("conferenceList", conferenceService.findAllConference());
+            request.getSession().setAttribute("conferenceList", conferenceService.findAllConference(currentUser.getId()));
             return "/conference/speaker";
         } catch (SQLException | WrongInputException e) {
             request.setAttribute("error", true);

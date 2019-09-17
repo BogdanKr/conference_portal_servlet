@@ -27,6 +27,10 @@ public class JDBCConferenceDao implements ConferenceDao {
             "left join user on cr.user_id=user.id";
     private String queryUpdateUser = "UPDATE conference SET date = ?, subject = ?, user_id = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM conference  WHERE id = ?";
+    private String queryAddConfReg = "INSERT INTO conference_registrations (conference_id, user_id) VALUES (?, ?)";
+    private String queryDeleteConfReg = "DELETE FROM conference_registrations WHERE conference_id = ? AND user_id = ?";
+    private String queryCheckReg = "select sum(if((conference_id=? and user_id=?), 1,0)) as is_user_reg from conference_registrations";
+
     private Connection connection;
 
     JDBCConferenceDao(Connection connection) {
@@ -66,8 +70,14 @@ public class JDBCConferenceDao implements ConferenceDao {
         }
     }
 
+
     @Override
     public List<Conference> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Conference> findAll(long currentUserId) {
         List<Conference> resultList;
         PresentationMapper presentationMapper = new PresentationMapper();
         ConferenceMapper conferenceMapper = new ConferenceMapper();
@@ -90,13 +100,48 @@ public class JDBCConferenceDao implements ConferenceDao {
                     regUser.getRegOnConferences().add(conference);
                     conference.getUserRegistrations().add(regUser);
                 }
-
+                if (regUser.getId() == currentUserId) conference.setCurrentUserRegistered(true);
             }
             resultList = new ArrayList<>(conferenceMap.values());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return resultList;
+    }
+
+    @Override
+    public void addConfRegistration(long conferenceId, long userId) {
+        try (PreparedStatement ps = connection.prepareStatement(queryAddConfReg)) {
+            ps.setLong(1, conferenceId);
+            ps.setLong(2, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteConfRegistration(long conferenceId, long userId) {
+        try (PreparedStatement ps = connection.prepareStatement(queryDeleteConfReg)) {
+            ps.setLong(1, conferenceId);
+            ps.setLong(2, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int checkRegistration(long conferenceId, long userId) {
+        try (PreparedStatement ps = connection.prepareStatement(queryCheckReg)) {
+            ps.setLong(1, conferenceId);
+            ps.setLong(2, userId);
+            ResultSet rs = ps.executeQuery();
+            return rs.getInt("is_user_reg");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
