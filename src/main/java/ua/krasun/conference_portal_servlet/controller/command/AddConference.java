@@ -26,7 +26,7 @@ public class AddConference implements Command {
             }
         } catch (Exception e) {
             request.setAttribute("error", true);
-            request.setAttribute("message", "Can't save ");
+            request.setAttribute("message", "Sorry can't add conference ");
             return "/conference/admin";
         }
 

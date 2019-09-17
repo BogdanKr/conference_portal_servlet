@@ -27,7 +27,7 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody style="color: blue">
+                    <tbody style="color: #781a20">
                     <c:forEach items="${conference.presentations}" var="presentation">
                     <tr>
                         <td>${presentation.author.firstName}</td>
