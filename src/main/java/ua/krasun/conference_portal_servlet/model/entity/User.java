@@ -1,5 +1,7 @@
 package ua.krasun.conference_portal_servlet.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
@@ -9,6 +11,7 @@ public class User {
     private String password;
     private Role role;
     private boolean active;
+    private List<Conference> regOnConferences = new ArrayList<>();
 
     public boolean isActive() {
         return active;
@@ -56,6 +59,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Conference> getRegOnConferences() {
+        return regOnConferences;
+    }
+
+    public void setRegOnConferences(List<Conference> regOnConferences) {
+        this.regOnConferences = regOnConferences;
     }
 
     //Builder

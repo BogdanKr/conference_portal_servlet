@@ -6,10 +6,10 @@ import ua.krasun.conference_portal_servlet.model.dao.mapper.PresentationMapper;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
 import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.Presentation;
+import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +22,9 @@ public class JDBCConferenceDao implements ConferenceDao {
             "left join user u on p.user_id = u.id where c.id = ?";
     private String queryFindAll = "select * from conference " +
             "left join presentation p on conference.id = p.conference_id " +
-            "left join user u on p.user_id = u.id";
+            "left join user u on p.user_id = u.id " +
+            "left join conference_registrations cr on conference.id = cr.conference_id " +
+            "left join user on cr.user_id=user.id";
     private String queryUpdateUser = "UPDATE conference SET date = ?, subject = ?, user_id = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM conference  WHERE id = ?";
     private Connection connection;
@@ -56,7 +58,7 @@ public class JDBCConferenceDao implements ConferenceDao {
                 conference = conferenceMapper.makeUnique(conferenceMap, conference);
                 Presentation presentation = presentationMapper.extractFromResultSet(rs);
                 presentation.getAuthor().setId(rs.getLong(7));
-                if (presentation.getAuthor().getId()!=0) conference.getPresentations().add(presentation);
+                if (presentation.getAuthor().getId() != 0) conference.getPresentations().add(presentation);
             }
             return conference;
         } catch (SQLException e) {
@@ -69,7 +71,9 @@ public class JDBCConferenceDao implements ConferenceDao {
         List<Conference> resultList;
         PresentationMapper presentationMapper = new PresentationMapper();
         ConferenceMapper conferenceMapper = new ConferenceMapper();
+        UserMapper userMapper = new UserMapper();
         Map<Long, Conference> conferenceMap = new HashMap<>();
+        Map<Long, User> regUserMap = new HashMap<>();
         try (Statement ps = connection.createStatement()) {
             ResultSet rs = ps.executeQuery(queryFindAll);
             while (rs.next()) {
@@ -77,7 +81,16 @@ public class JDBCConferenceDao implements ConferenceDao {
                 conference = conferenceMapper.makeUnique(conferenceMap, conference);
                 Presentation presentation = presentationMapper.extractFromResultSet(rs);
                 presentation.getAuthor().setId(rs.getLong(7));
-                if (presentation.getAuthor().getId()!=0) conference.getPresentations().add(presentation);
+                if (presentation.getAuthor().getId() != 0 && !conference.getPresentations().contains(presentation))
+                    conference.getPresentations().add(presentation);
+                User regUser = extractRegUser(rs);
+                regUser = userMapper.makeUnique(regUserMap, regUser);
+                if (regUser.getId() == 0) continue;
+                if (!regUser.getRegOnConferences().contains(conference)) {
+                    regUser.getRegOnConferences().add(conference);
+                    conference.getUserRegistrations().add(regUser);
+                }
+
             }
             resultList = new ArrayList<>(conferenceMap.values());
         } catch (SQLException e) {
@@ -124,6 +137,17 @@ public class JDBCConferenceDao implements ConferenceDao {
                 .date(rs.getDate("date").toLocalDate())
                 .subject(rs.getString("subject"))
                 .author(user)
+                .build();
+    }
+
+    private User extractRegUser(ResultSet rs) throws SQLException {
+        return User.builder()
+                .id(rs.getLong(17))
+                .firstName(rs.getString(22))
+                .email(rs.getString(18))
+                .password(rs.getString(19))
+                .role(Role.values()[rs.getInt(20)])
+                .active(rs.getBoolean(21))
                 .build();
     }
 }

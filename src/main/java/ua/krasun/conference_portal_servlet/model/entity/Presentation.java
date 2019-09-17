@@ -1,5 +1,7 @@
 package ua.krasun.conference_portal_servlet.model.entity;
 
+import java.util.Objects;
+
 public class Presentation {
     private long id;
     private String theme;
@@ -80,5 +82,19 @@ public class Presentation {
                 ", author=" + author.getFirstName() +
                 ", conference=" + conference.getDate() + "/" + conference.getSubject() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Presentation that = (Presentation) o;
+        return id == that.id &&
+                Objects.equals(theme, that.theme);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, theme);
     }
 }

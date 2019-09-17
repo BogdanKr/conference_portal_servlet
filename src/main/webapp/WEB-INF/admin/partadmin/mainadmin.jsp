@@ -40,7 +40,7 @@
             </div>
             <div class="card-footer ">
                 <div class="row">
-<%--                    <div class="col-8">--%>
+                    <div class="col-8">
 <%--                        <a href="/conference/${conference.id}/like" style="color: #b10821">--%>
 <%--                            <#if conference.meRegistered>--%>
 <%--                            <i class="fas fa-registered"><@spring.message "registered"/> </i>--%>
@@ -50,8 +50,8 @@
 <%--                        </a>--%>
 <%--                    </div>--%>
 <%--                    <div class="col-4">--%>
-<%--                            ${conference.registrations}--%>
-<%--                    </div>--%>
+                            ${conference.userRegistrations.size()}
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ package ua.krasun.conference_portal_servlet.model.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Conference {
     private long id;
@@ -10,6 +11,7 @@ public class Conference {
     private String subject;
     private User author;
     private List<Presentation> presentations = new ArrayList<>();
+    private List<User> userRegistrations = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -49,6 +51,14 @@ public class Conference {
 
     public void setPresentations(List<Presentation> presentations) {
         this.presentations = presentations;
+    }
+
+    public List<User> getUserRegistrations() {
+        return userRegistrations;
+    }
+
+    public void setUserRegistrations(List<User> userRegistrations) {
+        this.userRegistrations = userRegistrations;
     }
 
     //Builder
@@ -98,5 +108,20 @@ public class Conference {
                 ", subject='" + subject + '\'' +
                 ", author=" + author +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Conference that = (Conference) o;
+        return id == that.id &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(subject, that.subject);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, subject);
     }
 }
