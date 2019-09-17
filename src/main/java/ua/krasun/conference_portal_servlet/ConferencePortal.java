@@ -40,7 +40,7 @@ public class ConferencePortal extends HttpServlet {
         commands.put("user/conferencelist", new ShowConferenceList());
         commands.put("user/presentationlist", new ShowPresentationList());
         commands.put("user/conference_registration", new ConfRegistration());
-        commands.put("speakre/conference_registration", new ConfRegistration());
+        commands.put("speaker/conference_registration", new ConfRegistration());
         commands.put("admin/conference_registration", new ConfRegistration());
 
     }

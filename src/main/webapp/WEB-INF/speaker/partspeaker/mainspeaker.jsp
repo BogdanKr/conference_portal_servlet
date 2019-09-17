@@ -35,18 +35,20 @@
             </div>
             <div class="card-footer ">
                 <div class="row">
-<%--                    <div class="col-8">--%>
-<%--                        <a href="/conference/${conference.id}/like" style="color: #b10821">--%>
-<%--                            <#if conference.meRegistered>--%>
-<%--                            <i class="fas fa-registered"><@spring.message "registered"/> </i>--%>
-<%--                            <#else>--%>
-<%--                            <i class="far fa-registered"> </i>--%>
-<%--                        </#if>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
-<%--                    <div class="col-4">--%>
-<%--                            ${conference.registrations}--%>
-<%--                    </div>--%>
+                    <div class="col-8">
+                        <a href="${pageContext.request.contextPath}
+                        /conference/speaker/conference_registration?confId=${conference.id}" style="color: #b10821">
+                            <c:if test="${conference.currentUserRegistered}">
+                                <i class="fas fa-registered">I'm registered </i>
+                            </c:if>
+                            <c:if test="${!conference.currentUserRegistered}">
+                                <i class="far fa-registered"> </i>
+                            </c:if>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                            ${conference.userRegistrations.size()}
+                    </div>
                 </div>
             </div>
         </div>

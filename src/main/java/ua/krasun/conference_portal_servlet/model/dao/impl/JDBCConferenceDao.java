@@ -137,7 +137,9 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setLong(1, conferenceId);
             ps.setLong(2, userId);
             ResultSet rs = ps.executeQuery();
-            return rs.getInt("is_user_reg");
+            if (rs.next()) {
+                return rs.getInt("is_user_reg");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

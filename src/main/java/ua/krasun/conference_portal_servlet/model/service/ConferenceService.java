@@ -61,11 +61,11 @@ public class ConferenceService {
     public void registration(long confId, long currentUserId) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             if (conferenceDao.checkRegistration(confId, currentUserId) == 0) {
-                System.out.println("зарегился");
+                System.out.println("зарегился было 0");
                 conferenceDao.addConfRegistration(confId, currentUserId);
             } else {
                 conferenceDao.deleteConfRegistration(confId, currentUserId);
-                System.out.println("отписался");
+                System.out.println("отписался было не 0");
             }
         }
     }
