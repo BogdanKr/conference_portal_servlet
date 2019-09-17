@@ -8,6 +8,8 @@
         <th>Date</th>
         <th>Subject</th>
         <th>Presentations</th>
+        <th>Total registered</th>
+        <th>My registration</th>
         <th></th>
     </tr>
     </thead>
@@ -17,6 +19,16 @@
             <td>${conference.date}</td>
             <td class="lm-2">${conference.subject}</td>
             <td class="lm-2">${conference.presentations.size()}</td>
+            <td class="lm-2">${conference.userRegistrations.size()}</td>
+            <td class="lm-2"><a href="${pageContext.request.contextPath}
+                        /conference/user/conference_registration?confId=${conference.id}" style="color: #b10821">
+                <c:if test="${conference.currentUserRegistered}">
+                    <i class="fas fa-registered">I'm registered </i>
+                </c:if>
+                <c:if test="${!conference.currentUserRegistered}">
+                    <i class="far fa-registered"> </i>
+                </c:if>
+            </a></td>
         </tr>
     </c:forEach>
     </tbody>
