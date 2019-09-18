@@ -16,8 +16,8 @@
                 <table class="table table-sm">
                     <thead>
                     <tr>
-                        <th>Speaker</th>
-                        <th style="padding-left: 10px">Theme</th>
+                        <th><fmt:message key="speaker"/></th>
+                        <th style="padding-left: 10px"><fmt:message key="theme"/></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -38,7 +38,7 @@
                         <a href="${pageContext.request.contextPath}
                         /conference/admin/conference_registration?confId=${conference.id}" style="color: #b10821">
                             <c:if test="${conference.currentUserRegistered}">
-                                <i class="fas fa-registered">I'm registered </i>
+                                <i class="fas fa-registered"><fmt:message key="registered"/> </i>
                             </c:if>
                             <c:if test="${!conference.currentUserRegistered}">
                                 <i class="far fa-registered"> </i>

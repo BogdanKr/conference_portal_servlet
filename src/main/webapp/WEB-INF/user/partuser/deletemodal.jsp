@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -6,7 +7,7 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal3">
-    Delete profile
+    <fmt:message key="delete_profile"/>
 </button>
 <!-- Modal -->
 <div class="modal fade bd-example-modal-sm" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modalLabel3"
@@ -16,9 +17,9 @@
             <div class="modal-header">
                 <form action="${pageContext.request.contextPath}/conference/user/delete_profile" method="post">
                     <input type="hidden" name="deleteId" value="${requestScope.user.id}">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger"> <fmt:message key="delete_profile"/></button>
                 </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <fmt:message key="back"/></button>
             </div>
         </div>
     </div>

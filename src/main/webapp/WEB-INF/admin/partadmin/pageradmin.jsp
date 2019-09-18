@@ -2,7 +2,7 @@
 <%--For displaying Previous link except for the 1st page --%>
 <c:if test="${currentPage != 1}">
     <td><a href="${pageContext.request.contextPath}
-    /conference/admin?page=${currentPage - 1}">Previous</a></td>
+    /conference/admin?page=${currentPage - 1}"><fmt:message key="previous"/></a></td>
 </c:if>
 
 <%--For displaying Page numbers.
@@ -26,5 +26,5 @@ The when condition does not display a link for the current page--%>
 <%--For displaying Next link --%>
 <c:if test="${currentPage lt noOfPages}">
     <td><a href="${pageContext.request.contextPath}
-    /conference/admin?page=${currentPage + 1}">Next</a></td>
+    /conference/admin?page=${currentPage + 1}"><fmt:message key="next"/></a></td>
 </c:if>

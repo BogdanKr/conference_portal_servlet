@@ -2,8 +2,8 @@
 <%@ include file="/WEB-INF/admin/partadmin/headadmin.jsp" %>
 
 
-    <h5> Welcome admin ${sessionScope.user.firstName} !</h5>
-<fmt:message key="welcome_info" />
+    <h5> <fmt:message key="greeting_admin"/> ${sessionScope.user.firstName} !</h5>
+<fmt:message key="greeting_admin2" />
 
 <%@ include file="/WEB-INF/admin/partadmin/mainadmin.jsp" %>
 

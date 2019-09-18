@@ -3,9 +3,10 @@
 <%@ include file="/WEB-INF/speaker/partspeaker/headspeaker.jsp" %>
 
 
-<div class="mb-3">Presentation edd for ${requestScope.conference.date} / ${requestScope.conference.subject}</div>
-<form action="${pageContext.request.contextPath}/conference/speaker/addpresentation" method="post">
-    <label >Speaker
+<div class="mb-3"><fmt:message key="presentation_editor"/> ${requestScope.conference.date} / ${requestScope.conference.subject}</div>
+<form action="${pageContext.request.contextPath}
+/conference/speaker/addpresentation" method="post">
+    <label ><fmt:message key="speaker"/>
         <input type="text" name="firstName" readonly
         <c:choose>
         <c:when test="${requestScope.presentation ne null}">
@@ -17,13 +18,13 @@
         </c:choose>
         >
     </label>
-    <label>Presentation theme
+    <label><fmt:message key="theme"/>
         <input type="text" name="theme" value="${requestScope.presentation.theme}">
     </label>
 
     <input type="hidden" name="presentationEditId" value="${requestScope.presentation.id}">
     <input type="hidden" name="presentationConfId" value="${requestScope.conference.id}">
-    <button type="submit">Save</button>
+    <button type="submit"><fmt:message key="save"/></button>
 </form>
 
 

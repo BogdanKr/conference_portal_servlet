@@ -2,17 +2,17 @@
 <%@ include file="/WEB-INF/admin/partadmin/headadmin.jsp" %>
 
 
-<h5> User list</h5>
+<h5> <fmt:message key="user_list"/></h5>
 <a href="${pageContext.request.contextPath}
-/conference/admin/adduser">Add user</a>
+/conference/admin/adduser"><fmt:message key="add_new_user"/></a>
 <table>
     <thead>
     <tr>
-        <th>First Name</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Active</th>
-        <th>Role</th>
+        <th><fmt:message key="first_name"/></th>
+        <th><fmt:message key="email"/></th>
+        <th><fmt:message key="password"/></th>
+        <th><fmt:message key="active"/></th>
+        <th><fmt:message key="role"/></th>
         <th></th>
     </tr>
     </thead>
@@ -25,7 +25,7 @@
             <td>${user.role}</td>
             <td><c:if test="${user.active}">Active</c:if></td>
             <td><a href="${pageContext.request.contextPath}
-            /conference/admin/edit?id=${user.id}">Edit</a></td>
+            /conference/admin/edit?id=${user.id}"><fmt:message key="edit"/></a></td>
         </tr>
     </c:forEach>
     </tbody>

@@ -2,10 +2,10 @@
 <%@ include file="/WEB-INF/speaker/partspeaker/headspeaker.jsp" %>
 
 
-<h5> Welcome speaker ${sessionScope.user.firstName} !
+<h5><fmt:message key="greeting_speaker"/>  ${sessionScope.user.firstName} !
 
 </h5>
-This is a conference portal, you could add presentation
+<fmt:message key="greeting_speaker2"/>
 <br>
 
 <%@ include file="/WEB-INF/speaker/partspeaker/mainspeaker.jsp" %>

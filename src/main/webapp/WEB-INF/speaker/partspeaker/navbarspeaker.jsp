@@ -30,7 +30,7 @@
                    /conference/user/presentationlist"><fmt:message key="all_presentations"/> </a>
             </li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}
-            /conference/user/presentationlist?speakerID=${sessionScope.user.id}">My presentation</a>
+            /conference/user/presentationlist?speakerID=${sessionScope.user.id}"><fmt:message key="my_presentations"/></a>
             </li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}
                 /conference/user/edit"><fmt:message key="edit_profile"/></a>

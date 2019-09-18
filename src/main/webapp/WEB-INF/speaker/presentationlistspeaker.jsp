@@ -4,10 +4,10 @@
 <table>
     <thead>
     <tr>
-        <th>Date</th>
-        <th>Conference</th>
-        <th>Speaker</th>
-        <th>Presentation theme</th>
+        <th><fmt:message key="date"/></th>
+        <th><fmt:message key="conference_day"/></th>
+        <th><fmt:message key="speaker"/></th>
+        <th><fmt:message key="theme"/></th>
         <th></th>
     </tr>
     </thead>
@@ -21,7 +21,7 @@
             <td>
             <c:if test="${sessionScope.user.id eq presentation.author.id}">
                 <a href="${pageContext.request.contextPath}
-                /conference/speaker/editpresentation?presentationEditId=${presentation.id}">Edit </a>
+                /conference/speaker/editpresentation?presentationEditId=${presentation.id}"><fmt:message key="edit"/> </a>
             </c:if>
             </td>
         </tr>

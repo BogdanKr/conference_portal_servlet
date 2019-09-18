@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="WEB-INF/partsguest/head.jsp" %>
 
-
+<fmt:message key="login_page"/>
 <form action="${pageContext.request.contextPath}
 /conference/login" method="post">
 

@@ -4,10 +4,10 @@
 <table>
     <thead>
     <tr>
-        <th>Date</th>
-        <th>Conference</th>
-        <th>Speaker</th>
-        <th>Presentation theme</th>
+        <th><fmt:message key="date"/></th>
+        <th><fmt:message key="conference_day"/></th>
+        <th><fmt:message key="speaker"/></th>
+        <th><fmt:message key="theme"/></th>
         <th></th>
     </tr>
     </thead>
@@ -19,7 +19,7 @@
             <td>${presentation.author.firstName}</td>
             <td class="lm-2">${presentation.theme}</td>
             <td><a href="${pageContext.request.contextPath}
-                /conference/speaker/editpresentation?presentationEditId=${presentation.id}">Edit admin</a>
+                /conference/speaker/editpresentation?presentationEditId=${presentation.id}"><fmt:message key="edit"/></a>
             </td>
         </tr>
     </c:forEach>

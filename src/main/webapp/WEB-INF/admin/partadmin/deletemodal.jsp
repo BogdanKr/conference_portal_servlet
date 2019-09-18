@@ -6,7 +6,7 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal3">
-    Delete profile
+    <fmt:message key="delete_profile"/>
 </button>
 <!-- Modal -->
 <div class="modal fade bd-example-modal-sm" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modalLabel3"
@@ -16,9 +16,9 @@
             <div class="modal-header">
                 <form action="${pageContext.request.contextPath}/conference/user/delete_profile" method="post">
                     <input type="hidden" name="deleteId" value="${requestScope.user.id}">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger"><fmt:message key="delete_profile"/></button>
                 </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key="back"/></button>
             </div>
         </div>
     </div>

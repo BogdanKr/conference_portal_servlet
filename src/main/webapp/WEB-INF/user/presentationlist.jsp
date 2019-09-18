@@ -4,10 +4,10 @@
 <table>
     <thead>
     <tr>
-        <th>Date</th>
-        <th>Conference</th>
-        <th>Speaker</th>
-        <th>Presentation theme</th>
+        <th><fmt:message key="date"/> </th>
+        <th><fmt:message key="conference_day"/> </th>
+        <th><fmt:message key="speaker"/> </th>
+        <th><fmt:message key="theme"/> </th>
         <th></th>
     </tr>
     </thead>

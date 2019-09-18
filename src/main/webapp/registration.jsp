@@ -18,7 +18,7 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">
-        Registration
+        <fmt:message key="registration"/>
     </button>
 </form>
     <div class="mt-1">

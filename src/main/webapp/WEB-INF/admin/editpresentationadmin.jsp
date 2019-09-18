@@ -2,10 +2,11 @@
 <%@ include file="/WEB-INF/admin/partadmin/headadmin.jsp" %>
 
 
-<div class="mb-3">Presentation editor </div>
-<form action="${pageContext.request.contextPath}/conference/speaker/saveeditpresentation" method="post">
+<div class="mb-3"><fmt:message key="presentation_editor"/></div>
+<form action="${pageContext.request.contextPath}
+/conference/speaker/saveeditpresentation" method="post">
     <div class="form-group">
-        <label for="exampleFormControlSelect1">Conference date</label>
+        <label for="exampleFormControlSelect1"><fmt:message key="conference_day"/></label>
         <select class="form-control" id="exampleFormControlSelect1" name="chooseConferenceID">
             <c:forEach items="${requestScope.conferenceList}" var="conference">
                 <option value="${conference.id}"
@@ -14,7 +15,7 @@
             </c:forEach>
         </select>
     </div>
-    <label for="exampleFormControlSelect2">Speaker</label>
+    <label for="exampleFormControlSelect2"><fmt:message key="speaker"/></label>
     <div class="form-group">
     <select class="form-control" id="exampleFormControlSelect2" name="chooseSpeakerID">
         <c:forEach items="${requestScope.speakerList}" var="speaker">
@@ -25,12 +26,12 @@
     </select>
     </div>
 
-    <label>Presentation theme
+    <label><fmt:message key="theme"/>
         <input type="text" name="theme" value="${requestScope.presentation.theme}">
     </label>
 
     <input type="hidden" name="presentationEditId" value="${requestScope.presentation.id}">
-    <button type="submit">Save</button>
+    <button type="submit"><fmt:message key="save"/></button>
 </form>
 
 

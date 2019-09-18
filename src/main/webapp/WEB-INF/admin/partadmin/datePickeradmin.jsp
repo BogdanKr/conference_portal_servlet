@@ -21,10 +21,11 @@
     <div class="container-fluid">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <form class="form-horizontal" method="post"
-                  action="${pageContext.request.contextPath}/conference/admin/addconference">
+                  action="${pageContext.request.contextPath}
+                  /conference/admin/addconference">
                 <div class="form-group form-group-sm">
                     <label class="control-label  requiredField" for="localDate${conference.id}">
-                        Date
+                        <fmt:message key="date"/>
                         <span class="asteriskField"> * </span>
                     </label>
                     <div class="input-group">
@@ -37,7 +38,7 @@
                                required value="${conference.date}"/>
                     </div>
                     <label class="control-label requiredField" for="subject">
-                        Subject
+                        <fmt:message key="subject"/>
                         <span class="asteriskField"> * </span>
                     </label>
                     <input class="form-control" id="subject" name="subject" type="text" required
@@ -46,11 +47,13 @@
                 <div class="form-group mb-1">
                     <input type="hidden" name="conferenceEditId" value="${conference.id}"/>
                     <button class="btn btn-primary btn-sm" name="submit" type="submit">
-                        Save
+                        <fmt:message key="save"/>
                     </button>
                     <c:if test="${requestScope.containsKey('edit')}">
                         <a class="btn btn-danger btn-sm"
-                           href="${pageContext.request.contextPath}/conference/admin/delete_conference?confId=${conference.id}" role="button">Delete</a>
+                           href="${pageContext.request.contextPath}
+                           /conference/admin/delete_conference?confId=${conference.id}"
+                           role="button"><fmt:message key="delete"/></a>
                     </c:if>
                 </div>
             </form>
@@ -70,7 +73,6 @@
         var date_input = $('input[id="localDate${conference.id}"]'); //our date input has the name "localDate"
         var container = $('.bootstrap-iso${conference.id} form').length > 0 ? $('.bootstrap-iso${conference.id} form').parent() : "body";
         date_input.datepicker({
-            // language: "ru",
             format: 'yyyy-mm-dd',
             container: container,
             todayHighlight: true,

@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-auto">
                     <a href="${pageContext.request.contextPath}
-                        /conference/speaker/addpresentation?conf=${conference.id}"> Add presentation</a>
+                        /conference/speaker/addpresentation?conf=${conference.id}"> <fmt:message key="add_presentation"/></a>
                 </div>
             </div>
 
@@ -18,8 +18,8 @@
                 <table class="table table-sm">
                     <thead>
                     <tr>
-                        <th>Speaker</th>
-                        <th style="padding-left: 10px">Theme</th>
+                        <th><fmt:message key="speaker"/></th>
+                        <th style="padding-left: 10px"><fmt:message key="theme"/></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -40,7 +40,7 @@
                         <a href="${pageContext.request.contextPath}
                         /conference/speaker/conference_registration?confId=${conference.id}" style="color: #b10821">
                             <c:if test="${conference.currentUserRegistered}">
-                                <i class="fas fa-registered">I'm registered </i>
+                                <i class="fas fa-registered"><fmt:message key="registered"/> </i>
                             </c:if>
                             <c:if test="${!conference.currentUserRegistered}">
                                 <i class="far fa-registered"> </i>
@@ -48,7 +48,7 @@
                         </a>
                     </div>
                     <div class="col-4">
-                            ${conference.userRegistrations.size()}
+                        <fmt:message key="total"/> ${conference.userRegistrations.size()}
                     </div>
                 </div>
             </div>
