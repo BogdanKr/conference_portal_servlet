@@ -34,7 +34,12 @@
         </ul>
 
         <div class="navbar-text mr-3"> ${sessionScope.user.firstName}</div>
-
+        <a href="?lang=ua">
+            <img alt="Українська" height="32" src="/img/UA.ico" title="Ukrainian" width="32">
+        </a>
+        <a href="?lang=en">
+            <img alt="Англійська" height="32" src="/img/United-Kingdom.ico" title="English" width="32">
+        </a>
         <div class="mr-3">
             <form action="${pageContext.request.contextPath}
                 /conference/logout" method="post">

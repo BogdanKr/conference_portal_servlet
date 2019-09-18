@@ -23,11 +23,11 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>ua.krasun.conference_portal_servlet.controller.filters.AuthFilter</filter-class>
+        <filter-name>LocaleFilter</filter-name>
+        <filter-class>ua.krasun.conference_portal_servlet.controller.filters.SessionLocaleFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
+        <filter-name>LocaleFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter>
