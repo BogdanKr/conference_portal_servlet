@@ -1,3 +1,4 @@
+<%@ include file="/WEB-INF/speaker/partspeaker/pagerspeaker.jsp" %>
 
 <div class="card-columns">
     <c:forEach items="${sessionScope.conferenceList}" var="conference">
@@ -7,10 +8,10 @@
                     <div class="col-5"> ${conference.date}</div>
                     <div class="col pr-0 pl-0"> ${conference.subject}</div>
                 </div>
-                    <div class="col-md-auto">
-                        <a href="${pageContext.request.contextPath}
+                <div class="col-md-auto">
+                    <a href="${pageContext.request.contextPath}
                         /conference/speaker/addpresentation?conf=${conference.id}"> Add presentation</a>
-                    </div>
+                </div>
             </div>
 
             <div class="card-body ">
@@ -24,10 +25,10 @@
                     </thead>
                     <tbody style="color: #781a20">
                     <c:forEach items="${conference.presentations}" var="presentation">
-                    <tr>
-                        <td>${presentation.author.firstName}</td>
-                        <td>${presentation.theme}</td>
-                    </tr>
+                        <tr>
+                            <td>${presentation.author.firstName}</td>
+                            <td>${presentation.theme}</td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -54,3 +55,5 @@
         </div>
     </c:forEach>
 </div>
+
+<%@ include file="/WEB-INF/speaker/partspeaker/pagerspeaker.jsp" %>

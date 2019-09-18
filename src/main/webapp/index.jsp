@@ -20,4 +20,4 @@ Login or Registration please
 <br>
 
 
-<%@ include file="WEB-INF/partsguest/tail.jsp" %>
+<%@ include file="/WEB-INF/partsguest/tail.jsp" %>

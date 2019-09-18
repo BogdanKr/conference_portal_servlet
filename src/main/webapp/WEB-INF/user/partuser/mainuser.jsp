@@ -1,3 +1,4 @@
+<%@ include file="/WEB-INF/user/partuser/pageruser.jsp" %>
 
 <div class="card-columns">
     <c:forEach items="${sessionScope.conferenceList}" var="conference">
@@ -20,10 +21,10 @@
                     </thead>
                     <tbody style="color: #781a20">
                     <c:forEach items="${conference.presentations}" var="presentation">
-                    <tr>
-                        <td>${presentation.author.firstName}</td>
-                        <td>${presentation.theme}</td>
-                    </tr>
+                        <tr>
+                            <td>${presentation.author.firstName}</td>
+                            <td>${presentation.theme}</td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -47,7 +48,8 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </c:forEach>
 </div>
+
+<%@ include file="/WEB-INF/user/partuser/pageruser.jsp" %>

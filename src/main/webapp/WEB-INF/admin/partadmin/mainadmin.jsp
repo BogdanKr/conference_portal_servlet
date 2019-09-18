@@ -1,6 +1,6 @@
-<c:if test="${sessionScope.role eq 'ADMIN'}">
-    <%@ include file="/WEB-INF/admin/partadmin/addconfmodal.jsp" %>
-</c:if>
+<%@ include file="/WEB-INF/admin/partadmin/addconfmodal.jsp" %>
+<br>
+<%@ include file="/WEB-INF/admin/partadmin/pageradmin.jsp" %>
 
 <div class="card-columns">
     <c:forEach items="${sessionScope.conferenceList}" var="conference">
@@ -29,10 +29,10 @@
                     </thead>
                     <tbody style="color: #781a20">
                     <c:forEach items="${conference.presentations}" var="presentation">
-                    <tr>
-                        <td>${presentation.author.firstName}</td>
-                        <td>${presentation.theme}</td>
-                    </tr>
+                        <tr>
+                            <td>${presentation.author.firstName}</td>
+                            <td>${presentation.theme}</td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -47,7 +47,7 @@
                                 <i class="fas fa-registered">I'm registered </i>
                             </c:if>
                             <c:if test="${!conference.currentUserRegistered}">
-                            <i class="far fa-registered"> </i>
+                                <i class="far fa-registered"> </i>
                             </c:if>
                         </a>
                     </div>
@@ -59,3 +59,7 @@
         </div>
     </c:forEach>
 </div>
+
+<%@ include file="/WEB-INF/admin/partadmin/pageradmin.jsp" %>
+
+

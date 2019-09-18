@@ -4,7 +4,7 @@
     <h5> Welcome admin ${sessionScope.user.firstName} !</h5>
     This is a conference portal
     Це портал конференцій!
-    <br>
+
 
 <%@ include file="/WEB-INF/admin/partadmin/mainadmin.jsp" %>
 

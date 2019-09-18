@@ -1,11 +1,15 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
+import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
+import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 class CommandUtility {
     static void setUserRole(HttpServletRequest request, Role role, String email) {
@@ -28,5 +32,28 @@ class CommandUtility {
 
     static void setUserInSession(User user, HttpServletRequest request) {
         request.getSession().setAttribute("user", user);
+    }
+
+    static void showPaginationConfList(HttpServletRequest request) {
+        ConferenceService conferenceService = new ConferenceService();
+        List<Conference> list = conferenceService.findAllConference(((User) request.getSession().getAttribute("user")).getId());
+
+        int page = 1;
+        int recordsPerPage = 6;
+        int noOfRecords = list.size();
+        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+        try {
+            if (request.getParameter("page") != null)
+                page = Integer.parseInt(request.getParameter("page"));
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Invalid number");
+        }
+        if (page > noOfPages) page = noOfPages;
+        List<Conference> listPage = list.stream().skip((page - 1) * recordsPerPage).limit(recordsPerPage).collect(Collectors.toList());
+
+        request.getSession().setAttribute("conferenceList", listPage);
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", page);
     }
 }
