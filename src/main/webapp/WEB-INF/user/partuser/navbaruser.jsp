@@ -20,7 +20,8 @@
                    /conference/user/conferencelist">All conferences </a>
             </li>
             <li class="nav-item"><a class="nav-link"
-                                    href="${pageContext.request.contextPath}/conference/user">My registration </a>
+                                    href="${pageContext.request.contextPath}
+                                    /conference/user/myconferenceregistration">My registration </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}

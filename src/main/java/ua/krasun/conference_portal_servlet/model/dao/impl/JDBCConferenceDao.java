@@ -150,7 +150,7 @@ public class JDBCConferenceDao implements ConferenceDao {
     public void update(Conference entity) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(
                 queryUpdateUser)) {
-            ps.setDate(1, Date.valueOf(entity.getDate()));
+            ps.setString(1, String.valueOf(entity.getDate()));
             ps.setString(2, entity.getSubject());
             ps.setLong(3, entity.getAuthor().getId());
             ps.setLong(4, entity.getId());

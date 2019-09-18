@@ -25,7 +25,6 @@ public class AccessFilter implements Filter {
                 || (path.contains("admin") && role != Role.ADMIN)) {
             request.setAttribute("error", true);
             request.setAttribute("message", "AccessDenied");
-//            response.sendRedirect(request.getHeader("referer"));
             request.getRequestDispatcher("/conference/").forward(request, response);
             return;
         }

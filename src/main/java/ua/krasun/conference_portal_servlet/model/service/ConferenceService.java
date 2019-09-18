@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ConferenceService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
@@ -61,12 +62,15 @@ public class ConferenceService {
     public void registration(long confId, long currentUserId) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             if (conferenceDao.checkRegistration(confId, currentUserId) == 0) {
-                System.out.println("зарегился было 0");
                 conferenceDao.addConfRegistration(confId, currentUserId);
             } else {
                 conferenceDao.deleteConfRegistration(confId, currentUserId);
-                System.out.println("отписался было не 0");
             }
         }
+    }
+
+    public List<Conference> findAllUserRegistrations(User currentUser) {
+        List<Conference> resultList = findAllConference(currentUser.getId());
+        return resultList.stream().filter(Conference::isCurrentUserRegistered).collect(Collectors.toList());
     }
 }

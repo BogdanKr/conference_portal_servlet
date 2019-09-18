@@ -17,14 +17,17 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   href="${pageContext.request.contextPath}/conference/user/conferencelist">All conferences </a>
+                   href="${pageContext.request.contextPath}
+                   /conference/user/conferencelist">All conferences </a>
             </li>
             <li class="nav-item"><a class="nav-link"
-                                    href="${pageContext.request.contextPath}/conference/speaker">My registration </a>
+                                    href="${pageContext.request.contextPath}
+                                    /conference/speaker/myconferenceregistration">My registration </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   href="${pageContext.request.contextPath}/conference/user/presentationlist">All presentation </a>
+                   href="${pageContext.request.contextPath}
+                   /conference/user/presentationlist">All presentation </a>
             </li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}
             /conference/user/presentationlist?speakerID=${sessionScope.user.id}">My presentation</a>
@@ -36,7 +39,8 @@
 
         <div class="navbar-text mr-3"> ${sessionScope.user.firstName}</div>
         <div class="mr-3">
-            <form action="${pageContext.request.contextPath}/conference/logout" method="post">
+            <form action="${pageContext.request.contextPath}
+            /conference/logout" method="post">
                 <button type="submit" class="btn btn-primary">Log out <i class="fas fa-sign-out-alt"></i>
                 </button>
             </form>

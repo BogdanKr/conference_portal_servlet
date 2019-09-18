@@ -38,6 +38,9 @@ public class ConferencePortal extends HttpServlet {
         commands.put("user/delete_profile", new DeleteProfile());
         commands.put("admin/delete_conference", new DeleteConference());
         commands.put("user/conferencelist", new ShowConferenceList());
+        commands.put("user/myconferenceregistration", new MyConfRegList());
+        commands.put("speaker/myconferenceregistration", new MyConfRegList());
+        commands.put("admin/myconferenceregistration", new MyConfRegList());
         commands.put("user/presentationlist", new ShowPresentationList());
         commands.put("user/conference_registration", new ConfRegistration());
         commands.put("speaker/conference_registration", new ConfRegistration());
