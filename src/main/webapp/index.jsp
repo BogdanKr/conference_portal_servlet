@@ -3,18 +3,16 @@
 <%@ include file="/WEB-INF/partsguest/head.jsp" %>
 
 
-<h5> Welcome Guest
-</h5>
-This is a conference portal<br>
-Це портал конференцій!
+<h5> <fmt:message key="welcome_info" /></h5>
+
 <br>
-Login or Registration please
+<fmt:message key="please_login" />
 <div class="mt-1">
     <a class="btn btn-primary" href="${pageContext.request.contextPath}
-    /conference/login" role="button">Login</a>
+    /conference/login" role="button"><fmt:message key="login" /></a>
     <br>
     <a class="btn btn-primary mt-1" href="${pageContext.request.contextPath}
-    /conference/registration" role="button">Registration</a>
+    /conference/registration" role="button"><fmt:message key="registration" /></a>
     <br>
 </div>
 <br>

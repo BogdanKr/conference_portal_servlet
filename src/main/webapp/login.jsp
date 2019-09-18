@@ -7,7 +7,7 @@
 /conference/login" method="post">
 
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="emailInput"> Email </label>
+        <label class="col-sm-2 col-form-label" for="emailInput"> <fmt:message key="email"/> </label>
         <div class="col-sm-4">
             <input type="email" name="email" class="form-control" placeholder="Email" required
             autofocus id="emailInput"/>
@@ -15,18 +15,18 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label"> Password </label>
+        <label class="col-sm-2 col-form-label"> <fmt:message key="password"/>  </label>
         <div class="col-sm-4 ">
             <input type="password" name="password" class="form-control" placeholder="Password"/>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">
-        Login
+        <fmt:message key="login"/>
     </button>
 </form>
 
 <div class="mt-1">
-   <a href="${pageContext.request.contextPath}/registration.jsp">Registration</a>
+   <a href="${pageContext.request.contextPath}/registration.jsp"><fmt:message key="registration"/></a>
 </div>
 
 <%@ include file="WEB-INF/partsguest/tail.jsp" %>
