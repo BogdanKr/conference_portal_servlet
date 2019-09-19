@@ -42,7 +42,7 @@ public class Login implements Command {
             request.setAttribute("message", bundle.getString("info.you.logged"));
             return "/login.jsp";
         }
-        logger.info("User email " + email + " logged successfully.");
+        logger.info("User email: " + email + " logged successfully. User role: "+ user.get().getRole());
 
         CommandUtility.setUserInSession(user.get(), request);
         request.getSession().setAttribute("conferenceList", conferenceService.findAllConference(user.get().getId()));

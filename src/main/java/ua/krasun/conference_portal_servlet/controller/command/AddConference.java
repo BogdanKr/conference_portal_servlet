@@ -1,5 +1,7 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 
@@ -11,6 +13,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddConference implements Command {
+    private static final Logger logger = LogManager.getLogger(AddConference.class);
     @Override
     public String execute(HttpServletRequest request) {
         ConferenceService conferenceService = new ConferenceService();
@@ -25,10 +28,12 @@ public class AddConference implements Command {
             if (!request.getParameter("conferenceEditId").isEmpty()) {
                 String confId = request.getParameter("conferenceEditId");
                 conferenceService.conferenceEdit(confId, LocalDate.parse(date), subject);
+                logger.info("Conference: " + confId + "was edit");
                 return "/conference/user/conferencelist";
             } else {
                 User currentUser = (User) request.getSession().getAttribute("user");
                 conferenceService.addConference(currentUser, LocalDate.parse(date), subject);
+                logger.info("User: " + currentUser.getEmail() + "add new conference" + date + "/" + subject);
             }
         } catch (Exception e) {
             request.setAttribute("error", true);

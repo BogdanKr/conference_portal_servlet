@@ -1,5 +1,7 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
@@ -11,6 +13,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DeleteProfile implements Command {
+    private static final Logger logger = LogManager.getLogger(DeleteProfile.class);
+
     @Override
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
@@ -27,6 +31,7 @@ public class DeleteProfile implements Command {
                 userService.deleteUser(Long.parseLong(deleteId));
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.profile.deleted"));
+            logger.info("User: "+currentUser.getEmail() + " delete profile");
         } catch (SQLException | NumberFormatException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.cant.delete"));

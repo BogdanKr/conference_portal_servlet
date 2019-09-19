@@ -1,5 +1,7 @@
 package ua.krasun.conference_portal_servlet.controller.command;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DeleteConference implements Command {
+    private static final Logger logger = LogManager.getLogger(DeleteConference.class);
     @Override
     public String execute(HttpServletRequest request) {
         ConferenceService conferenceService = new ConferenceService();
@@ -23,6 +26,7 @@ public class DeleteConference implements Command {
             conferenceService.deleteConference(Long.parseLong(confId));
             request.setAttribute("success", true);
             request.setAttribute("message", bundle.getString("info.conf.deleted"));
+            logger.info("Conference was deleted, ID: "+ confId);
         } catch (SQLException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.cant.delete.conf"));
