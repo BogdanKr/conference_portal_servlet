@@ -8,6 +8,7 @@ import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.lang.Exception;
 
 public class AddPresentation implements Command {
     @Override
@@ -20,7 +21,7 @@ public class AddPresentation implements Command {
             try {
                 conference = conferenceService.findById(Integer.parseInt(confId))
                         .orElseThrow(() -> new WrongInputException("No such Conference"));
-            } catch (java.lang.Exception e) {
+            } catch (Exception e) {
                 request.setAttribute("error", true);
                 request.setAttribute("message", "Can't add presentation ");
                 return "/conference/";
@@ -37,11 +38,11 @@ public class AddPresentation implements Command {
                     .orElseThrow(() -> new WrongInputException("No such Conference"));
             presentationService.addPresentation(theme, currentUser, conference);
             request.getSession().setAttribute("conferenceList", conferenceService.findAllConference(currentUser.getId()));
-            return "/conference/speaker";
-        } catch (SQLException | WrongInputException e) {
+            return "redirect:/conference/speaker";
+        } catch (SQLException | WrongInputException | NumberFormatException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", "Can't add presentation ");
-            return "/conference/speaker";
+            return "redirect:/conference/speaker";
         }
     }
 }

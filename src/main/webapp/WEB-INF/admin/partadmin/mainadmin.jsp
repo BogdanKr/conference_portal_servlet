@@ -34,7 +34,7 @@
             </div>
             <div class="card-footer ">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-5">
                         <a href="${pageContext.request.contextPath}
                         /conference/admin/conference_registration?confId=${conference.id}" style="color: #b10821">
                             <c:if test="${conference.currentUserRegistered}">
@@ -45,7 +45,8 @@
                             </c:if>
                         </a>
                     </div>
-                    <div class="col-4">
+                    <div class="col-7">
+                        <fmt:message key="total"/>:
                             ${conference.userRegistrations.size()}
                     </div>
                 </div>
