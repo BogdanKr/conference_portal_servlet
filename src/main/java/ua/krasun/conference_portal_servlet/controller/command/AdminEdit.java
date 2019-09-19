@@ -7,7 +7,9 @@ import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class AdminEdit implements Command {
     private static final Logger logger = LogManager.getLogger(AdminEdit.class);
@@ -15,10 +17,12 @@ public class AdminEdit implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
+        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        ResourceBundle bundle = ResourceBundle.getBundle("messages",
+                new Locale(locale.orElse("en")));
         String id = request.getParameter("id");
 
         if (Optional.ofNullable(request.getParameter("userId")).isEmpty()) {
-            System.out.println();
             try {
                 Optional<User> user = userService.findUserById(Integer.parseInt(id));
                 request.setAttribute("user", user.orElseThrow(SQLException::new));
@@ -27,7 +31,7 @@ public class AdminEdit implements Command {
             } catch (SQLException | NumberFormatException e) {
                 logger.info("Invalid no such user ID '" + id + "'");
                 request.setAttribute("error", true);
-                request.setAttribute("message", "Invalid input");
+                request.setAttribute("message", bundle.getString("info.invalid.input"));
                 return "/conference/admin/userlist";
             }
         }
@@ -44,7 +48,7 @@ public class AdminEdit implements Command {
             request.setAttribute("message", "Success Save");
         } catch (SQLException | NumberFormatException e) {
             request.setAttribute("error", true);
-            request.setAttribute("message", "Invalid input");
+            request.setAttribute("message", bundle.getString("info.invalid.input"));
         }
         return "/conference/admin/userlist";
     }

@@ -7,8 +7,7 @@ import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class CommandUtility {
@@ -37,7 +36,9 @@ class CommandUtility {
     static void showPaginationConfList(HttpServletRequest request) {
         ConferenceService conferenceService = new ConferenceService();
         List<Conference> list = conferenceService.findAllConference(((User) request.getSession().getAttribute("user")).getId());
-
+        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        ResourceBundle bundle = ResourceBundle.getBundle("messages",
+                new Locale(locale.orElse("en")));
         int page = 1;
         int recordsPerPage = 6;
         int noOfRecords = list.size();
@@ -47,10 +48,11 @@ class CommandUtility {
                 page = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException e) {
             request.setAttribute("error", true);
-            request.setAttribute("message", "Invalid number");
+            request.setAttribute("message", bundle.getString("info.invalid.input"));
         }
         if (page > noOfPages) page = noOfPages;
-        List<Conference> listPage = list.stream().skip((page - 1) * recordsPerPage).limit(recordsPerPage).collect(Collectors.toList());
+        List<Conference> listPage = list.stream().skip((page - 1) * recordsPerPage)
+                .limit(recordsPerPage).collect(Collectors.toList());
 
         request.getSession().setAttribute("conferenceList", listPage);
         request.setAttribute("noOfPages", noOfPages);

@@ -1,6 +1,5 @@
 package ua.krasun.conference_portal_servlet;
 
-import ua.krasun.conference_portal_servlet.controller.command.Exception;
 import ua.krasun.conference_portal_servlet.controller.command.*;
 
 import javax.servlet.ServletConfig;
@@ -23,7 +22,6 @@ public class ConferencePortal extends HttpServlet {
         commands.put("login", new Login());
         commands.put("registration", new Registration());
         commands.put("logout", new LogOut());
-        commands.put("exception", new Exception());
         commands.put("admin", new AdminRole());
         commands.put("user", new UserRole());
         commands.put("speaker", new SpeakerRole());

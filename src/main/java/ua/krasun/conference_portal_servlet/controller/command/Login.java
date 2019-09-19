@@ -8,7 +8,9 @@ import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import static java.util.Objects.nonNull;
 
@@ -19,6 +21,9 @@ public class Login implements Command {
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
         ConferenceService conferenceService = new ConferenceService();
+        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        ResourceBundle bundle = ResourceBundle.getBundle("messages",
+                new Locale(locale.orElse("en")));
         if (nonNull(request.getSession().getAttribute("userEmail"))) return "redirect:/conference/logout";
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -28,13 +33,13 @@ public class Login implements Command {
         if (user.isEmpty()) {
             logger.info("Invalid attempt of user email: '" + email + "'");
             request.setAttribute("error", true);
-            request.setAttribute("message", "Invalid email or password");
+            request.setAttribute("message", bundle.getString("info.invalid.input"));
             return "/login.jsp";
         }
         if (CommandUtility.checkUserIsLogged(request, email)) {
             logger.info("User email " + email + " already logged.");
             request.setAttribute("error", true);
-            request.setAttribute("message", "You already logged");
+            request.setAttribute("message", bundle.getString("info.you.logged"));
             return "/login.jsp";
         }
         logger.info("User email " + email + " logged successfully.");

@@ -8,7 +8,9 @@ import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class UserEdit implements Command {
     private static final Logger logger = LogManager.getLogger(AdminEdit.class);
@@ -18,6 +20,9 @@ public class UserEdit implements Command {
         UserService userService = new UserService();
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) return "redirect:/conference/";
+        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        ResourceBundle bundle = ResourceBundle.getBundle("messages",
+                new Locale(locale.orElse("en")));
         if (Optional.ofNullable(request.getParameter("userId")).isEmpty()) {
             request.setAttribute("user", user);
              if (request.getSession().getAttribute("role").equals(Role.SPEAKER))
@@ -35,11 +40,11 @@ public class UserEdit implements Command {
             User newUser = userService.userEditIfNotAdmin(id, firstName, email, password);
             CommandUtility.setUserInSession(newUser, request);
             request.setAttribute("success", true);
-            request.setAttribute("message", "Success Save");
+            request.setAttribute("message", bundle.getString("info.success.save"));
             request.setAttribute("user", newUser);
         } catch (SQLException e) {
             request.setAttribute("error", true);
-            request.setAttribute("message", "Invalid input");
+            request.setAttribute("message", bundle.getString("info.invalid.input"));
             request.setAttribute("user", user);
         }
 

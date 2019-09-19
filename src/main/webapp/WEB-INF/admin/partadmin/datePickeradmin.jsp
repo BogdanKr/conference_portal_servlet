@@ -21,8 +21,7 @@
     <div class="container-fluid">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <form class="form-horizontal" method="post"
-                  action="${pageContext.request.contextPath}
-                  /conference/admin/addconference">
+                  action="${pageContext.request.contextPath}/conference/admin/addconference">
                 <div class="form-group form-group-sm">
                     <label class="control-label  requiredField" for="localDate${conference.id}">
                         <fmt:message key="date"/>

@@ -6,11 +6,17 @@ import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.Exception;
 import java.time.LocalDate;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class AddConference implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         ConferenceService conferenceService = new ConferenceService();
+        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        ResourceBundle bundle = ResourceBundle.getBundle("messages",
+                new Locale(locale.orElse("en")));
         String date = request.getParameter("localDate");
         String subject = request.getParameter("subject");
         if (date == null) return "/conference/";
@@ -26,14 +32,14 @@ public class AddConference implements Command {
             }
         } catch (Exception e) {
             request.setAttribute("error", true);
-            request.setAttribute("message", "Sorry can't add conference ");
+            request.setAttribute("message",  bundle.getString("info.sorry.cant.add.conf"));
             return "/conference/admin";
         }
 
         request.getSession().setAttribute("conferenceList",
                 conferenceService.findAllConference(((User) request.getSession().getAttribute("user")).getId()));
         request.setAttribute("success", true);
-        request.setAttribute("message", "Conference added");
+        request.setAttribute("message", bundle.getString("info.conference.added"));
         return "/conference/admin";
     }
 

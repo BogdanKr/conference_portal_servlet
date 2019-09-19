@@ -10,7 +10,6 @@ public class ConnectionPoolHolder {
 
         if (dataSource == null){
             synchronized (ConnectionPoolHolder.class) {
-//                Class.forName("com.mysql.cj.jdbc.Driver");
                 if (dataSource == null) {
                     BasicDataSource ds = new BasicDataSource();
                     ds.setDriverClassName("com.mysql.cj.jdbc.Driver");

@@ -9,6 +9,9 @@ import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class EditPresentation implements Command {
     @Override
@@ -16,6 +19,9 @@ public class EditPresentation implements Command {
         UserService userService = new UserService();
         PresentationService presentationService = new PresentationService();
         ConferenceService conferenceService = new ConferenceService();
+        Optional<String> locale = Optional.ofNullable((String) request.getSession().getAttribute("lang"));
+        ResourceBundle bundle = ResourceBundle.getBundle("messages",
+                new Locale(locale.orElse("en")));
         String presentationEditId = request.getParameter("presentationEditId");
 
         request.setAttribute("conferenceList",
@@ -26,7 +32,7 @@ public class EditPresentation implements Command {
             presentation = presentationService.findById(Integer.parseInt(presentationEditId)).orElse(new Presentation());
         } catch (NumberFormatException | SQLException e){
             request.setAttribute("error", true);
-            request.setAttribute("message", "Invalid number");
+            request.setAttribute("message", bundle.getString("info.invalid.input"));
         }
         request.setAttribute("presentation", presentation);
         if (request.getSession().getAttribute("role").equals(Role.ADMIN))

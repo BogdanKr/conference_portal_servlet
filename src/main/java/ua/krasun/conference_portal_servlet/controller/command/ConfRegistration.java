@@ -9,7 +9,6 @@ public class ConfRegistration implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         ConferenceService conferenceService = new ConferenceService();
-        System.out.println("делаем редирект на ту же страничку: " + request.getHeader("referer"));
         long userId = ((User) request.getSession().getAttribute("user")).getId();
         long confId = Long.parseLong(request.getParameter("confId"));
         conferenceService.registration(confId, userId);

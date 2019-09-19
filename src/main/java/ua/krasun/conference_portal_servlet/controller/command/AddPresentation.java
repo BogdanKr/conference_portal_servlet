@@ -9,12 +9,18 @@ import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.lang.Exception;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class AddPresentation implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         PresentationService presentationService = new PresentationService();
         ConferenceService conferenceService = new ConferenceService();
+        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        ResourceBundle bundle = ResourceBundle.getBundle("messages",
+                new Locale(locale.orElse("en")));
         String confId = request.getParameter("conf");
         if (confId != null) {
             Conference conference;
@@ -23,7 +29,7 @@ public class AddPresentation implements Command {
                         .orElseThrow(() -> new WrongInputException("No such Conference"));
             } catch (Exception e) {
                 request.setAttribute("error", true);
-                request.setAttribute("message", "Can't add presentation ");
+                request.setAttribute("message", bundle.getString("info.cant.add.presentation"));
                 return "/conference/";
             }
             request.setAttribute("conference", conference);
@@ -41,7 +47,7 @@ public class AddPresentation implements Command {
             return "redirect:/conference/speaker";
         } catch (SQLException | WrongInputException | NumberFormatException e) {
             request.setAttribute("error", true);
-            request.setAttribute("message", "Can't add presentation ");
+            request.setAttribute("message", bundle.getString("info.cant.add.presentation"));
             return "redirect:/conference/speaker";
         }
     }
