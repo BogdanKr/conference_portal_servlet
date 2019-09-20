@@ -33,3 +33,38 @@
 [INFO ] 2019-09-20 14:50:37.278 [http-nio-8888-exec-182] Login - User email gmail@com registration successfully.
 [INFO ] 2019-09-20 15:00:06.978 [http-nio-8888-exec-187] Login - User email mail@mail.ru registration successfully.
 [INFO ] 2019-09-20 15:04:03.711 [http-nio-8888-exec-214] Login - Invalid attempt of user email: 'm@m'
+[INFO ] 2019-09-20 15:05:16.416 [http-nio-8888-exec-221] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 15:06:33.803 [http-nio-8888-exec-226] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 15:09:31.754 [http-nio-8888-exec-236] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 15:11:10.141 [http-nio-8888-exec-243] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 15:11:33.901 [http-nio-8888-exec-248] SessionListener - User log out: maria@mail.ru
+[INFO ] 2019-09-20 15:11:37.191 [http-nio-8888-exec-240] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 15:11:53.629 [http-nio-8888-exec-244] SessionListener - User log out: admin@gmail.com
+[WARN ] 2019-09-20 15:32:16.983 [http-nio-8888-exec-2] ConnectionPoolHolder - Warning: file properties not found
+[WARN ] 2019-09-20 15:38:44.269 [http-nio-8888-exec-3] ConnectionPoolHolder - Warning: file properties not found
+[WARN ] 2019-09-20 15:39:13.908 [http-nio-8888-exec-2] ConnectionPoolHolder - Warning: file properties not found
+[WARN ] 2019-09-20 15:39:38.955 [http-nio-8888-exec-10] ConnectionPoolHolder - Warning: file properties not found
+[WARN ] 2019-09-20 15:40:24.057 [http-nio-8888-exec-11] ConnectionPoolHolder - Warning: file properties not found
+[WARN ] 2019-09-20 16:02:26.462 [http-nio-8888-exec-2] JDBCDaoFactory - Warning: file properties not found
+[WARN ] 2019-09-20 16:03:28.424 [http-nio-8888-exec-2] JDBCDaoFactory - Warning: file properties not found
+[WARN ] 2019-09-20 16:05:42.968 [http-nio-8888-exec-5] JDBCDaoFactory - Warning: file properties not found
+[WARN ] 2019-09-20 16:06:50.352 [http-nio-8888-exec-13] JDBCDaoFactory - Warning: classnotfound ex
+[WARN ] 2019-09-20 16:07:33.611 [http-nio-8888-exec-13] JDBCDaoFactory - Warning: classnotfound ex
+[WARN ] 2019-09-20 16:09:35.040 [http-nio-8888-exec-22] JDBCDaoFactory - Warning: file properties not found
+[WARN ] 2019-09-20 16:28:39.215 [http-nio-8888-exec-2] ConferencePortal - Warning: file properties not found
+[WARN ] 2019-09-20 16:35:30.172 [http-nio-8888-exec-2] ConferencePortal - Warning: file properties not found
+[WARN ] 2019-09-20 16:36:02.773 [http-nio-8888-exec-2] ConferencePortal - Warning: file properties not found
+[WARN ] 2019-09-20 16:36:29.964 [http-nio-8888-exec-8] ConferencePortal - Warning: file properties not found
+[INFO ] 2019-09-20 17:08:48.501 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: null
+[WARN ] 2019-09-20 19:07:16.881 [http-nio-8888-exec-1] ConferencePortal - Warning: file properties not found
+[INFO ] 2019-09-20 19:51:46.168 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: null
+[INFO ] 2019-09-20 21:11:29.268 [http-nio-8888-exec-14] SessionListener - User log out: null
+[INFO ] 2019-09-20 21:46:00.322 [http-nio-8888-exec-3] ConferencePortal - load db property file
+[INFO ] 2019-09-20 21:46:32.238 [http-nio-8888-exec-7] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[WARN ] 2019-09-20 21:48:29.631 [http-nio-8888-exec-1] ConferencePortal - Warning: file properties not found
+[WARN ] 2019-09-20 21:49:17.292 [http-nio-8888-exec-2] ConferencePortal - Warning: file properties not found
+[INFO ] 2019-09-20 21:56:34.299 [http-nio-8888-exec-6] ConnectionPoolHolder - load db property file
+[INFO ] 2019-09-20 21:59:50.670 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[WARN ] 2019-09-20 22:00:16.360 [http-nio-8888-exec-2] ConnectionPoolHolder - Warning: file database.properties not found
+[INFO ] 2019-09-20 22:04:22.577 [http-nio-8888-exec-3] ConferencePortal - load info.properties  file
+[INFO ] 2019-09-20 22:04:22.601 [http-nio-8888-exec-3] ConnectionPoolHolder - Load database.properties file

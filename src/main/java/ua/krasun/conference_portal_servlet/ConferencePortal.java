@@ -1,5 +1,7 @@
 package ua.krasun.conference_portal_servlet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.controller.command.*;
 
 import javax.servlet.ServletConfig;
@@ -7,17 +9,30 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Properties;
 
 public class ConferencePortal extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(ConferencePortal.class);
     private Map<String, Command> commands = new HashMap<>();
+    public static final Properties TEXT_PROPERTY = new Properties();
 
     public void init(ServletConfig servletConfig) {
+        try (InputStream inputStream = new FileInputStream("../../src/main/resources/info.properties")) {
+            TEXT_PROPERTY.load(inputStream);
+            logger.info("Load info.properties  file");
+        } catch (IOException ex) {
+            logger.warn("Warning: file info.properties not found" );
+        }
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
+
         commands.put("", new RolePath());
         commands.put("login", new Login());
         commands.put("registration", new Registration());
@@ -51,7 +66,6 @@ public class ConferencePortal extends HttpServlet {
         commands.put("user/conference_registration", new ConfRegistration());
         commands.put("speaker/conference_registration", new ConfRegistration());
         commands.put("admin/conference_registration", new ConfRegistration());
-
     }
 
     @Override
@@ -68,8 +82,6 @@ public class ConferencePortal extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(request.getMethod());
-        System.out.println(request.getRequestURI());
         String path = request.getRequestURI();
         path = path.replaceAll(".*/conference/", "");
 

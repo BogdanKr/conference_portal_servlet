@@ -41,9 +41,11 @@ public class JDBCUserDaoTest {
 
     @Test
     public void whenGetUserWhichExist() {
-        final User user = dao.findByEmail("q@q");
+        final User user = dao.findByEmail("admin@gmail.com");
         final User expected = User.builder()
-                .email("q@q")
+                .id(1L)
+                .firstName("Bogdan")
+                .email("admin@gmail.com")
                 .password("1")
                 .active(true)
                 .role(Role.ADMIN)
