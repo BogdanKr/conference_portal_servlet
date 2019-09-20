@@ -19,7 +19,7 @@
         >
     </label>
     <label><fmt:message key="theme"/>
-        <input maxlength="100" type="text" name="theme" value="${requestScope.presentation.theme}">
+        <input style="width: 400px" maxlength="100" type="text" name="theme" value="${requestScope.presentation.theme}">
     </label>
 
     <input type="hidden" name="presentationEditId" value="${requestScope.presentation.id}">
