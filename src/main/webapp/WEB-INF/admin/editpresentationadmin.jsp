@@ -10,28 +10,32 @@
         <select class="form-control" id="exampleFormControlSelect1" name="chooseConferenceID">
             <c:forEach items="${requestScope.conferenceList}" var="conference">
                 <option value="${conference.id}"
-                <c:if test="${requestScope.presentation.conference.id eq conference.id}">selected</c:if> >
+                        <c:if test="${requestScope.presentation.conference.id eq conference.id}">selected</c:if> >
                         ${conference.date} / ${conference.subject}</option>
             </c:forEach>
         </select>
     </div>
     <label for="exampleFormControlSelect2"><fmt:message key="speaker"/></label>
     <div class="form-group">
-    <select class="form-control" id="exampleFormControlSelect2" name="chooseSpeakerID">
-        <c:forEach items="${requestScope.speakerList}" var="speaker">
-            <option value="${speaker.id}"
-                    <c:if test="${requestScope.presentation.author.id eq speaker.id}">selected</c:if> >
-                    ${speaker.firstName}</option>
-        </c:forEach>
-    </select>
+        <select class="form-control" id="exampleFormControlSelect2" name="chooseSpeakerID">
+            <c:forEach items="${requestScope.speakerList}" var="speaker">
+                <option value="${speaker.id}"
+                        <c:if test="${requestScope.presentation.author.id eq speaker.id}">selected</c:if> >
+                        ${speaker.firstName}</option>
+            </c:forEach>
+        </select>
     </div>
+    <div class="form-group">
+        <label for="inputTheme"><fmt:message key="theme"/></label>
+        <div class="input-group mb-2">
+            <input id="inputTheme" class="form-control" type="text" name="theme"
+                   value="${requestScope.presentation.theme}">
 
-    <label><fmt:message key="theme"/>
-        <input type="text" name="theme" value="${requestScope.presentation.theme}">
-    </label>
+        </div>
 
-    <input type="hidden" name="presentationEditId" value="${requestScope.presentation.id}">
-    <button type="submit"><fmt:message key="save"/></button>
+        <button class="btn btn-primary" type="submit"><fmt:message key="save"/></button>
+        <input type="hidden" name="presentationEditId" value="${requestScope.presentation.id}">
+    </div>
 </form>
 
 

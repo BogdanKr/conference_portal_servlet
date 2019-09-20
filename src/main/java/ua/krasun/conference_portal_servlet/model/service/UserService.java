@@ -5,6 +5,7 @@ import ua.krasun.conference_portal_servlet.model.dao.DaoFactory;
 import ua.krasun.conference_portal_servlet.model.dao.UserDao;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
+import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -21,7 +22,9 @@ public class UserService {
         }
     }
 
-    public void addUser(String email, String password) throws SQLException {
+    public void addUser(String email, String password) throws SQLException, WrongInputException {
+        if (!email.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$"))
+            throw new WrongInputException("Wrong email");
         User newUser = User.builder()
                 .firstName("")
                 .email(email)

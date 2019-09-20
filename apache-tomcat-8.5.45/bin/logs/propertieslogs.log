@@ -1,3 +1,35 @@
 [INFO ] 2019-09-20 02:21:40.263 [http-nio-8888-exec-4] Login - User email admin@gmail.com logged successfully.
 [INFO ] 2019-09-20 02:39:47.964 [http-nio-8888-exec-4] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
 [INFO ] 2019-09-20 02:39:56.466 [http-nio-8888-exec-3] SessionListener - User log out: admin@gmail.com
+[INFO ] 2019-09-20 02:42:01.233 [http-nio-8888-exec-12] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 02:42:16.500 [http-nio-8888-exec-17] Login - Invalid attempt of user email: 'roma@ukre.net'
+[INFO ] 2019-09-20 02:42:37.860 [http-nio-8888-exec-11] Login - User email: roma@ukr.net logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 13:24:33.999 [http-nio-8888-exec-5] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 13:27:00.440 [http-nio-8888-exec-5] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 13:29:50.154 [http-nio-8888-exec-19] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 13:30:20.194 [http-nio-8888-exec-20] DeletePresentation - Presentation was deleted, ID: 2
+[INFO ] 2019-09-20 13:34:03.226 [http-nio-8888-exec-23] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 13:36:04.848 [http-nio-8888-exec-33] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 13:37:07.160 [http-nio-8888-exec-44] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 13:37:41.088 [http-nio-8888-exec-48] DeletePresentation - Presentation was deleted, ID: 66
+[INFO ] 2019-09-20 13:41:19.798 [http-nio-8888-exec-48] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 13:43:38.020 [http-nio-8888-exec-58] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 13:51:42.421 [http-nio-8888-exec-76] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 13:52:18.151 [http-nio-8888-exec-71] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 13:58:51.083 [http-nio-8888-exec-94] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 13:59:54.494 [http-nio-8888-exec-95] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 14:02:23.487 [http-nio-8888-exec-110] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 14:07:47.922 [http-nio-8888-exec-118] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 14:11:54.170 [http-nio-8888-exec-126] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 14:12:57.880 [http-nio-8888-exec-134] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 14:16:33.490 [http-nio-8888-exec-142] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 14:17:13.418 [http-nio-8888-exec-155] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 14:20:07.308 [http-nio-8888-exec-158] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 14:20:36.079 [http-nio-8888-exec-166] SessionListener - User log out: maria@mail.ru
+[INFO ] 2019-09-20 14:20:41.692 [http-nio-8888-exec-164] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 14:20:46.755 [http-nio-8888-exec-169] SessionListener - User log out: admin@gmail.com
+[INFO ] 2019-09-20 14:20:51.393 [http-nio-8888-exec-159] Login - User email: maria@mail.ru logged successfully. User role: SPEAKER
+[INFO ] 2019-09-20 14:47:50.874 [http-nio-8888-exec-168] Login - User email mail@mail registration successfully.
+[INFO ] 2019-09-20 14:50:37.278 [http-nio-8888-exec-182] Login - User email gmail@com registration successfully.
+[INFO ] 2019-09-20 15:00:06.978 [http-nio-8888-exec-187] Login - User email mail@mail.ru registration successfully.
+[INFO ] 2019-09-20 15:04:03.711 [http-nio-8888-exec-214] Login - Invalid attempt of user email: 'm@m'

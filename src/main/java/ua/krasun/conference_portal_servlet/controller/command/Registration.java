@@ -2,6 +2,7 @@ package ua.krasun.conference_portal_servlet.controller.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +25,11 @@ public class Registration implements Command {
                 new Locale(locale.orElse("en")));
         try {
             userService.addUser(email, password);
-            logger.info("User email " + email + " registration successfully.");
-        } catch (SQLException e) {
+            logger.info("User email: " + email + " registration successfully.");
+        } catch (SQLException | WrongInputException e) {
+            logger.info("Entered email: " + email + " registration fail");
             request.setAttribute("error", true);
+            request.setAttribute("message", bundle.getString("info.invalid.input"));
             return "/registration.jsp";
         }
         request.setAttribute("success", true);

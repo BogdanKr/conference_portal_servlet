@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/speaker/partspeaker/headspeaker.jsp" %>
 
 
-<table>
+<table style="text-align: center">
     <thead>
     <tr>
         <th><fmt:message key="date"/></th>

@@ -19,12 +19,12 @@
         >
     </label>
     <label><fmt:message key="theme"/>
-        <input type="text" name="theme" value="${requestScope.presentation.theme}">
+        <input maxlength="100" type="text" name="theme" value="${requestScope.presentation.theme}">
     </label>
 
     <input type="hidden" name="presentationEditId" value="${requestScope.presentation.id}">
     <input type="hidden" name="presentationConfId" value="${requestScope.conference.id}">
-    <button type="submit"><fmt:message key="save"/></button>
+    <button class="btn btn-primary" type="submit"><fmt:message key="save"/></button>
 </form>
 
 

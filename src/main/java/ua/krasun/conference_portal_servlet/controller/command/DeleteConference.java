@@ -27,7 +27,7 @@ public class DeleteConference implements Command {
             request.setAttribute("success", true);
             request.setAttribute("message", bundle.getString("info.conf.deleted"));
             logger.info("Conference was deleted, ID: "+ confId);
-        } catch (SQLException e) {
+        } catch (SQLException | NumberFormatException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.cant.delete.conf"));
         }

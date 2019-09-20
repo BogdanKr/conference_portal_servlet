@@ -17,14 +17,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}
-                    /conference/user/conferencelist"><fmt:message key="all_conferences"/> </a>
+                    /conference/admin/conferencelist"><fmt:message key="all_conferences"/> </a>
             </li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}
             /conference/admin/myconferenceregistration"><fmt:message key="my_registrations"/> </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}
-                       /conference/user/presentationlist"><fmt:message key="all_presentations"/> </a>
+                       /conference/admin/presentationlist"><fmt:message key="all_presentations"/> </a>
             </li>
 
             <li class="nav-item">

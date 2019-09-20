@@ -32,7 +32,7 @@
                             <i class="fa fa-calendar">
                             </i>
                         </div>
-                        <input class="form-control" id="localDate${conference.id}" name="localDate"
+                        <input autocomplete="off" class="form-control" id="localDate${conference.id}" name="localDate"
                                placeholder="yyyy-mm-dd" type="text"
                                required value="${conference.date}"/>
                     </div>

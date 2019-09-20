@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/admin/partadmin/headadmin.jsp" %>
 
 
-<h5> <fmt:message key="user_list"/></h5>
+<h5><fmt:message key="user_list"/></h5>
 <a href="${pageContext.request.contextPath}
 /conference/admin/adduser"><fmt:message key="add_new_user"/></a>
 <table>

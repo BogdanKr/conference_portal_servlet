@@ -7,7 +7,8 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label"> <fmt:message key="email"/> </label>
         <div class="col-sm-4">
-            <input type="email" name="email" class="form-control" placeholder="Email" required autofocus/>
+            <input type="email" name="email" class="form-control" placeholder="Email" required autofocus
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
         </div>
     </div>
 
