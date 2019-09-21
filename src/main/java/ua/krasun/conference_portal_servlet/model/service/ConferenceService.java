@@ -4,6 +4,7 @@ import ua.krasun.conference_portal_servlet.model.dao.ConferenceDao;
 import ua.krasun.conference_portal_servlet.model.dao.DaoFactory;
 import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.User;
+import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -14,8 +15,6 @@ import java.util.stream.Collectors;
 
 public class ConferenceService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private PresentationService presentationService = new PresentationService();
-
 
     public List<Conference> findAllConference(long currentUserId) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
@@ -25,7 +24,7 @@ public class ConferenceService {
         }
     }
 
-    public void addConference(User currentUser, LocalDate date, String subject) throws SQLException {
+    public void addConference(User currentUser, LocalDate date, String subject) throws WrongInputException {
         Conference newConference = Conference.builder()
                 .date(date)
                 .subject(subject)
@@ -38,22 +37,26 @@ public class ConferenceService {
 
     public void conferenceEdit(String id,
                                LocalDate date,
-                               String subject) throws SQLException {
+                               String subject) throws WrongInputException {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
+            conferenceDao.getConnection().setAutoCommit(false);
             Conference conference = conferenceDao.findById(Integer.parseInt(id));
             conference.setDate(date);
             conference.setSubject(subject);
             conferenceDao.update(conference);
+            conferenceDao.getConnection().commit();
+        } catch (SQLException e) {
+            throw new WrongInputException(e.getMessage());
         }
     }
 
-    public void deleteConference(long id) throws SQLException {
+    public void deleteConference(long id) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             conferenceDao.delete(id);
         }
     }
 
-    public Optional<Conference> findById(long id) throws SQLException {
+    public Optional<Conference> findById(long id) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
             return Optional.ofNullable(conferenceDao.findById(id));
         }
@@ -61,11 +64,7 @@ public class ConferenceService {
 
     public void registration(long confId, long currentUserId) {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
-            if (conferenceDao.checkRegistration(confId, currentUserId) == 0) {
-                conferenceDao.addConfRegistration(confId, currentUserId);
-            } else {
-                conferenceDao.deleteConfRegistration(confId, currentUserId);
-            }
+            conferenceDao.checkRegistrationAndAddOrDelete(confId, currentUserId);
         }
     }
 

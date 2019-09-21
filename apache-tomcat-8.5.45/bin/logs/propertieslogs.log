@@ -68,3 +68,14 @@
 [WARN ] 2019-09-20 22:00:16.360 [http-nio-8888-exec-2] ConnectionPoolHolder - Warning: file database.properties not found
 [INFO ] 2019-09-20 22:04:22.577 [http-nio-8888-exec-3] ConferencePortal - load info.properties  file
 [INFO ] 2019-09-20 22:04:22.601 [http-nio-8888-exec-3] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-09-20 22:13:48.819 [http-nio-8888-exec-10] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-20 22:14:06.356 [http-nio-8888-exec-2] DeleteProfile - User: admin@gmail.com delete profile
+[INFO ] 2019-09-20 22:14:10.766 [http-nio-8888-exec-3] DeleteProfile - User: admin@gmail.com delete profile
+[INFO ] 2019-09-20 22:14:14.382 [http-nio-8888-exec-5] DeleteProfile - User: admin@gmail.com delete profile
+[INFO ] 2019-09-20 22:30:54.967 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-09-20 22:30:58.042 [http-nio-8888-exec-3] Login - Invalid attempt of user email: 'william@yahoo.com'
+[INFO ] 2019-09-20 22:31:03.004 [http-nio-8888-exec-4] Login - User email: william@yahoo.com logged successfully. User role: USER
+[INFO ] 2019-09-21 15:16:05.666 [http-nio-8888-exec-4] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-09-21 15:16:14.535 [http-nio-8888-exec-5] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-09-21 15:16:32.078 [http-nio-8888-exec-1] AdminEdit - Invalid input For input string: "3a"
+[INFO ] 2019-09-21 15:16:39.468 [http-nio-8888-exec-2] AdminEdit - Invalid input No such user

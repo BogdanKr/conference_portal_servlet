@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
+import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,7 +32,7 @@ public class JDBCUserDaoTest {
     }
 
     @After
-    public void after() throws Exception {
+    public void after() {
         try {
             connection.close();
         } catch (SQLException e) {
@@ -61,7 +62,7 @@ public class JDBCUserDaoTest {
     }
 
     @Test
-    public void whenAddUserWhichNotExist() throws SQLException {
+    public void whenAddUserWhichNotExist() throws WrongInputException {
         final User user = User.builder()
                 .active(true)
                 .role(Role.USER)
@@ -78,7 +79,7 @@ public class JDBCUserDaoTest {
     }
 
     @Test
-    public void whenUpdateExistUserThenPasswordUpdated() throws SQLException {
+    public void whenUpdateExistUserThenPasswordUpdated() throws WrongInputException {
         final User user = User.builder()
                 .active(true)
                 .role(Role.USER)

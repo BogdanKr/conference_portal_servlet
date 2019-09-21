@@ -1,5 +1,7 @@
 package ua.krasun.conference_portal_servlet.model.dao.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.dao.ConferenceDao;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.ConferenceMapper;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.PresentationMapper;
@@ -8,6 +10,7 @@ import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.Presentation;
 import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
+import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,18 +35,26 @@ public class JDBCConferenceDao implements ConferenceDao {
     private String queryCheckReg = "select sum(if((conference_id=? and user_id=?), 1,0)) as is_user_reg from conference_registrations";
 
     private Connection connection;
+    private static final Logger logger = LogManager.getLogger(JDBCConferenceDao.class);
 
     JDBCConferenceDao(Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public void add(Conference entity) throws SQLException {
+    public Connection getConnection() {
+        return connection;
+    }
+
+    @Override
+    public void add(Conference entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(queryAdd)) {
             ps.setString(1, String.valueOf(entity.getDate()));
             ps.setString(2, entity.getSubject());
             ps.setLong(3, entity.getAuthor().getId());
             ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new WrongInputException(e.getMessage());
         }
     }
 
@@ -52,10 +63,10 @@ public class JDBCConferenceDao implements ConferenceDao {
         PresentationMapper presentationMapper = new PresentationMapper();
         ConferenceMapper conferenceMapper = new ConferenceMapper();
         Map<Long, Conference> conferenceMap = new HashMap<>();
+        Conference conference = new Conference();
         try (PreparedStatement ps = connection.prepareStatement(queryFindById)) {
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
-            Conference conference = new Conference();
             while (rs.next()) {
                 conference = extractFromResultSet(rs);
                 conference.setId(rs.getLong(1));
@@ -64,21 +75,20 @@ public class JDBCConferenceDao implements ConferenceDao {
                 presentation.getAuthor().setId(rs.getLong(7));
                 if (presentation.getAuthor().getId() != 0) conference.getPresentations().add(presentation);
             }
-            return conference;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.info("findById SQLException: " + e.getMessage());
         }
+        return conference;
     }
 
 
     @Override
     public List<Conference> findAll() {
-        return null;
+        return findAll(0);
     }
 
     @Override
     public List<Conference> findAll(long currentUserId) {
-        List<Conference> resultList;
         PresentationMapper presentationMapper = new PresentationMapper();
         ConferenceMapper conferenceMapper = new ConferenceMapper();
         UserMapper userMapper = new UserMapper();
@@ -102,11 +112,10 @@ public class JDBCConferenceDao implements ConferenceDao {
                 }
                 if (regUser.getId() == currentUserId) conference.setCurrentUserRegistered(true);
             }
-            resultList = new ArrayList<>(conferenceMap.values());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.info("findAll SQLException: " + e.getMessage());
         }
-        return resultList;
+        return new ArrayList<>(conferenceMap.values());
     }
 
     @Override
@@ -116,7 +125,7 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setLong(2, userId);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.info("addConfRegistration SQLException: " + e.getMessage());
         }
     }
 
@@ -127,27 +136,32 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setLong(2, userId);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.info("deleteConfRegistration SQLException: " + e.getMessage());
         }
     }
 
     @Override
-    public int checkRegistration(long conferenceId, long userId) {
+    public void checkRegistrationAndAddOrDelete(long conferenceId, long userId) {
         try (PreparedStatement ps = connection.prepareStatement(queryCheckReg)) {
+            int check = 0;
             ps.setLong(1, conferenceId);
             ps.setLong(2, userId);
+            connection.setAutoCommit(false);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getInt("is_user_reg");
+                check = rs.getInt("is_user_reg");
             }
+            if (check == 0) addConfRegistration(conferenceId, userId);
+            else deleteConfRegistration(conferenceId, userId);
+            connection.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.info("checkRegistrationAndAddOrDelete SQLException: " + e.getMessage());
         }
-        return 0;
+
     }
 
     @Override
-    public void update(Conference entity) throws SQLException {
+    public void update(Conference entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(
                 queryUpdateUser)) {
             ps.setString(1, String.valueOf(entity.getDate()));
@@ -155,14 +169,18 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setLong(3, entity.getAuthor().getId());
             ps.setLong(4, entity.getId());
             ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new WrongInputException(e.getMessage());
         }
     }
 
     @Override
-    public void delete(long id) throws SQLException {
+    public void delete(long id) {
         try (PreparedStatement ps = connection.prepareStatement(queryDeleteById)) {
             ps.setLong(1, id);
             ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.info("delete SQLException: " + e.getMessage());
         }
     }
 
@@ -172,7 +190,7 @@ public class JDBCConferenceDao implements ConferenceDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.info("close() SQLException: " + e.getMessage());
         }
     }
 

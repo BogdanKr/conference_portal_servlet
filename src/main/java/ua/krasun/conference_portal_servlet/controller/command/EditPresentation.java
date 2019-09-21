@@ -8,7 +8,6 @@ import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -27,14 +26,14 @@ public class EditPresentation implements Command {
         request.setAttribute("conferenceList",
                 conferenceService.findAllConference(((User) request.getSession().getAttribute("user")).getId()));
         request.setAttribute("speakerList", userService.findAllSpeaker());
-        Presentation presentation = null;
+        Presentation presentation;
         try {
             presentation = presentationService.findById(Integer.parseInt(presentationEditId)).orElse(new Presentation());
-        } catch (NumberFormatException | SQLException e){
+            request.setAttribute("presentation", presentation);
+        } catch (NumberFormatException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.invalid.input"));
         }
-        request.setAttribute("presentation", presentation);
         if (request.getSession().getAttribute("role").equals(Role.ADMIN))
             return "/WEB-INF/admin/editpresentationadmin.jsp";
         else return "/WEB-INF/speaker/editpresentationspeaker.jsp";

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserService {
+    private static final String EMAIL_REGEX = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$";
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
 
@@ -22,8 +23,8 @@ public class UserService {
         }
     }
 
-    public void addUser(String email, String password) throws SQLException, WrongInputException {
-        if (!email.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$"))
+    public void addUser(String email, String password) throws WrongInputException {
+        if (!email.matches(EMAIL_REGEX))
             throw new WrongInputException("Wrong email");
         User newUser = User.builder()
                 .firstName("")
@@ -47,7 +48,7 @@ public class UserService {
         return Optional.empty();
     }
 
-    public Optional<User> findUserById(long id) throws SQLException {
+    public Optional<User> findUserById(long id) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return Optional.ofNullable((userDao.findById(id)));
         }
@@ -57,14 +58,15 @@ public class UserService {
         return Arrays.asList(Role.values());
     }
 
-    public void userEdit(String id,
+    public void userEdit(int id,
                          String firstName,
                          String email,
                          String password,
                          String active,
-                         String role) throws SQLException {
+                         String role) throws WrongInputException {
         try (UserDao userDao = daoFactory.createUserDao()) {
-            User user = userDao.findById(Integer.parseInt(id));
+            userDao.getConnection().setAutoCommit(false);
+            User user = userDao.findById(id);
             user.setFirstName(firstName);
             user.setEmail(email);
             if (!password.isEmpty()) user.setPassword(password);
@@ -82,30 +84,31 @@ public class UserService {
                     break;
             }
             userDao.update(user);
+            userDao.getConnection().commit();
+        } catch (SQLException e) {
+            throw new WrongInputException(e.getMessage());
         }
     }
 
-    public User userEditIfNotAdmin(String id,
+    public User userEditIfNotAdmin(int id,
                                    String firstName,
                                    String email,
-                                   String password) throws SQLException {
+                                   String password) throws WrongInputException {
         try (UserDao userDao = daoFactory.createUserDao()) {
-            User user = userDao.findById(Integer.parseInt(id));
+            userDao.getConnection().setAutoCommit(false);
+            User user = userDao.findById(id);
             user.setFirstName(firstName);
             user.setEmail(email);
             if (!password.isEmpty()) user.setPassword(password);
             userDao.update(user);
+            userDao.getConnection().commit();
             return user;
+        } catch (SQLException e) {
+            throw new WrongInputException(e.getMessage());
         }
     }
 
-    public Optional<User> findUserByEmail(String email) {
-        try (UserDao userDao = daoFactory.createUserDao()) {
-            return Optional.ofNullable((userDao.findByEmail(email)));
-        }
-    }
-
-    public void deleteUser(long id) throws SQLException {
+    public void deleteUser(long id) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             userDao.delete(id);
         }

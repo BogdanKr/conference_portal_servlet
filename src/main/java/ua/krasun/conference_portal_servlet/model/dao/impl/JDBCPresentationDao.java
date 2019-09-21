@@ -1,10 +1,13 @@
 package ua.krasun.conference_portal_servlet.model.dao.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.dao.PresentationDao;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.ConferenceMapper;
 import ua.krasun.conference_portal_servlet.model.dao.mapper.UserMapper;
 import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.Presentation;
+import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,18 +26,25 @@ public class JDBCPresentationDao implements PresentationDao {
     private String queryUpdatePresentation = "UPDATE presentation SET theme = ?, user_id = ?, conference_id = ? WHERE id = ?";
     private String queryDeleteById = "DELETE FROM presentation  WHERE id = ?";
     private Connection connection;
+    private static final Logger logger = LogManager.getLogger(JDBCPresentationDao.class);
 
     JDBCPresentationDao(Connection connection) {
         this.connection = connection;
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     @Override
-    public void add(Presentation entity) throws SQLException {
+    public void add(Presentation entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(queryAdd)) {
             ps.setString(1, entity.getTheme());
             ps.setLong(2, entity.getAuthor().getId());
             ps.setLong(3, entity.getConference().getId());
             ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new WrongInputException(e.getMessage());
         }
     }
 
@@ -49,7 +59,7 @@ public class JDBCPresentationDao implements PresentationDao {
                 return presentation;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.info("findById SQLException: " + e.getMessage());
         }
         return null;
     }
@@ -70,13 +80,13 @@ public class JDBCPresentationDao implements PresentationDao {
                 resultList.add(presentation);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.info("findAll SQLException: " + e.getMessage());
         }
         return resultList;
     }
 
     @Override
-    public void update(Presentation entity) throws SQLException {
+    public void update(Presentation entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(
                 queryUpdatePresentation)) {
             ps.setString(1, entity.getTheme());
@@ -84,30 +94,19 @@ public class JDBCPresentationDao implements PresentationDao {
             ps.setLong(3, entity.getConference().getId());
             ps.setLong(4, entity.getId());
             ps.executeUpdate();
-        }
-    }
-
-    @Override
-    public void upDateWithParam(Long presentationEditId, String theme,
-                                Long chooseSpeakerID, Long chooseConferenceID) {
-        try (PreparedStatement ps = connection.prepareStatement(
-                queryUpdatePresentation)) {
-            ps.setString(1, theme);
-            ps.setLong(2, chooseSpeakerID);
-            ps.setLong(3, chooseConferenceID);
-            ps.setLong(4, presentationEditId);
-            ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
-            throw new RuntimeException("Can't Update");
+            throw new WrongInputException(e.getMessage());
         }
     }
 
     @Override
-    public void delete(long id) throws SQLException {
+    public void delete(long id) {
         try (PreparedStatement ps = connection.prepareStatement(queryDeleteById)) {
             ps.setLong(1, id);
             ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.info("delete() SQLException: " + e.getMessage());
+
         }
     }
 
@@ -116,7 +115,8 @@ public class JDBCPresentationDao implements PresentationDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.info("close() SQLException: " + e.getMessage());
+
         }
     }
 

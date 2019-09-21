@@ -3,10 +3,10 @@ package ua.krasun.conference_portal_servlet.controller.command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.entity.User;
+import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.Exception;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Optional;
@@ -14,10 +14,11 @@ import java.util.ResourceBundle;
 
 public class AddConference implements Command {
     private static final Logger logger = LogManager.getLogger(AddConference.class);
+
     @Override
     public String execute(HttpServletRequest request) {
         ConferenceService conferenceService = new ConferenceService();
-        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        Optional<String> locale = Optional.ofNullable((String) request.getSession().getAttribute("lang"));
         ResourceBundle bundle = ResourceBundle.getBundle("messages",
                 new Locale(locale.orElse("en")));
         String date = request.getParameter("localDate");
@@ -35,9 +36,10 @@ public class AddConference implements Command {
                 conferenceService.addConference(currentUser, LocalDate.parse(date), subject);
                 logger.info("User: " + currentUser.getEmail() + "add new conference" + date + "/" + subject);
             }
-        } catch (Exception e) {
+        } catch (WrongInputException e) {
             request.setAttribute("error", true);
-            request.setAttribute("message",  bundle.getString("info.sorry.cant.add.conf"));
+            request.setAttribute("message", bundle.getString("info.sorry.cant.add.conf"));
+            logger.warn("Couldn't edit conference, exception: " + e);
             return "/conference/admin";
         }
 

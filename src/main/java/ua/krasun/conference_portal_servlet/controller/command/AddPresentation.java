@@ -7,8 +7,6 @@ import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 import ua.krasun.conference_portal_servlet.model.service.PresentationService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
-import java.lang.Exception;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -18,7 +16,7 @@ public class AddPresentation implements Command {
     public String execute(HttpServletRequest request) {
         PresentationService presentationService = new PresentationService();
         ConferenceService conferenceService = new ConferenceService();
-        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        Optional<String> locale = Optional.ofNullable((String) request.getSession().getAttribute("lang"));
         ResourceBundle bundle = ResourceBundle.getBundle("messages",
                 new Locale(locale.orElse("en")));
         String confId = request.getParameter("conf");
@@ -27,7 +25,7 @@ public class AddPresentation implements Command {
             try {
                 conference = conferenceService.findById(Integer.parseInt(confId))
                         .orElseThrow(() -> new WrongInputException("No such Conference"));
-            } catch (Exception e) {
+            } catch (WrongInputException | NumberFormatException e) {
                 request.setAttribute("error", true);
                 request.setAttribute("message", bundle.getString("info.cant.add.presentation"));
                 return "/conference/";
@@ -45,7 +43,7 @@ public class AddPresentation implements Command {
             presentationService.addPresentation(theme, currentUser, conference);
             request.getSession().setAttribute("conferenceList", conferenceService.findAllConference(currentUser.getId()));
             return "redirect:/conference/speaker";
-        } catch (SQLException | WrongInputException | NumberFormatException e) {
+        } catch (WrongInputException | NumberFormatException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.cant.add.presentation"));
             return "redirect:/conference/speaker";

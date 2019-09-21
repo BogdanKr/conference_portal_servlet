@@ -25,7 +25,7 @@ public class PresentationService {
         }
     }
 
-    public void addPresentation(String theme, User user, Conference conference) throws SQLException {
+    public void addPresentation(String theme, User user, Conference conference) throws WrongInputException {
         Presentation newPresentation = Presentation.builder()
                 .theme(theme)
                 .author(user)
@@ -36,29 +36,32 @@ public class PresentationService {
         }
     }
 
-    public void presentationEdit(String presentationEditId, String theme,
-                                 String chooseSpeakerID, String chooseConferenceID) throws SQLException, WrongInputException {
+    public void presentationEdit(int presentationEditId, String theme,
+                                 int chooseSpeakerID, int chooseConferenceID) throws WrongInputException {
         UserService userService = new UserService();
         ConferenceService conferenceService = new ConferenceService();
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
-            Presentation presentation = presentationDao.findById(Integer.parseInt(presentationEditId));
+            presentationDao.getConnection().setAutoCommit(false);
+            Presentation presentation = presentationDao.findById(presentationEditId);
             presentation.setTheme(theme);
-            presentation.setAuthor(userService.findUserById(Integer.parseInt(chooseSpeakerID)).orElseThrow());
-            int chooseConferenceIDinteger = Integer.parseInt(chooseConferenceID);
-            Conference conference = conferenceService.findById(chooseConferenceIDinteger)
+            presentation.setAuthor(userService.findUserById(chooseSpeakerID).orElseThrow());
+            Conference conference = conferenceService.findById(chooseConferenceID)
                     .orElseThrow(() -> new WrongInputException("No such Conference"));
             presentation.setConference(conference);
             presentationDao.update(presentation);
+            presentationDao.getConnection().commit();
+        } catch (SQLException e) {
+            throw new WrongInputException(e.getMessage());
         }
     }
 
-    public void deletePresentation(long id) throws SQLException {
+    public void deletePresentation(long id) {
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
             presentationDao.delete(id);
         }
     }
 
-    public Optional<Presentation> findById(int id) throws SQLException {
+    public Optional<Presentation> findById(int id) {
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
             return Optional.ofNullable(presentationDao.findById(id));
         }

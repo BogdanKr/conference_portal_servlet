@@ -6,7 +6,6 @@ import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputExce
 import ua.krasun.conference_portal_servlet.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -26,15 +25,16 @@ public class Registration implements Command {
         try {
             userService.addUser(email, password);
             logger.info("User email: " + email + " registration successfully.");
-        } catch (SQLException | WrongInputException e) {
-            logger.info("Entered email: " + email + " registration fail");
+        } catch (WrongInputException e) {
+            logger.info("Entered email: " + email + " registration fail" + e);
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.invalid.input"));
             return "/registration.jsp";
         }
         request.setAttribute("success", true);
         request.setAttribute("message", bundle.getString("info.success.reg"));
-        if (request.getSession().getAttribute("role") == null) return "/registration.jsp";
+
+        if (request.getSession().getAttribute("role") == null) return "/login.jsp";
         else return "/conference/admin/userlist";
     }
 }

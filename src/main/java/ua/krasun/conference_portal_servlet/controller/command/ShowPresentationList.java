@@ -13,19 +13,20 @@ public class ShowPresentationList implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         PresentationService presentationService = new PresentationService();
-        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        Optional<String> locale = Optional.ofNullable((String) request.getSession().getAttribute("lang"));
         ResourceBundle bundle = ResourceBundle.getBundle("messages",
                 new Locale(locale.orElse("en")));
-        try {
-            Optional<String> speakerID = Optional.ofNullable(request.getParameter("speakerID"));
-            if (speakerID.isEmpty())
-                request.setAttribute("presentationList", presentationService.findAllPresentation());
-            else
+        Optional<String> speakerID = Optional.ofNullable(request.getParameter("speakerID"));
+        if (speakerID.isEmpty())
+            request.setAttribute("presentationList", presentationService.findAllPresentation());
+        else
+            try {
                 request.setAttribute("presentationList", presentationService.findAllByAuthorId(Long.parseLong(speakerID.get())));
-        } catch (NumberFormatException e) {
-            request.setAttribute("error", true);
-            request.setAttribute("message", bundle.getString("info.invalid.input"));
-        }
+            } catch (NumberFormatException e) {
+                request.setAttribute("error", true);
+                request.setAttribute("message", bundle.getString("info.invalid.input"));
+            }
+
         if (request.getSession().getAttribute("role").equals(Role.ADMIN))
             return "/WEB-INF/admin/presentationlistadmin.jsp";
         else if (request.getSession().getAttribute("role").equals(Role.SPEAKER))

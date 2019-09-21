@@ -21,7 +21,7 @@ public class Login implements Command {
     public String execute(HttpServletRequest request) {
         UserService userService = new UserService();
         ConferenceService conferenceService = new ConferenceService();
-        Optional<String> locale = Optional.ofNullable( (String) request.getSession().getAttribute("lang"));
+        Optional<String> locale = Optional.ofNullable((String) request.getSession().getAttribute("lang"));
         ResourceBundle bundle = ResourceBundle.getBundle("messages",
                 new Locale(locale.orElse("en")));
         if (nonNull(request.getSession().getAttribute("userEmail"))) return "redirect:/conference/logout";
@@ -42,7 +42,7 @@ public class Login implements Command {
             request.setAttribute("message", bundle.getString("info.you.logged"));
             return "/login.jsp";
         }
-        logger.info("User email: " + email + " logged successfully. User role: "+ user.get().getRole());
+        logger.info("User email: " + email + " logged successfully. User role: " + user.get().getRole());
 
         CommandUtility.setUserInSession(user.get(), request);
         request.getSession().setAttribute("conferenceList", conferenceService.findAllConference(user.get().getId()));

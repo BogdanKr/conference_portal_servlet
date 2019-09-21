@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import ua.krasun.conference_portal_servlet.model.service.ConferenceService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -27,7 +26,7 @@ public class DeleteConference implements Command {
             request.setAttribute("success", true);
             request.setAttribute("message", bundle.getString("info.conf.deleted"));
             logger.info("Conference was deleted, ID: "+ confId);
-        } catch (SQLException | NumberFormatException e) {
+        } catch (NumberFormatException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.cant.delete.conf"));
         }
