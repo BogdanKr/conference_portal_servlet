@@ -18,21 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static ua.krasun.conference_portal_servlet.ConferencePortal.QUERY_PROPERTY;
+
 public class JDBCConferenceDao implements ConferenceDao {
-    private String queryAdd = "INSERT INTO conference (date, subject, user_id) VALUES (? ,?, ?)";
-    private String queryFindById = "select * from conference c " +
-            "left join presentation p on c.id = p.conference_id " +
-            "left join user u on p.user_id = u.id where c.id = ?";
-    private String queryFindAll = "select * from conference " +
-            "left join presentation p on conference.id = p.conference_id " +
-            "left join user u on p.user_id = u.id " +
-            "left join conference_registrations cr on conference.id = cr.conference_id " +
-            "left join user on cr.user_id=user.id";
-    private String queryUpdateUser = "UPDATE conference SET date = ?, subject = ?, user_id = ? WHERE id = ?";
-    private String queryDeleteById = "DELETE FROM conference  WHERE id = ?";
-    private String queryAddConfReg = "INSERT INTO conference_registrations (conference_id, user_id) VALUES (?, ?)";
-    private String queryDeleteConfReg = "DELETE FROM conference_registrations WHERE conference_id = ? AND user_id = ?";
-    private String queryCheckReg = "select sum(if((conference_id=? and user_id=?), 1,0)) as is_user_reg from conference_registrations";
 
     private Connection connection;
     private static final Logger logger = LogManager.getLogger(JDBCConferenceDao.class);
@@ -48,7 +36,7 @@ public class JDBCConferenceDao implements ConferenceDao {
 
     @Override
     public void add(Conference entity) throws WrongInputException {
-        try (PreparedStatement ps = connection.prepareStatement(queryAdd)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("conference.add"))) {
             ps.setString(1, String.valueOf(entity.getDate()));
             ps.setString(2, entity.getSubject());
             ps.setLong(3, entity.getAuthor().getId());
@@ -64,7 +52,7 @@ public class JDBCConferenceDao implements ConferenceDao {
         ConferenceMapper conferenceMapper = new ConferenceMapper();
         Map<Long, Conference> conferenceMap = new HashMap<>();
         Conference conference = new Conference();
-        try (PreparedStatement ps = connection.prepareStatement(queryFindById)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("conference.find.by.id"))) {
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -95,7 +83,7 @@ public class JDBCConferenceDao implements ConferenceDao {
         Map<Long, Conference> conferenceMap = new HashMap<>();
         Map<Long, User> regUserMap = new HashMap<>();
         try (Statement ps = connection.createStatement()) {
-            ResultSet rs = ps.executeQuery(queryFindAll);
+            ResultSet rs = ps.executeQuery(QUERY_PROPERTY.getProperty("conference.find.all"));
             while (rs.next()) {
                 Conference conference = extractFromResultSet(rs);
                 conference = conferenceMapper.makeUnique(conferenceMap, conference);
@@ -120,7 +108,7 @@ public class JDBCConferenceDao implements ConferenceDao {
 
     @Override
     public void addConfRegistration(long conferenceId, long userId) {
-        try (PreparedStatement ps = connection.prepareStatement(queryAddConfReg)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("conference.add.conf.reg"))) {
             ps.setLong(1, conferenceId);
             ps.setLong(2, userId);
             ps.executeUpdate();
@@ -131,7 +119,7 @@ public class JDBCConferenceDao implements ConferenceDao {
 
     @Override
     public void deleteConfRegistration(long conferenceId, long userId) {
-        try (PreparedStatement ps = connection.prepareStatement(queryDeleteConfReg)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("conference.delete.conf.reg"))) {
             ps.setLong(1, conferenceId);
             ps.setLong(2, userId);
             ps.executeUpdate();
@@ -142,7 +130,7 @@ public class JDBCConferenceDao implements ConferenceDao {
 
     @Override
     public void checkRegistrationAndAddOrDelete(long conferenceId, long userId) {
-        try (PreparedStatement ps = connection.prepareStatement(queryCheckReg)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("conference.check.conf.reg"))) {
             int check = 0;
             ps.setLong(1, conferenceId);
             ps.setLong(2, userId);
@@ -163,7 +151,7 @@ public class JDBCConferenceDao implements ConferenceDao {
     @Override
     public void update(Conference entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(
-                queryUpdateUser)) {
+                QUERY_PROPERTY.getProperty("conference.update"))) {
             ps.setString(1, String.valueOf(entity.getDate()));
             ps.setString(2, entity.getSubject());
             ps.setLong(3, entity.getAuthor().getId());
@@ -176,7 +164,7 @@ public class JDBCConferenceDao implements ConferenceDao {
 
     @Override
     public void delete(long id) {
-        try (PreparedStatement ps = connection.prepareStatement(queryDeleteById)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("conference.delete.by.id"))) {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {

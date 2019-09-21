@@ -15,16 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static ua.krasun.conference_portal_servlet.ConferencePortal.QUERY_PROPERTY;
+
 public class JDBCPresentationDao implements PresentationDao {
-    private String queryAdd = "INSERT INTO presentation (theme, user_id, conference_id) VALUES (? ,?, ?)";
-    private String queryFindById = "select * from presentation " +
-            "left join user u on presentation.user_id = u.id " +
-            "left join conference c on presentation.conference_id = c.id where presentation.id = ?";
-    private String queryFindAll = "SELECT * FROM presentation " +
-            "left join user on presentation.user_id = user.id " +
-            "left join conference on presentation.conference_id = conference.id";
-    private String queryUpdatePresentation = "UPDATE presentation SET theme = ?, user_id = ?, conference_id = ? WHERE id = ?";
-    private String queryDeleteById = "DELETE FROM presentation  WHERE id = ?";
     private Connection connection;
     private static final Logger logger = LogManager.getLogger(JDBCPresentationDao.class);
 
@@ -38,7 +31,7 @@ public class JDBCPresentationDao implements PresentationDao {
 
     @Override
     public void add(Presentation entity) throws WrongInputException {
-        try (PreparedStatement ps = connection.prepareStatement(queryAdd)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("presentation.add"))) {
             ps.setString(1, entity.getTheme());
             ps.setLong(2, entity.getAuthor().getId());
             ps.setLong(3, entity.getConference().getId());
@@ -50,7 +43,7 @@ public class JDBCPresentationDao implements PresentationDao {
 
     @Override
     public Presentation findById(long id) {
-        try (PreparedStatement ps = connection.prepareStatement(queryFindById)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("presentation.find.by.id"))) {
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -70,7 +63,7 @@ public class JDBCPresentationDao implements PresentationDao {
         Map<Long, Conference> conferenceMap = new HashMap<>();
         ConferenceMapper conferenceMapper = new ConferenceMapper();
         try (Statement ps = connection.createStatement()) {
-            ResultSet rs = ps.executeQuery(queryFindAll);
+            ResultSet rs = ps.executeQuery(QUERY_PROPERTY.getProperty("presentation.find.all"));
             while (rs.next()) {
                 Presentation presentation = extractFromResultSet(rs);
                 Conference conference = conferenceMapper.extractFromResultSet(rs);
@@ -88,7 +81,7 @@ public class JDBCPresentationDao implements PresentationDao {
     @Override
     public void update(Presentation entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(
-                queryUpdatePresentation)) {
+                QUERY_PROPERTY.getProperty("presentation.update"))) {
             ps.setString(1, entity.getTheme());
             ps.setLong(2, entity.getAuthor().getId());
             ps.setLong(3, entity.getConference().getId());
@@ -101,7 +94,7 @@ public class JDBCPresentationDao implements PresentationDao {
 
     @Override
     public void delete(long id) {
-        try (PreparedStatement ps = connection.prepareStatement(queryDeleteById)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("presentation.delete.by.id"))) {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {

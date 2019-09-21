@@ -11,15 +11,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCUserDao implements UserDao {
-    private String queryAdd = "INSERT INTO user (first_name, email , password , role , active) VALUES (? ,? ,? , ?, ?)";
-    private String queryFindByEmail = "SELECT * FROM user WHERE email = ?";
-    private String queryFindById = "SELECT * FROM user WHERE id = ?";
-    private String queryFindAll = "SELECT * FROM user";
-    private String queryUpdateUser = "UPDATE user SET first_name = ?, email = ? , password = ?, role = ?, active = ? WHERE id = ?";
-    private String queryDeleteById = "DELETE FROM user  WHERE id = ?";
-    private String queryFindAllSpeaker = "SELECT * FROM user WHERE role = 2";
+import static ua.krasun.conference_portal_servlet.ConferencePortal.QUERY_PROPERTY;
 
+public class JDBCUserDao implements UserDao {
     private Connection connection;
     private static final Logger logger = LogManager.getLogger(JDBCUserDao.class);
 
@@ -34,7 +28,7 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void add(User entity) throws WrongInputException {
-        try (PreparedStatement ps = connection.prepareStatement(queryAdd)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("user.add"))) {
             ps.setString(1, entity.getFirstName());
             ps.setString(2, entity.getEmail());
             ps.setString(3, entity.getPassword());
@@ -49,7 +43,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public User findByEmail(String email) {
         try (PreparedStatement ps = connection.prepareStatement
-                (queryFindByEmail)) {
+                (QUERY_PROPERTY.getProperty("user.find.by.email"))) {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -62,12 +56,12 @@ public class JDBCUserDao implements UserDao {
     }
 
     public List<User> findAllSpeaker() {
-        return getUsers(queryFindAllSpeaker);
+        return getUsers(QUERY_PROPERTY.getProperty("user.find.all.speaker"));
     }
 
     @Override
     public List<User> findAll() {
-        return getUsers(queryFindAll);
+        return getUsers(QUERY_PROPERTY.getProperty("user.find.all"));
     }
 
     private List<User> getUsers(String queryFindAllSpeaker) {
@@ -88,7 +82,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public User findById(long id) {
         try (PreparedStatement ps = connection.prepareStatement
-                (queryFindById)) {
+                (QUERY_PROPERTY.getProperty("user.find.by.id"))) {
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -103,7 +97,7 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void update(User entity) throws WrongInputException {
-        try (PreparedStatement ps = connection.prepareStatement(queryUpdateUser)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("user.update"))) {
             ps.setString(1, entity.getFirstName());
             ps.setString(2, entity.getEmail());
             ps.setString(3, entity.getPassword());
@@ -118,7 +112,7 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void delete(long id) {
-        try (PreparedStatement ps = connection.prepareStatement(queryDeleteById)) {
+        try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("user.delete.by.id"))) {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
