@@ -26,7 +26,7 @@ public class Registration implements Command {
             userService.addUser(email, password);
             logger.info("User email: " + email + " registration successfully.");
         } catch (WrongInputException e) {
-            logger.info("Entered email: " + email + " registration fail" + e);
+            logger.warn("Entered email: " + email + " registration fail" + e);
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.invalid.input"));
             return "/registration.jsp";

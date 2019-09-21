@@ -101,7 +101,7 @@ public class JDBCConferenceDao implements ConferenceDao {
                 if (regUser.getId() == currentUserId) conference.setCurrentUserRegistered(true);
             }
         } catch (SQLException e) {
-            logger.info("findAll SQLException: " + e.getMessage());
+            logger.warn("findAll SQLException: " + e.getMessage());
         }
         return new ArrayList<>(conferenceMap.values());
     }
@@ -113,7 +113,7 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setLong(2, userId);
             ps.executeUpdate();
         } catch (SQLException e) {
-            logger.info("addConfRegistration SQLException: " + e.getMessage());
+            logger.warn("addConfRegistration SQLException: " + e.getMessage());
         }
     }
 
@@ -124,7 +124,7 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setLong(2, userId);
             ps.executeUpdate();
         } catch (SQLException e) {
-            logger.info("deleteConfRegistration SQLException: " + e.getMessage());
+            logger.warn("deleteConfRegistration SQLException: " + e.getMessage());
         }
     }
 
@@ -143,7 +143,7 @@ public class JDBCConferenceDao implements ConferenceDao {
             else deleteConfRegistration(conferenceId, userId);
             connection.commit();
         } catch (SQLException e) {
-            logger.info("checkRegistrationAndAddOrDelete SQLException: " + e.getMessage());
+            logger.warn("checkRegistrationAndAddOrDelete SQLException: " + e.getMessage());
         }
 
     }
@@ -168,7 +168,7 @@ public class JDBCConferenceDao implements ConferenceDao {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            logger.info("delete SQLException: " + e.getMessage());
+            logger.warn("delete SQLException: " + e.getMessage());
         }
     }
 
@@ -178,7 +178,7 @@ public class JDBCConferenceDao implements ConferenceDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            logger.info("close() SQLException: " + e.getMessage());
+            logger.warn("close() SQLException: " + e.getMessage());
         }
     }
 

@@ -30,7 +30,7 @@ public class SaveEditPresentation implements Command {
         } catch (NumberFormatException | WrongInputException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.cant.save"));
-            logger.info("Exception: " + e.getMessage());
+            logger.warn("Exception: " + e.getMessage());
         }
         return "/conference/user/presentationlist";
     }

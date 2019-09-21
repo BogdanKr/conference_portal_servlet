@@ -22,7 +22,7 @@ public class DeletePresentation implements Command {
             presentationService.deletePresentation(Long.parseLong(presentationId));
             logger.info("Presentation was deleted, ID: " + presentationId);
         } catch (NumberFormatException e) {
-            logger.info("Can't delete presentation, ID: " + presentationId);
+            logger.warn("Can't delete presentation, ID: " + presentationId);
         }
         return "redirect:" + request.getHeader("referer");
     }

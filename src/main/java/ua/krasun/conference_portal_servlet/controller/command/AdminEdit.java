@@ -29,7 +29,7 @@ public class AdminEdit implements Command {
                 request.setAttribute("roles", userService.getRoles());
                 return "/WEB-INF/admin/adminedit.jsp";
             } catch (NumberFormatException | WrongInputException e) {
-                logger.info("Invalid input " + e.getMessage());
+                logger.warn("Invalid input " + e.getMessage());
                 request.setAttribute("error", true);
                 request.setAttribute("message", bundle.getString("info.invalid.input"));
                 return "/conference/admin/userlist";

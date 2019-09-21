@@ -47,7 +47,7 @@ public class UserEdit implements Command {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.invalid.input"));
             request.setAttribute("user", user);
-            logger.info("update failure" + e.getMessage());
+            logger.warn("update failure" + e.getMessage());
         }
 
         if (request.getSession().getAttribute("role").equals(Role.SPEAKER))

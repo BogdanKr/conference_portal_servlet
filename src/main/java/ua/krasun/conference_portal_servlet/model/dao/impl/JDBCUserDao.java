@@ -50,7 +50,7 @@ public class JDBCUserDao implements UserDao {
                 return extractFromResultSet(rs);
             }
         } catch (SQLException e) {
-            logger.info("findByEmail SQLException: " + e.getMessage());
+            logger.warn("findByEmail SQLException: " + e.getMessage());
         }
         return null;
     }
@@ -73,7 +73,7 @@ public class JDBCUserDao implements UserDao {
                 resultList.add(result);
             }
         } catch (SQLException e) {
-            logger.info("findAll SQLException: " + e.getMessage());
+            logger.warn("findAll SQLException: " + e.getMessage());
         }
         return resultList;
     }
@@ -89,7 +89,7 @@ public class JDBCUserDao implements UserDao {
                 return extractFromResultSet(rs);
             }
         } catch (SQLException e) {
-            logger.info("findById SQLException: " + e.getMessage());
+            logger.warn("findById SQLException: " + e.getMessage());
         }
         return null;
     }
@@ -116,7 +116,7 @@ public class JDBCUserDao implements UserDao {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            logger.info("delete() SQLException: " + e.getMessage());
+            logger.warn("delete() SQLException: " + e.getMessage());
         }
     }
 
@@ -125,7 +125,7 @@ public class JDBCUserDao implements UserDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            logger.info("close() SQLException: " + e.getMessage());
+            logger.warn("close() SQLException: " + e.getMessage());
         }
     }
 

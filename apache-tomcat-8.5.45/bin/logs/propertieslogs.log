@@ -79,3 +79,11 @@
 [INFO ] 2019-09-21 15:16:14.535 [http-nio-8888-exec-5] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
 [INFO ] 2019-09-21 15:16:32.078 [http-nio-8888-exec-1] AdminEdit - Invalid input For input string: "3a"
 [INFO ] 2019-09-21 15:16:39.468 [http-nio-8888-exec-2] AdminEdit - Invalid input No such user
+[INFO ] 2019-09-21 16:12:35.138 [http-nio-8888-exec-1] ConferencePortal - Load query.properties  file
+[INFO ] 2019-09-21 16:12:46.994 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-09-21 16:12:55.015 [http-nio-8888-exec-4] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[WARN ] 2019-09-21 16:13:27.934 [http-nio-8888-exec-4] AddConference - Couldn't edit conference, exception: ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException: Duplicate entry '2019-08-28' for key 'conference_date_uindex'
+[INFO ] 2019-09-21 16:26:16.059 [http-nio-8888-exec-1] ConferencePortal - Load query.properties  file
+[INFO ] 2019-09-21 16:26:19.553 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-09-21 16:26:26.294 [http-nio-8888-exec-3] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[ERROR] 2019-09-21 16:26:57.107 [http-nio-8888-exec-10] AddConference - Couldn't edit conference, exception: ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException: Duplicate entry '2019-08-28' for key 'conference_date_uindex'

@@ -98,7 +98,7 @@ public class JDBCPresentationDao implements PresentationDao {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            logger.info("delete() SQLException: " + e.getMessage());
+            logger.warn("delete() SQLException: " + e.getMessage());
 
         }
     }
@@ -108,7 +108,7 @@ public class JDBCPresentationDao implements PresentationDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            logger.info("close() SQLException: " + e.getMessage());
+            logger.warn("close() SQLException: " + e.getMessage());
 
         }
     }

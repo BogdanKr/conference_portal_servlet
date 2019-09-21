@@ -32,7 +32,7 @@ public class DeleteProfile implements Command {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.profile.deleted"));
             logger.info("User: " + currentUser.getEmail() + " delete profile");
-        } catch (WrongInputException | NumberFormatException e) {
+        } catch (NumberFormatException e) {
             request.setAttribute("error", true);
             request.setAttribute("message", bundle.getString("info.cant.delete"));
             if (!request.getSession().getAttribute("role").equals(Role.ADMIN)) {
