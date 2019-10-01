@@ -25,10 +25,6 @@ public class JDBCPresentationDao implements PresentationDao {
         this.connection = connection;
     }
 
-    public Connection getConnection() {
-        return connection;
-    }
-
     @Override
     public void add(Presentation entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("presentation.add"))) {

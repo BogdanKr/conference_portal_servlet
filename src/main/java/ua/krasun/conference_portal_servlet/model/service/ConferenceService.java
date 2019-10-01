@@ -6,7 +6,6 @@ import ua.krasun.conference_portal_servlet.model.entity.Conference;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -39,14 +38,10 @@ public class ConferenceService {
                                LocalDate date,
                                String subject) throws WrongInputException {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
-            conferenceDao.getConnection().setAutoCommit(false);
             Conference conference = conferenceDao.findById(Integer.parseInt(id));
             conference.setDate(date);
             conference.setSubject(subject);
             conferenceDao.update(conference);
-            conferenceDao.getConnection().commit();
-        } catch (SQLException e) {
-            throw new WrongInputException(e.getMessage());
         }
     }
 

@@ -22,11 +22,6 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public Connection getConnection() {
-        return connection;
-    }
-
-    @Override
     public void add(User entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("user.add"))) {
             ps.setString(1, entity.getFirstName());

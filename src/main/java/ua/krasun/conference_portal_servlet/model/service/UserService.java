@@ -7,7 +7,6 @@ import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +14,7 @@ import java.util.Optional;
 public class UserService {
     private static final String EMAIL_REGEX = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$";
     private DaoFactory daoFactory = DaoFactory.getInstance();
+
 
 
     public List<User> findAllUsers() {
@@ -65,7 +65,6 @@ public class UserService {
                          String active,
                          String role) throws WrongInputException {
         try (UserDao userDao = daoFactory.createUserDao()) {
-            userDao.getConnection().setAutoCommit(false);
             User user = userDao.findById(id);
             user.setFirstName(firstName);
             user.setEmail(email);
@@ -84,9 +83,6 @@ public class UserService {
                     break;
             }
             userDao.update(user);
-            userDao.getConnection().commit();
-        } catch (SQLException e) {
-            throw new WrongInputException(e.getMessage());
         }
     }
 
@@ -95,16 +91,12 @@ public class UserService {
                                    String email,
                                    String password) throws WrongInputException {
         try (UserDao userDao = daoFactory.createUserDao()) {
-            userDao.getConnection().setAutoCommit(false);
             User user = userDao.findById(id);
             user.setFirstName(firstName);
             user.setEmail(email);
             if (!password.isEmpty()) user.setPassword(password);
             userDao.update(user);
-            userDao.getConnection().commit();
             return user;
-        } catch (SQLException e) {
-            throw new WrongInputException(e.getMessage());
         }
     }
 

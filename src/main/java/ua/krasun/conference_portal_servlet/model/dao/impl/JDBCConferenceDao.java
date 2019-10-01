@@ -30,11 +30,6 @@ public class JDBCConferenceDao implements ConferenceDao {
     }
 
     @Override
-    public Connection getConnection() {
-        return connection;
-    }
-
-    @Override
     public void add(Conference entity) throws WrongInputException {
         try (PreparedStatement ps = connection.prepareStatement(QUERY_PROPERTY.getProperty("conference.add"))) {
             ps.setString(1, String.valueOf(entity.getDate()));

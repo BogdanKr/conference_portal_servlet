@@ -7,7 +7,6 @@ import ua.krasun.conference_portal_servlet.model.entity.Presentation;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
-import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +40,6 @@ public class PresentationService {
         UserService userService = new UserService();
         ConferenceService conferenceService = new ConferenceService();
         try (PresentationDao presentationDao = daoFactory.createPresentationDao()) {
-            presentationDao.getConnection().setAutoCommit(false);
             Presentation presentation = presentationDao.findById(presentationEditId);
             presentation.setTheme(theme);
             presentation.setAuthor(userService.findUserById(chooseSpeakerID).orElseThrow());
@@ -49,9 +47,6 @@ public class PresentationService {
                     .orElseThrow(() -> new WrongInputException("No such Conference"));
             presentation.setConference(conference);
             presentationDao.update(presentation);
-            presentationDao.getConnection().commit();
-        } catch (SQLException e) {
-            throw new WrongInputException(e.getMessage());
         }
     }
 
