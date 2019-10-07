@@ -98,3 +98,34 @@
 [INFO ] 2019-10-07 12:20:28.697 [http-nio-8888-exec-4] JDBCUserDao - Load query.properties  file
 [INFO ] 2019-10-07 12:20:29.245 [http-nio-8888-exec-4] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
 [INFO ] 2019-10-07 12:20:51.541 [http-nio-8888-exec-9] AddConference - User: admin@gmail.comadd new conference2019-10-31/BUSINESS
+[INFO ] 2019-10-07 13:26:43.767 [http-nio-8888-exec-5] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 13:26:47.635 [http-nio-8888-exec-6] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 13:26:48.307 [http-nio-8888-exec-6] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 13:27:14.765 [http-nio-8888-exec-1] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:27:26.095 [http-nio-8888-exec-5] SessionListener - User log out: admin@gmail.com
+[INFO ] 2019-10-07 13:27:31.602 [http-nio-8888-exec-8] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 13:27:40.190 [http-nio-8888-exec-10] AddConference - User: admin@gmail.comadd new conference2019-11-28/BUSINESS
+[INFO ] 2019-10-07 13:27:48.846 [http-nio-8888-exec-3] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:28:03.607 [http-nio-8888-exec-5] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:33:16.515 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 13:33:19.608 [http-nio-8888-exec-3] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 13:33:20.287 [http-nio-8888-exec-3] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 13:33:28.868 [http-nio-8888-exec-6] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:34:35.050 [http-nio-8888-exec-1] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:35:30.124 [http-nio-8888-exec-3] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:37:16.923 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 13:37:20.998 [http-nio-8888-exec-7] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 13:37:21.337 [http-nio-8888-exec-7] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 13:37:28.553 [http-nio-8888-exec-4] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:40:40.519 [http-nio-8888-exec-13] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:42:07.993 [http-nio-8888-exec-15] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:43:03.847 [http-nio-8888-exec-17] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:43:07.987 [http-nio-8888-exec-16] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 13:43:10.615 [http-nio-8888-exec-11] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 13:43:10.946 [http-nio-8888-exec-11] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 13:44:30.169 [http-nio-8888-exec-15] JDBCConferenceDao - findById SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+[INFO ] 2019-10-07 13:44:50.308 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 13:44:53.004 [http-nio-8888-exec-3] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 13:44:53.636 [http-nio-8888-exec-3] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 13:44:58.887 [http-nio-8888-exec-6] AddConference - Conference: 38was edit
+[INFO ] 2019-10-07 13:45:05.543 [http-nio-8888-exec-8] AddConference - Conference: 38was edit

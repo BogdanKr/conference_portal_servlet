@@ -38,7 +38,7 @@ public class ConferenceService {
                                LocalDate date,
                                String subject) throws WrongInputException {
         try (ConferenceDao conferenceDao = daoFactory.createConferenceDao()) {
-            Conference conference = conferenceDao.findById(Integer.parseInt(id));
+            Conference conference = conferenceDao.findById(Long.parseLong(id));
             conference.setDate(date);
             conference.setSubject(subject);
             conferenceDao.update(conference);
