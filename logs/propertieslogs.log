@@ -1,0 +1,82 @@
+[WARN ] 2019-10-07 11:45:38.127 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 11:45:38.247 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 11:55:04.976 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 11:55:05.073 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 11:57:05.794 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:01:06.959 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:01:06.984 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:01:07.035 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:01:07.082 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:01:07.083 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:01:07.174 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:03:48.139 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:03:48.163 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:03:48.192 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:03:48.226 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:03:48.226 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:03:48.279 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:02.923 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:02.952 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:03.051 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:03.111 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:03.112 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:03.213 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:11.265 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:11.296 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:11.341 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:11.410 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:11.410 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:11.477 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:19.552 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:19.573 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:19.598 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:19.629 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:19.630 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:19.684 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:31.624 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:31.644 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:31.679 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:31.722 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:31.723 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:31.809 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:53.397 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:53.426 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:53.453 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:53.499 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:04:53.500 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:04:53.606 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:05:06.313 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:05:06.344 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:05:06.374 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:05:06.427 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:05:06.428 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:05:06.485 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:08:21.006 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:08:21.033 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:08:21.058 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:08:21.108 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:08:21.109 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:08:21.210 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:11:57.230 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:11:57.271 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:11:57.312 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:11:57.354 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:11:57.355 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:11:57.456 [main] JDBCUserDaoTest - Warning: file query.properties not found
+[INFO ] 2019-10-07 12:12:16.477 [main] JDBCUserDaoTest - Load query.properties  file
+[WARN ] 2019-10-07 12:12:16.506 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[INFO ] 2019-10-07 12:12:16.550 [main] JDBCUserDaoTest - Load query.properties  file
+[INFO ] 2019-10-07 12:12:16.593 [main] JDBCUserDaoTest - Load query.properties  file
+[WARN ] 2019-10-07 12:12:16.594 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[INFO ] 2019-10-07 12:12:16.687 [main] JDBCUserDaoTest - Load query.properties  file
+[INFO ] 2019-10-07 12:13:48.644 [main] JDBCUserDaoTest - Load query.properties  file
+[WARN ] 2019-10-07 12:13:48.677 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[INFO ] 2019-10-07 12:13:48.713 [main] JDBCUserDaoTest - Load query.properties  file
+[INFO ] 2019-10-07 12:13:48.749 [main] JDBCUserDaoTest - Load query.properties  file
+[WARN ] 2019-10-07 12:13:48.750 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[INFO ] 2019-10-07 12:13:48.857 [main] JDBCUserDaoTest - Load query.properties  file
+[WARN ] 2019-10-07 12:15:52.766 [main] JDBCUserDao - Warning: file query.properties not found
+[WARN ] 2019-10-07 12:15:52.791 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[WARN ] 2019-10-07 12:15:52.867 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
+[INFO ] 2019-10-07 12:16:27.573 [main] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 12:22:59.370 [main] JDBCUserDao - Load query.properties  file
