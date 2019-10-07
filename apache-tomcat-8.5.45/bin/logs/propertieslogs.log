@@ -87,3 +87,14 @@
 [INFO ] 2019-09-21 16:26:19.553 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
 [INFO ] 2019-09-21 16:26:26.294 [http-nio-8888-exec-3] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
 [ERROR] 2019-09-21 16:26:57.107 [http-nio-8888-exec-10] AddConference - Couldn't edit conference, exception: ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException: Duplicate entry '2019-08-28' for key 'conference_date_uindex'
+[INFO ] 2019-10-07 11:56:28.419 [http-nio-8888-exec-6] ConferencePortal - Load query.properties  file
+[INFO ] 2019-10-07 11:56:28.474 [http-nio-8888-exec-6] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 11:56:37.170 [http-nio-8888-exec-8] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 12:17:38.292 [http-nio-8888-exec-5] ConferencePortal - Load query.properties  file
+[INFO ] 2019-10-07 12:17:38.354 [http-nio-8888-exec-5] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 12:18:07.804 [http-nio-8888-exec-8] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 12:18:08.374 [http-nio-8888-exec-8] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 12:20:20.612 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 12:20:28.697 [http-nio-8888-exec-4] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 12:20:29.245 [http-nio-8888-exec-4] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 12:20:51.541 [http-nio-8888-exec-9] AddConference - User: admin@gmail.comadd new conference2019-10-31/BUSINESS

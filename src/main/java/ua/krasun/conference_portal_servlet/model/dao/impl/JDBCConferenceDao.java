@@ -18,7 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ua.krasun.conference_portal_servlet.ConferencePortal.QUERY_PROPERTY;
+import static ua.krasun.conference_portal_servlet.model.dao.impl.JDBCUserDao.QUERY_PROPERTY;
+
 
 public class JDBCConferenceDao implements ConferenceDao {
 

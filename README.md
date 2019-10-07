@@ -14,5 +14,6 @@ To get access you have to do registration using email then login
  <h3>Для запуска необходимы</h3>
  
  JDK и JRE<br>
- MySQL Server<br>
- Maven
+ MySQL <br>
+ Maven <br>
+ Tomcat

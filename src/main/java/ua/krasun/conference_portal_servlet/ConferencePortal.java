@@ -9,26 +9,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Properties;
 
 public class ConferencePortal extends HttpServlet {
     private Map<String, Command> commands = new HashMap<>();
     private static final Logger logger = LogManager.getLogger(ConferencePortal.class);
-    public static final Properties QUERY_PROPERTY = new Properties();
 
     public void init(ServletConfig servletConfig) {
-        try (InputStream inputStream = new FileInputStream("../../src/main/resources/query.properties")) {
-            QUERY_PROPERTY.load(inputStream);
-            logger.info("Load query.properties  file");
-        } catch (IOException ex) {
-            logger.warn("Warning: file query.properties not found" );
-        }
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
 

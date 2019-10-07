@@ -7,15 +7,27 @@ import ua.krasun.conference_portal_servlet.model.entity.Role;
 import ua.krasun.conference_portal_servlet.model.entity.User;
 import ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static ua.krasun.conference_portal_servlet.ConferencePortal.QUERY_PROPERTY;
+import java.util.Properties;
 
 public class JDBCUserDao implements UserDao {
     private Connection connection;
     private static final Logger logger = LogManager.getLogger(JDBCUserDao.class);
+    static final Properties QUERY_PROPERTY = new Properties();
+
+    static {
+        try (InputStream inputStream = new FileInputStream("/Users/Bogdan/IdeaProjects/conference_portal_servlet/src/main/resources/query.properties")) {
+            QUERY_PROPERTY.load(inputStream);
+            logger.info("Load query.properties  file");
+        } catch (IOException ex) {
+            logger.warn("Warning: file query.properties not found");
+        }
+    }
 
     JDBCUserDao(Connection connection) {
         this.connection = connection;
