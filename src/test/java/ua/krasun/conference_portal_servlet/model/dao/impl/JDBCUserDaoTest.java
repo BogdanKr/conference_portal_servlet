@@ -47,7 +47,7 @@ public class JDBCUserDaoTest {
                 .id(1L)
                 .firstName("Bogdan")
                 .email("admin@gmail.com")
-                .password("1")
+                .password("222")
                 .active(true)
                 .role(Role.ADMIN)
                 .build();

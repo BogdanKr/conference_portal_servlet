@@ -129,3 +129,90 @@
 [INFO ] 2019-10-07 13:44:53.636 [http-nio-8888-exec-3] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
 [INFO ] 2019-10-07 13:44:58.887 [http-nio-8888-exec-6] AddConference - Conference: 38was edit
 [INFO ] 2019-10-07 13:45:05.543 [http-nio-8888-exec-8] AddConference - Conference: 38was edit
+[WARN ] 2019-10-07 13:46:53.501 [http-nio-8888-exec-4] AddConference - Couldn't edit conference, exception: ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException: Duplicate entry '2019-10-07' for key 'conference_date_uindex'
+[INFO ] 2019-10-07 13:47:04.167 [http-nio-8888-exec-6] AddConference - Conference: 5was edit
+[INFO ] 2019-10-07 13:47:15.293 [http-nio-8888-exec-9] AddConference - Conference: 2was edit
+[INFO ] 2019-10-07 13:47:24.414 [http-nio-8888-exec-10] AddConference - Conference: 8was edit
+[INFO ] 2019-10-07 13:47:32.447 [http-nio-8888-exec-2] AddConference - Conference: 4was edit
+[INFO ] 2019-10-07 13:51:35.137 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 13:51:38.456 [http-nio-8888-exec-3] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 13:51:38.980 [http-nio-8888-exec-3] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 13:51:44.792 [http-nio-8888-exec-10] SessionListener - User log out: admin@gmail.com
+[INFO ] 2019-10-07 13:53:48.034 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-07 13:53:59.285 [http-nio-8888-exec-4] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-07 13:53:59.942 [http-nio-8888-exec-4] Login - User email: william@yahoo.com logged successfully. User role: USER
+[INFO ] 2019-10-07 15:14:12.220 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: william@yahoo.com
+[INFO ] 2019-10-07 21:56:04.480 [http-nio-8888-exec-2] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-07 22:26:26.271 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: admin@gmail.com
+[WARN ] 2019-10-08 17:18:20.318 [http-nio-8888-exec-6] Login - Entered email: admin@gmail.com registration failua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException: Duplicate entry 'admin@gmail.com' for key 'user_email_uindex'
+[INFO ] 2019-10-08 17:20:00.163 [http-nio-8888-exec-5] Login - User email: aa@aa.aa registration successfully.
+[INFO ] 2019-10-08 17:20:14.264 [http-nio-8888-exec-6] Login - User email: aa@aa.aa logged successfully. User role: USER
+[INFO ] 2019-10-08 17:23:10.014 [http-nio-8888-exec-1] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-08 17:23:13.304 [http-nio-8888-exec-5] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-08 17:23:13.736 [http-nio-8888-exec-5] Login - User email: aa@aa.aa logged successfully. User role: USER
+[INFO ] 2019-10-08 17:23:32.521 [http-nio-8888-exec-4] UserEdit - User aa@aa.aaupdate profile
+[INFO ] 2019-10-08 17:26:07.962 [http-nio-8888-exec-18] SessionListener - User log out: aa@aa.aa
+[INFO ] 2019-10-08 17:26:14.316 [http-nio-8888-exec-11] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[WARN ] 2019-10-08 17:26:59.121 [http-nio-8888-exec-15] AddConference - Couldn't edit conference, exception: ua.krasun.conference_portal_servlet.model.entity.exception.WrongInputException: Duplicate entry '2019-09-26' for key 'conference_date_uindex'
+[WARN ] 2019-10-08 17:27:44.910 [http-nio-8888-exec-12] JDBCConferenceDao - delete SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference_registrations`, CONSTRAINT `FK3k47q8y5lkh2bubg8e0itwn9f` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`))
+[INFO ] 2019-10-08 17:27:44.911 [http-nio-8888-exec-12] DeleteConference - Conference was deleted, ID: 4
+[WARN ] 2019-10-08 17:28:09.682 [http-nio-8888-exec-15] JDBCConferenceDao - delete SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference_registrations`, CONSTRAINT `FK3k47q8y5lkh2bubg8e0itwn9f` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`))
+[INFO ] 2019-10-08 17:28:09.682 [http-nio-8888-exec-15] DeleteConference - Conference was deleted, ID: 38
+[WARN ] 2019-10-08 17:30:38.188 [http-nio-8888-exec-14] JDBCUserDao - delete() SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference`, CONSTRAINT `FK5ombydw0brnonv2d2gxum0hdk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+[INFO ] 2019-10-08 17:30:38.189 [http-nio-8888-exec-14] DeleteProfile - User: admin@gmail.com delete profile
+[WARN ] 2019-10-08 17:30:58.031 [http-nio-8888-exec-16] JDBCUserDao - delete() SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference`, CONSTRAINT `FK5ombydw0brnonv2d2gxum0hdk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+[INFO ] 2019-10-08 17:30:58.033 [http-nio-8888-exec-16] DeleteProfile - User: admin@gmail.com delete profile
+[WARN ] 2019-10-08 17:31:07.312 [http-nio-8888-exec-19] JDBCUserDao - delete() SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference_registrations`, CONSTRAINT `FKn3r729y3i5uwdojd034cmmb2h` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+[INFO ] 2019-10-08 17:31:07.312 [http-nio-8888-exec-19] DeleteProfile - User: admin@gmail.com delete profile
+[INFO ] 2019-10-08 17:32:57.591 [http-nio-8888-exec-16] SessionListener - User log out: admin@gmail.com
+[INFO ] 2019-10-08 17:33:04.874 [http-nio-8888-exec-18] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-08 17:33:24.550 [http-nio-8888-exec-20] Login - User email: edgar@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-08 17:33:35.703 [http-nio-8888-exec-14] Login - User email: aa@aa.aa logged successfully. User role: USER
+[INFO ] 2019-10-08 17:55:02.567 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: null
+[INFO ] 2019-10-08 18:05:44.032 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: null
+[INFO ] 2019-10-08 19:32:38.114 [http-nio-8888-exec-20] Login - Invalid attempt of user email: 'admin@gmail.com'
+[INFO ] 2019-10-08 19:32:43.474 [http-nio-8888-exec-14] Login - User email admin@gmail.com already logged.
+[INFO ] 2019-10-08 19:33:36.489 [http-nio-8888-exec-20] Login - Invalid attempt of user email: 'admin@gmail.com'
+[INFO ] 2019-10-08 19:33:40.961 [http-nio-8888-exec-15] Login - User email admin@gmail.com already logged.
+[INFO ] 2019-10-08 19:34:26.916 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-08 19:34:30.752 [http-nio-8888-exec-3] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-08 19:34:31.554 [http-nio-8888-exec-3] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-08 19:40:35.784 [http-nio-8888-exec-2] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-08 19:40:39.397 [http-nio-8888-exec-11] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-08 19:40:39.623 [http-nio-8888-exec-11] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[WARN ] 2019-10-08 19:40:48.931 [http-nio-8888-exec-4] JDBCUserDao - delete() SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference_registrations`, CONSTRAINT `FKn3r729y3i5uwdojd034cmmb2h` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+[INFO ] 2019-10-08 19:40:48.932 [http-nio-8888-exec-4] DeleteProfile - User: admin@gmail.com delete profile
+[INFO ] 2019-10-08 22:49:01.223 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: admin@gmail.com
+[INFO ] 2019-10-09 12:05:18.689 [http-nio-8888-exec-16] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-09 12:05:23.368 [http-nio-8888-exec-18] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-09 12:05:23.595 [http-nio-8888-exec-18] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[WARN ] 2019-10-09 12:05:23.629 [http-nio-8888-exec-18] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:23.641 [http-nio-8888-exec-19] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:25.444 [http-nio-8888-exec-15] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:26.635 [http-nio-8888-exec-21] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:33.121 [http-nio-8888-exec-20] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:33.605 [http-nio-8888-exec-23] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:34.306 [http-nio-8888-exec-13] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:34.644 [http-nio-8888-exec-14] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:35.062 [http-nio-8888-exec-22] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:45.130 [http-nio-8888-exec-23] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:45.711 [http-nio-8888-exec-29] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[WARN ] 2019-10-09 12:05:46.370 [http-nio-8888-exec-14] JDBCConferenceDao - findAll SQLException: Cannot determine value type from string 'william@yahoo.com'
+[INFO ] 2019-10-09 12:06:50.111 [http-nio-8888-exec-23] ConnectionPoolHolder - Load database.properties file
+[INFO ] 2019-10-09 12:06:54.359 [http-nio-8888-exec-29] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-09 12:06:54.590 [http-nio-8888-exec-29] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[WARN ] 2019-10-09 12:07:11.665 [http-nio-8888-exec-27] JDBCConferenceDao - delete SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference_registrations`, CONSTRAINT `FK3k47q8y5lkh2bubg8e0itwn9f` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`))
+[INFO ] 2019-10-09 12:07:11.666 [http-nio-8888-exec-27] DeleteConference - Conference was deleted, ID: 38
+[WARN ] 2019-10-09 12:07:36.445 [http-nio-8888-exec-39] JDBCConferenceDao - delete SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference_registrations`, CONSTRAINT `FK3k47q8y5lkh2bubg8e0itwn9f` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`))
+[INFO ] 2019-10-09 12:07:36.446 [http-nio-8888-exec-39] DeleteConference - Conference was deleted, ID: 38
+[INFO ] 2019-10-09 12:13:41.253 [http-nio-8888-exec-40] DeleteConference - Conference was deleted, ID: 38
+[WARN ] 2019-10-09 12:13:50.767 [http-nio-8888-exec-37] JDBCUserDao - delete() SQLException: Cannot delete or update a parent row: a foreign key constraint fails (`conference_servlet_db`.`conference_registrations`, CONSTRAINT `FKn3r729y3i5uwdojd034cmmb2h` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`))
+[INFO ] 2019-10-09 12:13:50.768 [http-nio-8888-exec-37] DeleteProfile - User: admin@gmail.com delete profile
+[INFO ] 2019-10-09 12:14:51.157 [http-nio-8888-exec-39] SessionListener - User log out: admin@gmail.com
+[INFO ] 2019-10-09 12:14:56.190 [http-nio-8888-exec-35] Login - User email: aa@aa.aa logged successfully. User role: USER
+[INFO ] 2019-10-09 12:15:02.994 [http-nio-8888-exec-36] SessionListener - User log out: aa@aa.aa
+[INFO ] 2019-10-09 12:15:07.586 [http-nio-8888-exec-37] Login - User email: admin@gmail.com logged successfully. User role: ADMIN
+[INFO ] 2019-10-09 12:15:13.459 [http-nio-8888-exec-35] DeleteProfile - User: admin@gmail.com delete profile
+[INFO ] 2019-10-09 13:19:26.839 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: null
+[INFO ] 2019-10-09 13:19:26.847 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: admin@gmail.com
+[INFO ] 2019-10-09 14:15:56.882 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] SessionListener - User log out: null

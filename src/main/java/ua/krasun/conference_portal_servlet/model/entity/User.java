@@ -65,10 +65,6 @@ public class User {
         return regOnConferences;
     }
 
-    public void setRegOnConferences(List<Conference> regOnConferences) {
-        this.regOnConferences = regOnConferences;
-    }
-
     //Builder
     public static Builder builder() {
         return new User().new Builder();

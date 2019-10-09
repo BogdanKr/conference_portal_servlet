@@ -80,3 +80,5 @@
 [WARN ] 2019-10-07 12:15:52.867 [main] JDBCUserDao - findByEmail SQLException: SQL String cannot be NULL
 [INFO ] 2019-10-07 12:16:27.573 [main] JDBCUserDao - Load query.properties  file
 [INFO ] 2019-10-07 12:22:59.370 [main] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-08 18:27:49.448 [main] JDBCUserDao - Load query.properties  file
+[INFO ] 2019-10-08 18:28:20.862 [main] JDBCUserDao - Load query.properties  file

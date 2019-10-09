@@ -23,7 +23,9 @@ public class AddConference implements Command {
                 new Locale(locale.orElse("en")));
         String date = request.getParameter("localDate");
         String subject = request.getParameter("subject");
-        if (date == null) return "/conference/";
+        if (date == null) {
+            return "/conference/";
+        }
 
         try {
             if (!request.getParameter("conferenceEditId").isEmpty()) {
